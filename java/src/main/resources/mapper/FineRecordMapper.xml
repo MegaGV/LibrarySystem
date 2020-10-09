@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xzz.library.dao.FineRecordMapper" >
+  <resultMap id="BaseResultMap" type="xzz.library.pojo.FineRecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="borrow_id" property="borrowId" jdbcType="VARCHAR" />
+    <result column="return_id" property="returnId" jdbcType="VARCHAR" />
+    <result column="days" property="days" jdbcType="INTEGER" />
+    <result column="fine" property="fine" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fine_records
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="xzz.library.pojo.FineRecord" >
+    insert into fine_records (id, borrow_id, return_id, 
+      days, fine)
+    values (#{id,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnId,jdbcType=VARCHAR}, 
+      #{days,jdbcType=INTEGER}, #{fine,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.FineRecord" >
+    update fine_records
+    set borrow_id = #{borrowId,jdbcType=VARCHAR},
+      return_id = #{returnId,jdbcType=VARCHAR},
+      days = #{days,jdbcType=INTEGER},
+      fine = #{fine,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, borrow_id, return_id, days, fine
+    from fine_records
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, borrow_id, return_id, days, fine
+    from fine_records
+  </select>
+</mapper>

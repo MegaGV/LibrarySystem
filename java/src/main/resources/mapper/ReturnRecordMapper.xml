@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xzz.library.dao.ReturnRecordMapper" >
+  <resultMap id="BaseResultMap" type="xzz.library.pojo.ReturnRecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="borrow_id" property="borrowId" jdbcType="VARCHAR" />
+    <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from return_records
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="xzz.library.pojo.ReturnRecord" >
+    insert into return_records (id, borrow_id, return_date, 
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.ReturnRecord" >
+    update return_records
+    set borrow_id = #{borrowId,jdbcType=VARCHAR},
+      return_date = #{returnDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, borrow_id, return_date, status
+    from return_records
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, borrow_id, return_date, status
+    from return_records
+  </select>
+</mapper>

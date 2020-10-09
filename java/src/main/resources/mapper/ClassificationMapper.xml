@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xzz.library.dao.ClassificationMapper" >
+  <resultMap id="BaseResultMap" type="xzz.library.pojo.Classification" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="classify_char" property="classifyChar" jdbcType="VARCHAR" />
+    <result column="classify_num" property="classifyNum" jdbcType="INTEGER" />
+    <result column="classify_books" property="classifyBooks" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from classifications
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xzz.library.pojo.Classification" >
+    insert into classifications (id, classify_char, classify_num, 
+      classify_books)
+    values (#{id,jdbcType=INTEGER}, #{classifyChar,jdbcType=VARCHAR}, #{classifyNum,jdbcType=INTEGER}, 
+      #{classifyBooks,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Classification" >
+    update classifications
+    set classify_char = #{classifyChar,jdbcType=VARCHAR},
+      classify_num = #{classifyNum,jdbcType=INTEGER},
+      classify_books = #{classifyBooks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, classify_char, classify_num, classify_books
+    from classifications
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, classify_char, classify_num, classify_books
+    from classifications
+  </select>
+</mapper>
