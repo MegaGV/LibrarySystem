@@ -43,4 +43,9 @@
     select id, username, password, nickname, role, borrowed, status, balance
     from users
   </select>
+  <select id="getUserByUsername" resultMap="BaseResultMap" >
+    select id, username, password, nickname, role, borrowed, status, balance
+    from users
+    where username=#{username}
+  </select>
 </mapper>

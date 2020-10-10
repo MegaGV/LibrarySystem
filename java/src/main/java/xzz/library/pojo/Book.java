@@ -1,7 +1,6 @@
 package xzz.library.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Book implements Serializable {
     private String id;
@@ -14,7 +13,7 @@ public class Book implements Serializable {
 
     private String publisher;
 
-    private BigDecimal price;
+    private Double price;
 
     private Integer stock;
 
@@ -62,11 +61,11 @@ public class Book implements Serializable {
         this.publisher = publisher == null ? null : publisher.trim();
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

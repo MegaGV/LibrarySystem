@@ -1,7 +1,6 @@
 package xzz.library.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class User implements Serializable {
     private String id;
@@ -18,7 +17,7 @@ public class User implements Serializable {
 
     private Integer status;
 
-    private BigDecimal balance;
+    private Double balance;
 
     private static final long serialVersionUID = 1L;
 
@@ -78,11 +77,11 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public BigDecimal getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 }

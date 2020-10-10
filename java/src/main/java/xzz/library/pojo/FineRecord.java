@@ -11,7 +11,7 @@ public class FineRecord implements Serializable {
 
     private Integer days;
 
-    private Long fine;
+    private Double fine;
 
     private static final long serialVersionUID = 1L;
 
@@ -47,11 +47,11 @@ public class FineRecord implements Serializable {
         this.days = days;
     }
 
-    public Long getFine() {
+    public Double getFine() {
         return fine;
     }
 
-    public void setFine(Long fine) {
+    public void setFine(Double fine) {
         this.fine = fine;
     }
 }
