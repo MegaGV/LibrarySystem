@@ -43,4 +43,25 @@
     select id, book_name, book_type, author, publisher, price, stock, total
     from books
   </select>
+  <select id="getBookList" resultMap="BaseResultMap" >
+    select id, book_name, book_type, author, publisher, price, stock, total
+    from books
+    <where>
+      <if test="book_name!=null and book_name !=''">
+        and book_name like concat("%",#{book_name},"%")
+      </if>
+      <if test="book_type!=null and book_type !=''">
+        and book_type = #{book_type}
+      </if>
+      <if test="author!=null and author !=''">
+        and author like concat("%",#{author},"%")
+      </if>
+      <if test="publisher!=null and publisher !=''">
+        and publisher like concat("%",#{publisher},"%")
+      </if>
+      <if test="stock!=null and stock !=''">
+        and stock != 0
+      </if>
+    </where>
+  </select>
 </mapper>

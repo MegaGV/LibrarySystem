@@ -1,6 +1,8 @@
 package xzz.library.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import xzz.library.pojo.Book;
 
 public interface BookMapper {
@@ -13,4 +15,10 @@ public interface BookMapper {
     List<Book> selectAll();
 
     int updateByPrimaryKey(Book record);
+
+    List<Book> getBookList(@Param("book_name") String bookName,
+                              @Param("book_type") String bookType,
+                              @Param("author") String author,
+                              @Param("publisher") String publisher,
+                              @Param("stock") Integer stock);
 }

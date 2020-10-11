@@ -21,6 +21,13 @@ public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public void borrowBook(){
+        this.stock--;
+    }
+    public void returnBook(){
+        this.stock++;
+    }
+
     public String getId() {
         return id;
     }
