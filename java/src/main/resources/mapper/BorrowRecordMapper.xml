@@ -39,4 +39,15 @@
     select id, user_id, book_id, borrow_date, return_date, status
     from borrow_records
   </select>
+  <select id="getRecordsByUserid" resultMap="BaseResultMap" >
+    select id, user_id, book_id, borrow_date, return_date, status
+    from borrow_records
+    where user_id=#{id}
+  </select>
+  <select id="getBorrowRecordStatus" resultType="java.lang.String">
+    select status
+    from borrow_status
+    where id=#{id}
+  </select>
+
 </mapper>

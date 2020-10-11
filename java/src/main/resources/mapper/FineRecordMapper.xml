@@ -3,6 +3,7 @@
 <mapper namespace="xzz.library.dao.FineRecordMapper" >
   <resultMap id="BaseResultMap" type="xzz.library.pojo.FineRecord" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="borrow_id" property="borrowId" jdbcType="VARCHAR" />
     <result column="return_id" property="returnId" jdbcType="VARCHAR" />
     <result column="days" property="days" jdbcType="INTEGER" />
@@ -13,26 +14,32 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.FineRecord" >
-    insert into fine_records (id, borrow_id, return_id, 
+    insert into fine_records (id, user_id, borrow_id, return_id,
       days, fine)
-    values (#{id,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnId,jdbcType=VARCHAR},
       #{days,jdbcType=INTEGER}, #{fine,jdbcType=DECIMAL})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.FineRecord" >
     update fine_records
-    set borrow_id = #{borrowId,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      borrow_id = #{borrowId,jdbcType=VARCHAR},
       return_id = #{returnId,jdbcType=VARCHAR},
       days = #{days,jdbcType=INTEGER},
       fine = #{fine,jdbcType=DECIMAL}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, borrow_id, return_id, days, fine
+    select id, user_id, borrow_id, return_id, days, fine
     from fine_records
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, borrow_id, return_id, days, fine
+    select id, user_id, borrow_id, return_id, days, fine
     from fine_records
+  </select>
+  <select id="getRecordsByUserid" resultMap="BaseResultMap" >
+    select id, user_id, borrow_id, return_id, days, fine
+    from fine_records
+    where user_id=#{id}
   </select>
 </mapper>

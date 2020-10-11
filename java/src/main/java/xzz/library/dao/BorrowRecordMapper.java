@@ -13,4 +13,8 @@ public interface BorrowRecordMapper {
     List<BorrowRecord> selectAll();
 
     int updateByPrimaryKey(BorrowRecord record);
+
+    List<BorrowRecord> getRecordsByUserid(String id);
+
+    String getBorrowRecordStatus(Integer id);
 }

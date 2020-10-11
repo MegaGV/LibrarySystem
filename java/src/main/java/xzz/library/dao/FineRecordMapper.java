@@ -13,4 +13,6 @@ public interface FineRecordMapper {
     List<FineRecord> selectAll();
 
     int updateByPrimaryKey(FineRecord record);
+
+    List<FineRecord> getRecordsByUserid(String id);
 }

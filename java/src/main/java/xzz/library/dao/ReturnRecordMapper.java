@@ -13,4 +13,8 @@ public interface ReturnRecordMapper {
     List<ReturnRecord> selectAll();
 
     int updateByPrimaryKey(ReturnRecord record);
+
+    List<ReturnRecord> getRecordsByUserid(String id);
+
+    String getReturnRecordStatus(Integer id);
 }

@@ -3,6 +3,7 @@
 <mapper namespace="xzz.library.dao.ReturnRecordMapper" >
   <resultMap id="BaseResultMap" type="xzz.library.pojo.ReturnRecord" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="borrow_id" property="borrowId" jdbcType="VARCHAR" />
     <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -12,25 +13,36 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.ReturnRecord" >
-    insert into return_records (id, borrow_id, return_date, 
+    insert into return_records (id, user_id, borrow_id, return_date,
       status)
-    values (#{id,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{borrowId,jdbcType=VARCHAR}, #{returnDate,jdbcType=TIMESTAMP},
       #{status,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.ReturnRecord" >
     update return_records
-    set borrow_id = #{borrowId,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      borrow_id = #{borrowId,jdbcType=VARCHAR},
       return_date = #{returnDate,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, borrow_id, return_date, status
+    select id, user_id, borrow_id, return_date, status
     from return_records
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, borrow_id, return_date, status
+    select id, user_id, borrow_id, return_date, status
     from return_records
+  </select>
+  <select id="getRecordsByUserid" resultMap="BaseResultMap" >
+    select id, user_id, borrow_id, return_date, status
+    from return_records
+    where user_id=#{id}
+  </select>
+  <select id="getBorrowRecordStatus" resultType="java.lang.String">
+    select status
+    from return_status
+    where id=#{id}
   </select>
 </mapper>
