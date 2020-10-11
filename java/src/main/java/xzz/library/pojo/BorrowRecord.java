@@ -1,22 +1,58 @@
 package xzz.library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import xzz.library.dao.BorrowRecordMapper;
+
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.UUID;
 
 public class BorrowRecord implements Serializable {
+    @Autowired
+    private BorrowRecordMapper borrowRecordMapper;
+
     private String id;
 
     private String userId;
 
     private String bookId;
 
+    @DateTimeFormat(pattern = "yyy-MM-dd hh:mm:sss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:sss")
     private Date borrowDate;
 
+    @DateTimeFormat(pattern = "yyy-MM-dd hh:mm:sss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:sss")
     private Date returnDate;
 
     private Integer status;
 
     private static final long serialVersionUID = 1L;
+
+    public BorrowRecord(String userId, String bookId){
+        this.id = UUID.randomUUID().toString();
+        while (borrowRecordMapper.selectByPrimaryKey(this.id) != null)
+            this.id = UUID.randomUUID().toString();
+        this.userId = userId;
+        this.bookId = bookId;
+        Date date=new Date();
+        this.borrowDate = date;
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE,30);
+        date=calendar.getTime();
+        this.returnDate = date;
+        this.status = 0;
+    }
+
+    public void returnBook(){
+        this.status = 2;
+        this.returnDate = new Date();
+    }
 
     public String getId() {
         return id;
@@ -65,4 +101,5 @@ public class BorrowRecord implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
 }

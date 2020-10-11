@@ -1,18 +1,39 @@
 package xzz.library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import xzz.library.dao.ReturnRecordMapper;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class ReturnRecord implements Serializable {
+    @Autowired
+    private ReturnRecordMapper returnRecordMapper;
+
     private String id;
 
     private String borrowId;
 
+    @DateTimeFormat(pattern = "yyy-MM-dd hh:mm:sss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:sss")
     private Date returnDate;
 
     private Integer status;
 
     private static final long serialVersionUID = 1L;
+
+    public ReturnRecord(BorrowRecord borrowRecord){
+        this.id = UUID.randomUUID().toString();
+        while (returnRecordMapper.selectByPrimaryKey(this.id) != null)
+            this.id = UUID.randomUUID().toString();
+        this.id = id;
+        this.borrowId = borrowRecord.getId();
+        Date date = new Date();
+        this.returnDate = date;
+    }
 
     public String getId() {
         return id;
