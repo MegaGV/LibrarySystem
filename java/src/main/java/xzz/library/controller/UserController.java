@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import xzz.library.dto.UserDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 
@@ -17,18 +18,29 @@ import xzz.library.service.UserService;
 @CrossOrigin(allowCredentials = "true")
 public class UserController {
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @PostMapping("/register")
     @ResponseBody
     public String register(@RequestBody User user) {
-        return service.register(user);
+        return userService.register(user);
     }
 
     @GetMapping("/login")
     @ResponseBody
     public String login(@RequestBody User user) {
-        return service.login(user);
+        return userService.login(user);
     }
 
+    @GetMapping("/getUserInfo")
+    @ResponseBody
+    public UserDto getUserInfo(String id){
+        return userService.getUserInfo(id);
+    }
+
+    @PostMapping("/updatePassword")
+    @ResponseBody
+    public String updateUser(String id, String originPassword, String newPassword){
+        return userService.updatePassword(id, originPassword, newPassword);
+    }
 }

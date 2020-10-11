@@ -17,7 +17,7 @@
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.User" >
     insert into users (id, username, password, 
-      nickname, role, borrowed, 
+      nickname, `role`, borrowed,
       status, balance)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{borrowed,jdbcType=INTEGER}, 
@@ -28,24 +28,39 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      role = #{role,jdbcType=VARCHAR},
+      `role` = #{role,jdbcType=VARCHAR},
       borrowed = #{borrowed,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       balance = #{balance,jdbcType=DECIMAL}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, username, password, nickname, role, borrowed, status, balance
+    select id, username, password, nickname, `role`, borrowed, status, balance
     from users
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, username, password, nickname, role, borrowed, status, balance
+    select id, username, password, nickname, `role`, borrowed, status, balance
     from users
   </select>
   <select id="getUserByUsername" resultMap="BaseResultMap" >
-    select id, username, password, nickname, role, borrowed, status, balance
+    select id, username, password, nickname, `role`, borrowed, status, balance
     from users
     where username=#{username}
   </select>
+  <select id="getUserStatus" resultType="java.lang.String" >
+    select status
+    from user_status
+    where id=#{id}
+  </select>
+  <select id="getUserRole" resultType="java.lang.String" >
+    select `role`
+    from `role`
+    where id=#{id}
+  </select>
+  <update id="updatePassword">
+    update users
+    set password = #{newPassword}
+    where id=#{id}
+  </update>
 </mapper>

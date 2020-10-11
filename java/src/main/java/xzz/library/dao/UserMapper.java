@@ -1,6 +1,8 @@
 package xzz.library.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import xzz.library.pojo.User;
 
 public interface UserMapper {
@@ -15,4 +17,10 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User getUserByUsername(String username);
+
+    String getUserStatus(Integer id);
+
+    String getUserRole(Integer id);
+
+    void updatePassword(@Param("id") String id, @Param("newPassword") String newPassword);
 }

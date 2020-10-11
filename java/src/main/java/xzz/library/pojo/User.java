@@ -21,6 +21,29 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public void borrowBook(){
+        this.borrowed++;
+        checkStatus();
+    }
+    public void returnBook(){
+        this.borrowed--;
+        checkStatus();
+    }
+    public void getFine(Double fine){
+        this.balance -= fine;
+        checkStatus();
+    }
+    private void checkStatus(){
+        if (this.status != 3){
+            if (this.balance < 0)
+                this.status = 1;
+            else if (this.borrowed < 5)
+                this.status = 0;
+            else
+                this.status = 2;
+        }
+    }
+
     public String getId() {
         return id;
     }
