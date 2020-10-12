@@ -20,4 +20,16 @@ public interface AdminService {
 
     String deleteUser(String[] ids);
 
+    //========================================================================================
+    //Books
+    //========================================================================================
+    BooksDto getBooks(Book book, Integer limit, Integer page);
+
+    String addBook(Book book);
+
+    Book getBook(String id);
+
+    String deleteBook(String[] ids);
+
+    String updateBook(Book book);
 }

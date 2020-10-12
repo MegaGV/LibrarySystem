@@ -30,6 +30,8 @@ public class BookServiceImpl implements BookService {
         if (page != null) {
             start = (page-1)*limit;
         }
+        if (book == null)
+            book = new Book();
         List<Book> books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),
                     book.getPublisher(),book.getStock(), limit, start);
         int total = bookMapper.countBook(book.getBookName(), book.getBookType(), book.getAuthor(),

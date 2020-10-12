@@ -51,4 +51,36 @@ public class AdminController {
         return adminService.deleteUser(ids);
     }
 
+    //========================================================================================
+    //Books
+    //========================================================================================
+    @GetMapping("/getBooks")
+    @ResponseBody
+    public BooksDto getBooks(@RequestBody Book book, Integer limit, Integer page){
+        return adminService.getBooks(book, limit, page);
+    }
+
+    @PostMapping("/addBook")
+    @ResponseBody
+    public String addBook(@RequestBody Book book){
+        return adminService.addBook(book);
+    }
+
+    @GetMapping("getBook")
+    @ResponseBody
+    public Book getBook(String id){
+        return adminService.getBook(id);
+    }
+
+    @PostMapping("/deleteBook")
+    @ResponseBody
+    public String deleteBook(String[] ids){
+        return adminService.deleteBook(ids);
+    }
+
+    @PostMapping("/updateBook")
+    @ResponseBody
+    public String updateBook(@RequestBody Book book){
+        return adminService.updateBook(book);
+    }
 }
