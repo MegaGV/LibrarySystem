@@ -7,10 +7,7 @@ import xzz.library.dao.*;
 import xzz.library.dto.BooksDto;
 import xzz.library.pojo.*;
 import xzz.library.service.BookService;
-
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -26,18 +23,23 @@ public class BookServiceImpl implements BookService {
     private FineRecordMapper fineRecordMapper;
 
     @Override
-    public BooksDto getBookList(Book book) {
-        BooksDto booksDto = new BooksDto();
-        List<Book> books;
-        if (book == null)
-            books = bookMapper.selectAll();
-        else{
-            books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),book.getPublisher(),book.getStock());
+    public BooksDto getBookList(Book book, Integer limit, Integer page) {
+        if (limit == null)
+            limit = 10;
+        int start = 0;
+        if (page != null) {
+            start = (page-1)*limit;
         }
+        List<Book> books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),
+                    book.getPublisher(),book.getStock(), limit, start);
+        int total = bookMapper.countBook(book.getBookName(), book.getBookType(), book.getAuthor(),
+                book.getPublisher(),book.getStock());
+        return new BooksDto(books,total);
+    }
 
-        booksDto.setData(books);
-        booksDto.setTotal(books.size());
-        return booksDto;
+    @Override
+    public Book getBookDetail(String bookId) {
+        return bookMapper.selectByPrimaryKey(bookId);
     }
 
     @Override

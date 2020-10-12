@@ -1,8 +1,16 @@
 package xzz.library.pojo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import xzz.library.dao.UserMapper;
+import xzz.library.util.MD5Utils;
+
 import java.io.Serializable;
+import java.util.UUID;
 
 public class User implements Serializable {
+    @Autowired
+    private UserMapper userMapper;
+
     private String id;
 
     private String username;
@@ -25,23 +33,44 @@ public class User implements Serializable {
         this.borrowed++;
         checkStatus();
     }
+
     public void returnBook(){
         this.borrowed--;
         checkStatus();
     }
+
     public void getFine(Double fine){
         this.balance -= fine;
         checkStatus();
     }
+
     private void checkStatus(){
+        // 状态优先级 冻结 > 欠费 > 上限 = 普通
         if (this.status != 3){
-            if (this.balance < 0)
+            if (this.balance < 0){
                 this.status = 1;
-            else if (this.borrowed < 5)
-                this.status = 0;
-            else
-                this.status = 2;
+            }
+            else{
+                this.status = this.borrowed < 5 ? 0 : 2;
+            }
         }
+    }
+
+    public void initial(){
+        this.id = UUID.randomUUID().toString();
+        while (userMapper.selectByPrimaryKey(this.id) != null){
+            this.id = UUID.randomUUID().toString();
+        }
+        this.role = 0;
+        this.borrowed = 0;
+        this.status = 0;
+        this.balance = 0.00;
+        this.password = MD5Utils.md5Code(this.username, this.password);
+    }
+
+    public void credit(Double money) {
+        this.balance += money;
+        checkStatus();
     }
 
     public String getId() {

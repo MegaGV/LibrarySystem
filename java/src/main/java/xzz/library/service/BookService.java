@@ -4,9 +4,11 @@ import xzz.library.dto.BooksDto;
 import xzz.library.pojo.Book;
 
 public interface BookService {
-    BooksDto getBookList(Book book);
+    BooksDto getBookList(Book book, Integer limit, Integer page);
 
     String borrowBook(String userId, String bookId);
 
     String returnBook(String borrowId);
+
+    Book getBookDetail(String bookId);
 }

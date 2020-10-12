@@ -9,33 +9,19 @@ import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
 
-import java.util.UUID;
-
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
     @Transactional
     public String register(User user) {
-        User dbUser = userMapper.getUserByUsername(user.getUsername());
-        if (dbUser != null){
+        if (userMapper.getUserByUsername(user.getUsername()) != null){
             return "用户名重复";
         }
-
-        String id = UUID.randomUUID().toString();
-        while (userMapper.selectByPrimaryKey(id) != null){
-            id = UUID.randomUUID().toString();
-        }
-        user.setId(id);
-        user.setRole(0);
-        user.setBorrowed(0);
-        user.setStatus(0);
-        user.setBalance(0.00);
-        user.setPassword(MD5Utils.md5Code(user.getUsername(), user.getPassword()));
+        user.initial();
         try{
             userMapper.insert(user);
             return null;
@@ -86,6 +72,24 @@ public class UserServiceImpl implements UserService {
         }
         else{
             return "原密码有误，密码修改失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String credit(String id, Double money) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if (user == null)
+            return "用户错误";
+        if (money == null || money < 0)
+            return "金额错误";
+        user.credit(money);
+        try{
+            userMapper.updateByPrimaryKey(user);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "充值失败";
         }
     }
 

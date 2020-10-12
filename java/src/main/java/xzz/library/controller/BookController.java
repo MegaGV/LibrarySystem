@@ -16,8 +16,14 @@ public class BookController {
 
     @GetMapping("/getBookList")
     @ResponseBody
-    public BooksDto getBookList(@RequestBody Book book){
-        return bookService.getBookList(book);
+    public BooksDto getBookList(@RequestBody Book book, Integer limit, Integer page){
+        return bookService.getBookList(book, limit, page);
+    }
+
+    @GetMapping("/getBookDetail")
+    @ResponseBody
+    public Book getBookDetail(String bookId){
+        return bookService.getBookDetail(bookId);
     }
 
     @PostMapping("/borrowBook")

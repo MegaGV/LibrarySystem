@@ -19,6 +19,8 @@ public class Book implements Serializable {
 
     private Integer total;
 
+    private String detail;
+
     private static final long serialVersionUID = 1L;
 
     public void borrowBook(){
@@ -90,5 +92,13 @@ public class Book implements Serializable {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }

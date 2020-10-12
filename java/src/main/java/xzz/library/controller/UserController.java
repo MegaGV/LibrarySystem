@@ -43,4 +43,10 @@ public class UserController {
     public String updateUser(String id, String originPassword, String newPassword){
         return userService.updatePassword(id, originPassword, newPassword);
     }
+
+    @PostMapping("/credit")
+    @ResponseBody
+    public String credit(String id, Double money){
+        return userService.credit(id, money);
+    }
 }

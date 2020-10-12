@@ -8,6 +8,11 @@ public class BooksDto {
     private Integer total = 0;
     private List<Book> data;
 
+    public BooksDto(List<Book> books, int total){
+        this.data = books;
+        this.total = total;
+    }
+
     public Integer getTotal() {
         return total;
     }
