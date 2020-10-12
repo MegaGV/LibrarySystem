@@ -52,8 +52,13 @@ export default {
           this.$axios
             .post("api/library/user/register", this.user)
             .then(res => {
-                alert(res.data);
-                this.$router.push('/');
+                    if (res.data == null){
+                        alert("注册成功，即将跳往登录页面");
+                        this.$router.push('/');
+                    }
+                    else{
+                        alert(res.data)
+                    }
                 })
             .catch(err => {
                 alert("系统繁忙，请稍后再试");
