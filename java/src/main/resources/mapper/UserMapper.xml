@@ -63,4 +63,13 @@
     set password = #{newPassword}
     where id=#{id}
   </update>
+  <select id="getUsers" resultMap="BaseResultMap" >
+    select id, username, password, nickname, `role`, borrowed, status, balance
+    from users
+    limit #{start}, #{limit}
+  </select>
+  <select id="countUsers" resultType="java.lang.Integer">
+    select count(id)
+    from users
+  </select>
 </mapper>

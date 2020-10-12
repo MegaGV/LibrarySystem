@@ -23,4 +23,8 @@ public interface UserMapper {
     String getUserRole(Integer id);
 
     void updatePassword(@Param("id") String id, @Param("newPassword") String newPassword);
+
+    List<User> getUsers(@Param("limit") Integer limit, @Param("start") Integer start);
+
+    Integer countUsers();
 }
