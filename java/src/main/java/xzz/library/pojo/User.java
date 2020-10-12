@@ -47,20 +47,17 @@ public class User implements Serializable {
     private void checkStatus(){
         // 状态优先级 冻结 > 欠费 > 上限 = 普通
         if (this.status != 3){
-            if (this.balance < 0){
+            if (this.balance < 0)
                 this.status = 1;
-            }
-            else{
+            else
                 this.status = this.borrowed < 5 ? 0 : 2;
-            }
         }
     }
 
     public void initial(){
         this.id = UUID.randomUUID().toString();
-        while (userMapper.selectByPrimaryKey(this.id) != null){
+        while (userMapper.selectByPrimaryKey(this.id) != null)
             this.id = UUID.randomUUID().toString();
-        }
         this.role = 0;
         this.borrowed = 0;
         this.status = 0;

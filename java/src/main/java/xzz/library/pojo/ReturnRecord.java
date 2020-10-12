@@ -29,10 +29,8 @@ public class ReturnRecord implements Serializable {
         this.id = UUID.randomUUID().toString();
         while (returnRecordMapper.selectByPrimaryKey(this.id) != null)
             this.id = UUID.randomUUID().toString();
-        this.id = id;
         this.borrowId = borrowRecord.getId();
-        Date date = new Date();
-        this.returnDate = date;
+        this.returnDate = new Date();
     }
 
     public String getId() {

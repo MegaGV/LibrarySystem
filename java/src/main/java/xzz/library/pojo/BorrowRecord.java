@@ -39,13 +39,11 @@ public class BorrowRecord implements Serializable {
             this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.bookId = bookId;
-        Date date=new Date();
-        this.borrowDate = date;
+        this.borrowDate = new Date();
         Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
+        calendar.setTime(this.borrowDate);
         calendar.add(Calendar.DATE,30);
-        date=calendar.getTime();
-        this.returnDate = date;
+        this.returnDate = calendar.getTime();
         this.status = 0;
     }
 
