@@ -42,4 +42,13 @@
     from fine_records
     where user_id=#{id}
   </select>
+  <select id="getRecords" resultMap="BaseResultMap" >
+    select id, user_id, borrow_id, return_id, days, fine
+    from fine_records
+    limit #{start}, #{limit}
+  </select>
+  <select id="countRecords" resultMap="java.lang.Integer">
+    select count(id)
+    from fine_records
+  </select>
 </mapper>

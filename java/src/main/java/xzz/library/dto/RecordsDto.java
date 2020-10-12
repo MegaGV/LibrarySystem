@@ -3,9 +3,13 @@ package xzz.library.dto;
 import java.util.List;
 
 public class RecordsDto {
-    private Integer total = 0;
+    private Integer total;
     private List data;
 
+    public RecordsDto(List data, int total){
+        this.data = data;
+        this.total = total;
+    }
     public Integer getTotal() {
         return total;
     }

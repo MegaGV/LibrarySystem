@@ -26,10 +26,7 @@ public class BookServiceImpl implements BookService {
     public BooksDto getBookList(Book book, Integer limit, Integer page) {
         if (limit == null)
             limit = 10;
-        int start = 0;
-        if (page != null) {
-            start = (page-1)*limit;
-        }
+        int start = page == null ? 0 : (page-1)*limit;
         if (book == null)
             book = new Book();
         List<Book> books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),

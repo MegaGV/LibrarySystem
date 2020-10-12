@@ -1,9 +1,9 @@
 package xzz.library.service;
 
 import xzz.library.dto.BooksDto;
+import xzz.library.dto.RecordsDto;
 import xzz.library.dto.UsersDto;
-import xzz.library.pojo.Book;
-import xzz.library.pojo.User;
+import xzz.library.pojo.*;
 
 public interface AdminService {
 
@@ -32,4 +32,27 @@ public interface AdminService {
     String deleteBook(String[] ids);
 
     String updateBook(Book book);
+
+    //========================================================================================
+    //Records
+    //========================================================================================
+    RecordsDto getRecords(Integer limit, Integer page, String recordType);
+
+    BorrowRecord getBR(String id);
+
+    String deleteBR(String[] ids);
+
+    String updateBR(BorrowRecord borrowRecord);
+
+    ReturnRecord getRR(String id);
+
+    String deleteRR(String[] ids);
+
+    String updateRR(ReturnRecord returnRecord);
+
+    FineRecord getFR(String id);
+
+    String deleteFR(String[] ids);
+
+    String updateFR(FineRecord fineRecord);
 }

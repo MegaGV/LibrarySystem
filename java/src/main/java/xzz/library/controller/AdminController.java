@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.BooksDto;
+import xzz.library.dto.RecordsDto;
 import xzz.library.dto.UsersDto;
-import xzz.library.pojo.Book;
-import xzz.library.pojo.User;
+import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
 import java.util.List;
@@ -82,5 +82,68 @@ public class AdminController {
     @ResponseBody
     public String updateBook(@RequestBody Book book){
         return adminService.updateBook(book);
+    }
+
+    //========================================================================================
+    //Records
+    //========================================================================================
+    @GetMapping("/getRecords")
+    @ResponseBody
+    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
+        return adminService.getRecords(limit, page, recordType);
+    }
+
+    @GetMapping("/getBR")
+    @ResponseBody
+    public BorrowRecord getBR(String id){
+        return adminService.getBR(id);
+    }
+
+    @PostMapping("/deleteBR")
+    @ResponseBody
+    public String deleteBR(String[] ids){
+        return adminService.deleteBR(ids);
+    }
+
+    @PostMapping("/updateBR")
+    @ResponseBody
+    public String updateBR(@RequestBody BorrowRecord borrowRecord){
+        return adminService.updateBR(borrowRecord);
+    }
+
+    @GetMapping("/getRR")
+    @ResponseBody
+    public ReturnRecord getRR(String id){
+        return adminService.getRR(id);
+    }
+
+    @PostMapping("/deleteRR")
+    @ResponseBody
+    public String deleteRR(String[] ids){
+        return adminService.deleteRR(ids);
+    }
+
+    @PostMapping("/updateRR")
+    @ResponseBody
+    public String updateBR(@RequestBody ReturnRecord returnRecord){
+        return adminService.updateRR(returnRecord);
+    }
+
+    @GetMapping("/getFR")
+    @ResponseBody
+    public FineRecord getFR(String id){
+        return adminService.getFR(id);
+    }
+
+    @PostMapping("/deleteFR")
+    @ResponseBody
+    public String deleteFR(String[] ids){
+        return adminService.deleteFR(ids);
+    }
+
+    @PostMapping("/updateFR")
+    @ResponseBody
+    public String updateFR(@RequestBody FineRecord fineRecord){
+        return adminService.updateFR(fineRecord);
     }
 }

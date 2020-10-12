@@ -3,14 +3,12 @@ package xzz.library.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xzz.library.dao.BookMapper;
-import xzz.library.dao.UserMapper;
-import xzz.library.dto.BooksDto;
-import xzz.library.dto.UsersDto;
-import xzz.library.pojo.Book;
-import xzz.library.pojo.User;
+import xzz.library.dao.*;
+import xzz.library.dto.*;
+import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,19 +17,21 @@ public class AdminServiceImpl implements AdminService {
     private UserMapper userMapper;
     @Autowired
     private BookMapper bookMapper;
+    @Autowired
+    private BorrowRecordMapper borrowRecordMapper;
+    @Autowired
+    private ReturnRecordMapper returnRecordMapper;
+    @Autowired
+    private FineRecordMapper fineRecordMapper;
 
     //========================================================================================
     //Users
     //========================================================================================
     @Override
     public UsersDto getUsers(Integer limit, Integer page) {
-        if (limit==null){
-            limit=10;
-        }
-        int start = 0;
-        if (page != null) {
-            start = (page-1)*limit;
-        }
+        if (limit == null)
+            limit = 10;
+        int start = page == null ? 0 : (page-1)*limit;
         List<User> users = userMapper.getUsers(limit, start);
         int total = userMapper.countUsers();
         return new UsersDto(users, total);
@@ -47,9 +47,8 @@ public class AdminServiceImpl implements AdminService {
     public String addUser(User user) {
         if (user == null)
             return "用户错误";
-        if (userMapper.getUserByUsername(user.getUsername()) != null){
+        if (userMapper.getUserByUsername(user.getUsername()) != null)
             return "用户名重复";
-        }
         user.initial();
         try{
             userMapper.insert(user);
@@ -96,10 +95,7 @@ public class AdminServiceImpl implements AdminService {
     public BooksDto getBooks(Book book, Integer limit, Integer page) {
         if (limit == null)
             limit = 10;
-        int start = 0;
-        if (page != null) {
-            start = (page-1)*limit;
-        }
+        int start = page == null ? 0 : (page-1)*limit;
         if (book == null)
             book = new Book();
         List<Book> books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),
@@ -150,10 +146,140 @@ public class AdminServiceImpl implements AdminService {
             return "图书错误";
         try{
             bookMapper.updateByPrimaryKey(book);
+            return null;
         }catch (Exception e){
             e.printStackTrace();
             return "修改图书失败";
         }
     }
 
+    //========================================================================================
+    //Records
+    //========================================================================================
+    @Override
+    public RecordsDto getRecords(Integer limit, Integer page, String recordType) {
+        if (limit == null)
+            limit = 10;
+        int start = page == null ? 0 : (page-1)*limit;
+        List records = null;
+        int total = 0;
+        switch (recordType){
+            case "borrow" :
+                records = borrowRecordMapper.getRecords(limit, start);
+                total = borrowRecordMapper.countRecords();
+                break;
+            case "return":
+                records = returnRecordMapper.getRecords(limit, start);
+                total = returnRecordMapper.countRecords();
+                break;
+            case "fine":
+                records = fineRecordMapper.getRecords(limit, start);
+                total = fineRecordMapper.countRecords();
+                break;
+            default:
+        }
+        return new RecordsDto(records, total);
+    }
+
+    @Override
+    public BorrowRecord getBR(String id) {
+        return borrowRecordMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional
+    public String deleteBR(String[] ids) {
+        if (ids == null)
+            return "借阅记录错误";
+        try {
+            for (String id : ids)
+                borrowRecordMapper.deleteByPrimaryKey(id);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "借阅记录删除失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateBR(BorrowRecord borrowRecord) {
+        if (borrowRecord == null)
+            return "借阅信息错误";
+        try {
+            borrowRecordMapper.updateByPrimaryKey(borrowRecord);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "借阅信息更新失败";
+        }
+    }
+
+    @Override
+    public ReturnRecord getRR(String id) {
+        return returnRecordMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional
+    public String deleteRR(String[] ids) {
+        if (ids == null)
+            return "归还记录错误";
+        try {
+            for (String id : ids)
+                returnRecordMapper.deleteByPrimaryKey(id);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "归还记录删除失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateRR(ReturnRecord returnRecord) {
+        if (returnRecord == null)
+            return "归还信息错误";
+        try {
+            returnRecordMapper.updateByPrimaryKey(returnRecord);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "归还信息更新失败";
+        }
+    }
+
+    @Override
+    public FineRecord getFR(String id) {
+        return fineRecordMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional
+    public String deleteFR(String[] ids) {
+        if (ids == null)
+            return "罚款记录错误";
+        try {
+            for (String id : ids)
+                fineRecordMapper.deleteByPrimaryKey(id);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "罚款记录删除失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateFR(FineRecord fineRecord) {
+        if (fineRecord == null)
+            return "罚款信息错误";
+        try {
+            fineRecordMapper.updateByPrimaryKey(fineRecord);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "罚款信息更新失败";
+        }
+    }
 }

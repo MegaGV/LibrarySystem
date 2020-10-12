@@ -1,6 +1,8 @@
 package xzz.library.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import xzz.library.pojo.FineRecord;
 
 public interface FineRecordMapper {
@@ -15,4 +17,8 @@ public interface FineRecordMapper {
     int updateByPrimaryKey(FineRecord record);
 
     List<FineRecord> getRecordsByUserid(String id);
+
+    List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
+
+    Integer countRecords();
 }

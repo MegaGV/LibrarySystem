@@ -19,7 +19,7 @@ public class RecordController {
 
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsDto getRecords(String id, String field){
-        return recordService.getRecords(id, field);
+    public RecordsDto getRecords(String id, String recordType){
+        return recordService.getRecords(id, recordType);
     }
 }

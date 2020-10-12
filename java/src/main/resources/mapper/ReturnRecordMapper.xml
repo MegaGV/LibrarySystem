@@ -45,4 +45,13 @@
     from return_status
     where id=#{id}
   </select>
+  <select id="getRecords" resultMap="BaseResultMap" >
+    select id, user_id, borrow_id, return_date, status
+    from return_records
+    limit #{start}, #{limit}
+  </select>
+  <select id="countRecords" resultMap="java.lang.Integer">
+    select count(id)
+    from return_records
+  </select>
 </mapper>
