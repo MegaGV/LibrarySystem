@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.BooksDto;
+import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.Book;
 import xzz.library.service.BookService;
 
@@ -16,8 +17,8 @@ public class BookController {
 
     @GetMapping("/getBookList")
     @ResponseBody
-    public BooksDto getBookList(@RequestBody Book book, Integer limit, Integer page){
-        return bookService.getBookList(book, limit, page);
+    public BooksDto getBookList(@RequestBody BooksGetDto booksGetDto){
+        return bookService.getBookList(booksGetDto);
     }
 
     @GetMapping("/getBookDetail")

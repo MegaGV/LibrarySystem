@@ -9,6 +9,8 @@ import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
 
+import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
             return "用户名重复";
         }
         user.initial();
+        while (userMapper.selectByPrimaryKey(user.getId()) != null)
+            user.setId(UUID.randomUUID().toString());
         try{
             userMapper.insert(user);
             return null;

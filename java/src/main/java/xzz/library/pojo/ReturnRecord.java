@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public class ReturnRecord implements Serializable {
-    @Autowired
-    private ReturnRecordMapper returnRecordMapper;
 
     private String id;
 
@@ -27,8 +25,6 @@ public class ReturnRecord implements Serializable {
 
     public ReturnRecord(BorrowRecord borrowRecord){
         this.id = UUID.randomUUID().toString();
-        while (returnRecordMapper.selectByPrimaryKey(this.id) != null)
-            this.id = UUID.randomUUID().toString();
         this.borrowId = borrowRecord.getId();
         this.returnDate = new Date();
     }

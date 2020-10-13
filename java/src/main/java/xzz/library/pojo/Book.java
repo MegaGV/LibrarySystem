@@ -8,9 +8,6 @@ import java.util.UUID;
 
 public class Book implements Serializable {
 
-    @Autowired
-    private BookMapper bookMapper;
-
     private String id;
 
     private String bookName;
@@ -41,8 +38,6 @@ public class Book implements Serializable {
 
     public void initial(){
         this.id = UUID.randomUUID().toString();
-        while (bookMapper.selectByPrimaryKey(this.id) != null)
-            this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {

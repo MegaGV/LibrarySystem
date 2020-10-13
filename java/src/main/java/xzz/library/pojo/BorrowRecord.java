@@ -12,8 +12,6 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class BorrowRecord implements Serializable {
-    @Autowired
-    private BorrowRecordMapper borrowRecordMapper;
 
     private String id;
 
@@ -35,8 +33,6 @@ public class BorrowRecord implements Serializable {
 
     public BorrowRecord(String userId, String bookId){
         this.id = UUID.randomUUID().toString();
-        while (borrowRecordMapper.selectByPrimaryKey(this.id) != null)
-            this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.bookId = bookId;
         this.borrowDate = new Date();

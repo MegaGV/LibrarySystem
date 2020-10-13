@@ -47,8 +47,8 @@
     from fine_records
     limit #{start}, #{limit}
   </select>
-  <select id="countRecords" resultMap="java.lang.Integer">
-    select count(id)
+  <select id="countRecords" resultType="java.lang.Integer">
+    select count(0)
     from fine_records
   </select>
 </mapper>

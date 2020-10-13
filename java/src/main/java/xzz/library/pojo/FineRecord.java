@@ -10,8 +10,6 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class FineRecord implements Serializable {
-    @Autowired
-    private FineRecordMapper fineRecordMapper;
 
     private String id;
 
@@ -27,8 +25,6 @@ public class FineRecord implements Serializable {
 
     public FineRecord(BorrowRecord borrowRecord, ReturnRecord returnRecord, Double price){
         this.id = UUID.randomUUID().toString();
-        while (fineRecordMapper.selectByPrimaryKey(this.id) != null)
-            this.id = UUID.randomUUID().toString();
         this.borrowId = borrowRecord.getId();
         this.returnId = returnRecord.getId();
         this.days = getDaysBetween(borrowRecord.getReturnDate(), returnRecord.getReturnDate());

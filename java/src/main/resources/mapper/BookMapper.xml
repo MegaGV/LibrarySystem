@@ -10,7 +10,7 @@
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="stock" property="stock" jdbcType="INTEGER" />
     <result column="total" property="total" jdbcType="INTEGER" />
-    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from books
@@ -22,7 +22,7 @@
       stock, total, detail)
     values (#{id,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{bookType,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{stock,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}), #{detail,jdbcType=VARCHAR}
+      #{stock,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}, #{detail,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Book" >
     update books
@@ -33,7 +33,7 @@
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
       total = #{total,jdbcType=INTEGER},
-      detail = #{detail,jdbcType=VARCHAR}
+      detail = #{detail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -42,29 +42,51 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, book_name, book_type, author, publisher, price, stock, total, detail
+    select id, book_name, book_type, author, publisher, price, stock, total
     from books
   </select>
   <select id="getBookList" resultMap="BaseResultMap" >
-    select id, book_name, book_type, author, publisher, price, stock, total, detail
+    select id, book_name, book_type, author, publisher, price, stock, total
     from books
     <where>
       <if test="book_name!=null and book_name !=''">
-        and book_name like concat("%",#{book_name},"%")
+        book_name like concat("%",#{book_name},"%")
       </if>
       <if test="book_type!=null and book_type !=''">
-        and book_type = #{book_type}
+        book_type like concat("%",#{book_type},"%")
       </if>
       <if test="author!=null and author !=''">
-        and author like concat("%",#{author},"%")
+        author like concat("%",#{author},"%")
       </if>
       <if test="publisher!=null and publisher !=''">
-        and publisher like concat("%",#{publisher},"%")
+        publisher like concat("%",#{publisher},"%")
       </if>
       <if test="stock!=null and stock !=''">
-        and stock != 0
+        stock != 0
       </if>
     </where>
     limit #{start}, #{limit}
   </select>
+  <select id="countBook" resultType="java.lang.Integer" >
+    select count(0)
+    from books
+    <where>
+      <if test="book_name!=null and book_name !=''">
+        book_name like concat("%",#{book_name},"%")
+      </if>
+      <if test="book_type!=null and book_type !=''">
+        book_type like concat("%",#{book_type},"%")
+      </if>
+      <if test="author!=null and author !=''">
+        author like concat("%",#{author},"%")
+      </if>
+      <if test="publisher!=null and publisher !=''">
+        publisher like concat("%",#{publisher},"%")
+      </if>
+      <if test="stock!=null and stock !=''">
+        stock != 0
+      </if>
+    </where>
+  </select>
+
 </mapper>

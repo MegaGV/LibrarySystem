@@ -22,5 +22,5 @@ public interface ReturnRecordMapper {
 
     List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
 
-    Integer countRecords();
+    int countRecords();
 }

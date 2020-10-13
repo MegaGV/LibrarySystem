@@ -9,6 +9,7 @@ import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -49,6 +50,8 @@ public class AdminServiceImpl implements AdminService {
         if (userMapper.getUserByUsername(user.getUsername()) != null)
             return "用户名重复";
         user.initial();
+        while (userMapper.selectByPrimaryKey(user.getId()) != null)
+            user.setId(UUID.randomUUID().toString());
         try{
             userMapper.insert(user);
             return null;
@@ -60,11 +63,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteUser(String[] ids) {
+    public String deleteUser(String ids) {
         if (ids == null)
             return "用户错误";
         try {
-            for (String id : ids)
+            String[] idList = ids.split(",");
+            for (String id : idList)
                 userMapper.deleteByPrimaryKey(id);
             return null;
         } catch (Exception e){
@@ -91,16 +95,14 @@ public class AdminServiceImpl implements AdminService {
     //Books
     //========================================================================================
     @Override
-    public BooksDto getBooks(Book book, Integer limit, Integer page) {
-        if (limit == null)
-            limit = 10;
-        int start = page == null ? 0 : (page-1)*limit;
-        if (book == null)
-            book = new Book();
-        List<Book> books = bookMapper.getBookList(book.getBookName(), book.getBookType(), book.getAuthor(),
-                book.getPublisher(),book.getStock(), limit, start);
-        int total = bookMapper.countBook(book.getBookName(), book.getBookType(), book.getAuthor(),
-                book.getPublisher(),book.getStock());
+    public BooksDto getBooks(BooksGetDto booksGetDto) {
+        if (booksGetDto.getLimit() == null)
+            booksGetDto.setLimit(10);
+        int start = booksGetDto.getPage() == null ? 0 : (booksGetDto.getPage()-1)*booksGetDto.getLimit();
+        List<Book> books = bookMapper.getBookList(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
+                booksGetDto.getPublisher(),booksGetDto.getStock(), booksGetDto.getLimit(), start);
+        int total = bookMapper.countBook(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
+                booksGetDto.getPublisher(),booksGetDto.getStock());
         return new BooksDto(books,total);
     }
 
@@ -110,6 +112,8 @@ public class AdminServiceImpl implements AdminService {
         if (book == null)
             return "图书错误";
         book.initial();
+        while (bookMapper.selectByPrimaryKey(book.getId()) != null)
+            book.setId(UUID.randomUUID().toString());
         try {
             bookMapper.insert(book);
             return null;
@@ -126,11 +130,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteBook(String[] ids) {
+    public String deleteBook(String ids) {
         if (ids == null)
             return "图书错误";
         try {
-            for (String id : ids)
+            String[] idList = ids.split(",");
+            for (String id : idList)
                 bookMapper.deleteByPrimaryKey(id);
             return null;
         } catch (Exception e){
@@ -187,11 +192,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteBR(String[] ids) {
+    public String deleteBR(String ids) {
         if (ids == null)
             return "借阅记录错误";
         try {
-            for (String id : ids)
+            String[] idList = ids.split(",");
+            for (String id : idList)
                 borrowRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){
@@ -221,11 +227,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteRR(String[] ids) {
+    public String deleteRR(String ids) {
         if (ids == null)
             return "归还记录错误";
         try {
-            for (String id : ids)
+            String[] idList = ids.split(",");
+            for (String id : idList)
                 returnRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){
@@ -255,11 +262,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteFR(String[] ids) {
+    public String deleteFR(String ids) {
         if (ids == null)
             return "罚款记录错误";
         try {
-            for (String id : ids)
+            String[] idList = ids.split(",");
+            for (String id : idList)
                 fineRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){

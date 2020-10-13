@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.BooksDto;
+import xzz.library.dto.BooksGetDto;
 import xzz.library.dto.RecordsDto;
 import xzz.library.dto.UsersDto;
 import xzz.library.pojo.*;
@@ -47,7 +48,7 @@ public class AdminController {
 
     @PostMapping("/deleteUser")
     @ResponseBody
-    public String deleteUser(String[] ids){
+    public String deleteUser(String ids){
         return adminService.deleteUser(ids);
     }
 
@@ -56,8 +57,8 @@ public class AdminController {
     //========================================================================================
     @GetMapping("/getBooks")
     @ResponseBody
-    public BooksDto getBooks(@RequestBody Book book, Integer limit, Integer page){
-        return adminService.getBooks(book, limit, page);
+    public BooksDto getBooks(@RequestBody BooksGetDto booksGetDto){
+        return adminService.getBooks(booksGetDto);
     }
 
     @PostMapping("/addBook")
@@ -74,7 +75,7 @@ public class AdminController {
 
     @PostMapping("/deleteBook")
     @ResponseBody
-    public String deleteBook(String[] ids){
+    public String deleteBook(String ids){
         return adminService.deleteBook(ids);
     }
 
@@ -101,7 +102,7 @@ public class AdminController {
 
     @PostMapping("/deleteBR")
     @ResponseBody
-    public String deleteBR(String[] ids){
+    public String deleteBR(String ids){
         return adminService.deleteBR(ids);
     }
 
@@ -119,7 +120,7 @@ public class AdminController {
 
     @PostMapping("/deleteRR")
     @ResponseBody
-    public String deleteRR(String[] ids){
+    public String deleteRR(String ids){
         return adminService.deleteRR(ids);
     }
 
@@ -137,7 +138,7 @@ public class AdminController {
 
     @PostMapping("/deleteFR")
     @ResponseBody
-    public String deleteFR(String[] ids){
+    public String deleteFR(String ids){
         return adminService.deleteFR(ids);
     }
 

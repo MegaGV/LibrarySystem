@@ -56,8 +56,6 @@ public class User implements Serializable {
 
     public void initial(){
         this.id = UUID.randomUUID().toString();
-        while (userMapper.selectByPrimaryKey(this.id) != null)
-            this.id = UUID.randomUUID().toString();
         this.role = 0;
         this.borrowed = 0;
         this.status = 0;
