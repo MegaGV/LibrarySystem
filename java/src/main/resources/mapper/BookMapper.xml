@@ -45,46 +45,46 @@
     select id, book_name, book_type, author, publisher, price, stock, total
     from books
   </select>
-  <select id="getBookList" resultMap="BaseResultMap" >
+  <select id="getBookList" parameterType="xzz.library.dto.BooksGetDto" resultMap="BaseResultMap" >
     select id, book_name, book_type, author, publisher, price, stock, total
     from books
     <where>
-      <if test="book_name!=null and book_name !=''">
-        book_name like concat("%",#{book_name},"%")
+      <if test="bookName!=null and bookName !=''">
+        book_name like concat("%",#{bookName},"%")
       </if>
-      <if test="book_type!=null and book_type !=''">
-        book_type like concat("%",#{book_type},"%")
+      <if test="bookType!=null and bookType !=''">
+        and book_type like concat("%",#{bookType},"%")
       </if>
       <if test="author!=null and author !=''">
-        author like concat("%",#{author},"%")
+        and author like concat("%",#{author},"%")
       </if>
       <if test="publisher!=null and publisher !=''">
-        publisher like concat("%",#{publisher},"%")
+        and publisher like concat("%",#{publisher},"%")
       </if>
       <if test="stock!=null and stock !=''">
-        stock != 0
+        and stock != 0
       </if>
     </where>
-    limit #{start}, #{limit}
+    limit #{page}, #{limit}
   </select>
-  <select id="countBook" resultType="java.lang.Integer" >
+  <select id="countBook" parameterType="xzz.library.dto.BooksGetDto" resultType="java.lang.Integer" >
     select count(0)
     from books
     <where>
-      <if test="book_name!=null and book_name !=''">
-        book_name like concat("%",#{book_name},"%")
+      <if test="bookName!=null and bookName !=''">
+        book_name like concat("%",#{bookName},"%")
       </if>
-      <if test="book_type!=null and book_type !=''">
-        book_type like concat("%",#{book_type},"%")
+      <if test="bookType!=null and bookType !=''">
+        and book_type like concat("%",#{bookType},"%")
       </if>
       <if test="author!=null and author !=''">
-        author like concat("%",#{author},"%")
+        and author like concat("%",#{author},"%")
       </if>
       <if test="publisher!=null and publisher !=''">
-        publisher like concat("%",#{publisher},"%")
+        and publisher like concat("%",#{publisher},"%")
       </if>
       <if test="stock!=null and stock !=''">
-        stock != 0
+        and stock != 0
       </if>
     </where>
   </select>

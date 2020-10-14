@@ -28,11 +28,12 @@ public class BookServiceImpl implements BookService {
     public BooksDto getBookList(BooksGetDto booksGetDto) {
         if (booksGetDto.getLimit() == null)
             booksGetDto.setLimit(10);
-        int start = booksGetDto.getPage() == null ? 0 : (booksGetDto.getPage()-1)*booksGetDto.getLimit();
-        List<Book> books = bookMapper.getBookList(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
-                booksGetDto.getPublisher(),booksGetDto.getStock(), booksGetDto.getLimit(), start);
-        int total = bookMapper.countBook(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
-                booksGetDto.getPublisher(),booksGetDto.getStock());
+        if (booksGetDto.getPage() == null)
+            booksGetDto.setPage(0);
+        else
+            booksGetDto.setPage((booksGetDto.getPage() - 1) * booksGetDto.getLimit());
+        List<Book> books = bookMapper.getBookList(booksGetDto);
+        int total = bookMapper.countBook(booksGetDto);
         return new BooksDto(books,total);
     }
 
@@ -86,48 +87,49 @@ public class BookServiceImpl implements BookService {
         BorrowRecord borrowRecord = borrowRecordMapper.selectByPrimaryKey(borrowId);
         if (borrowRecord == null)
             return "借阅记录错误";
+        if (borrowRecord.getStatus() == 2)
+            return "该借阅已归还";
         Book book = bookMapper.selectByPrimaryKey(borrowRecord.getBookId());
         User user = userMapper.selectByPrimaryKey(borrowRecord.getUserId());
         if (user == null)
             return "用户错误";
         if (book == null)
             return "图书错误";
-        int borrowRecordStatus = borrowRecord.getStatus();
-        if (borrowRecordStatus == 2)
-            return "该借阅已归还";
-        else{
-            ReturnRecord returnRecord = new ReturnRecord(borrowRecord);
-            while (returnRecordMapper.selectByPrimaryKey(returnRecord.getId()) != null)
-                returnRecord.setId(UUID.randomUUID().toString());
-            if(borrowRecordStatus == 0)
+
+        ReturnRecord returnRecord = new ReturnRecord(borrowRecord);
+        while (returnRecordMapper.selectByPrimaryKey(returnRecord.getId()) != null)
+            returnRecord.setId(UUID.randomUUID().toString());
+        switch (borrowRecord.getStatus()){
+            case 0:
                 returnRecord.setStatus(0);
-            else if (borrowRecordStatus == 1){
+                break;
+            case 1:
                 returnRecord.setStatus(1);
                 fineRecord = new FineRecord(borrowRecord, returnRecord, book.getPrice());
                 while (fineRecordMapper.selectByPrimaryKey(fineRecord.getId()) != null)
                     fineRecord.setId(UUID.randomUUID().toString());
                 user.getFine(fineRecord.getFine());
-            }
-            else
+                break;
+            default:
                 return "未知错误";
-            borrowRecord.returnBook();
-            book.returnBook();
-            user.returnBook();
-            try{
-                returnRecordMapper.insert(returnRecord);
-                if (fineRecord != null)
-                    fineRecordMapper.insert(fineRecord);
-                borrowRecordMapper.updateByPrimaryKey(borrowRecord);
-                bookMapper.updateByPrimaryKey(book);
-                userMapper.updateByPrimaryKey(user);
-                return null;
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                return "归还失败";
-            }
         }
+        borrowRecord.returnBook();
+        book.returnBook();
+        user.returnBook();
 
+        try{
+            returnRecordMapper.insert(returnRecord);
+            if (fineRecord != null)
+                fineRecordMapper.insert(fineRecord);
+            borrowRecordMapper.updateByPrimaryKey(borrowRecord);
+            bookMapper.updateByPrimaryKey(book);
+            userMapper.updateByPrimaryKey(user);
+            return null;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "归还失败";
+        }
     }
 
 }

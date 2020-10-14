@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import xzz.library.dto.BorrowRecordDto;
 import xzz.library.dto.RecordsDto;
+import xzz.library.dto.ReturnRecordDto;
+import xzz.library.pojo.BorrowRecord;
+import xzz.library.pojo.FineRecord;
+import xzz.library.pojo.ReturnRecord;
 import xzz.library.service.RecordService;
 
 @Controller
@@ -21,5 +26,23 @@ public class RecordController {
     @ResponseBody
     public RecordsDto getRecords(String id, String recordType){
         return recordService.getRecords(id, recordType);
+    }
+
+    @GetMapping("/getBR")
+    @ResponseBody
+    public BorrowRecordDto getBR(String userId, String recordId){
+        return recordService.getBR(userId, recordId);
+    }
+
+    @GetMapping("/getRR")
+    @ResponseBody
+    public ReturnRecordDto getRR(String userId, String recordId){
+        return recordService.getRR(userId, recordId);
+    }
+
+    @GetMapping("/getFR")
+    @ResponseBody
+    public FineRecord getFR(String userId, String recordId){
+        return recordService.getFR(userId, recordId);
     }
 }

@@ -15,6 +15,8 @@ public class FineRecord implements Serializable {
 
     private String borrowId;
 
+    private String userId;
+
     private String returnId;
 
     private Integer days;
@@ -23,8 +25,13 @@ public class FineRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public FineRecord(){
+
+    }
+
     public FineRecord(BorrowRecord borrowRecord, ReturnRecord returnRecord, Double price){
         this.id = UUID.randomUUID().toString();
+        this.userId = borrowRecord.getUserId();
         this.borrowId = borrowRecord.getId();
         this.returnId = returnRecord.getId();
         this.days = getDaysBetween(borrowRecord.getReturnDate(), returnRecord.getReturnDate());
@@ -55,6 +62,14 @@ public class FineRecord implements Serializable {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getBorrowId() {

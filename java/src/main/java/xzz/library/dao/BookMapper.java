@@ -3,6 +3,7 @@ package xzz.library.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.Book;
 
 public interface BookMapper {
@@ -16,17 +17,7 @@ public interface BookMapper {
 
     int updateByPrimaryKey(Book record);
 
-    List<Book> getBookList(@Param("book_name") String bookName,
-                           @Param("book_type") String bookType,
-                           @Param("author") String author,
-                           @Param("publisher") String publisher,
-                           @Param("stock") Integer stock,
-                           @Param("limit") Integer limit,
-                           @Param("start") Integer start);
+    List<Book> getBookList(BooksGetDto booksGetDto);
 
-    int countBook(@Param("book_name") String bookName,
-                   @Param("book_type") String bookType,
-                   @Param("author") String author,
-                   @Param("publisher") String publisher,
-                   @Param("stock") Integer stock);
+    int countBook(BooksGetDto booksGetDto);
 }

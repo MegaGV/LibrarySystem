@@ -40,7 +40,7 @@
     from return_records
     where user_id=#{id}
   </select>
-  <select id="getBorrowRecordStatus" resultType="java.lang.String">
+  <select id="getReturnRecordStatus" resultType="java.lang.String">
     select status
     from return_status
     where id=#{id}

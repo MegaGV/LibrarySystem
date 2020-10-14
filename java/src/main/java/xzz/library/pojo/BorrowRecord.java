@@ -31,6 +31,10 @@ public class BorrowRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public BorrowRecord(){
+
+    }
+
     public BorrowRecord(String userId, String bookId){
         this.id = UUID.randomUUID().toString();
         this.userId = userId;

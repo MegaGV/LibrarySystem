@@ -13,6 +13,8 @@ public class ReturnRecord implements Serializable {
 
     private String id;
 
+    private String userId;
+
     private String borrowId;
 
     @DateTimeFormat(pattern = "yyy-MM-dd hh:mm:sss")
@@ -23,8 +25,13 @@ public class ReturnRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public ReturnRecord(){
+
+    }
+
     public ReturnRecord(BorrowRecord borrowRecord){
         this.id = UUID.randomUUID().toString();
+        this.userId = borrowRecord.getUserId();
         this.borrowId = borrowRecord.getId();
         this.returnDate = new Date();
     }
@@ -35,6 +42,14 @@ public class ReturnRecord implements Serializable {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getBorrowId() {
