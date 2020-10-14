@@ -3,10 +3,7 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.BooksDto;
-import xzz.library.dto.BooksGetDto;
-import xzz.library.dto.RecordsDto;
-import xzz.library.dto.UsersDto;
+import xzz.library.dto.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
@@ -67,7 +64,7 @@ public class AdminController {
         return adminService.addBook(book);
     }
 
-    @GetMapping("getBook")
+    @GetMapping("/getBook")
     @ResponseBody
     public Book getBook(String id){
         return adminService.getBook(id);
@@ -90,8 +87,8 @@ public class AdminController {
     //========================================================================================
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
-        return adminService.getRecords(limit, page, recordType);
+    public RecordsDto getRecords(@RequestBody RecordsGetDto recordsGetDto){
+        return adminService.getRecords(recordsGetDto);
     }
 
     @GetMapping("/getBR")

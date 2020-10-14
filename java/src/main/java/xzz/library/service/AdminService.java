@@ -1,9 +1,6 @@
 package xzz.library.service;
 
-import xzz.library.dto.BooksDto;
-import xzz.library.dto.BooksGetDto;
-import xzz.library.dto.RecordsDto;
-import xzz.library.dto.UsersDto;
+import xzz.library.dto.*;
 import xzz.library.pojo.*;
 
 public interface AdminService {
@@ -37,7 +34,7 @@ public interface AdminService {
     //========================================================================================
     //Records
     //========================================================================================
-    RecordsDto getRecords(Integer limit, Integer page, String recordType);
+    RecordsDto getRecords(RecordsGetDto recordsGetDto);
 
     BorrowRecord getBR(String id);
 

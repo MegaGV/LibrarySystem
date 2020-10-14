@@ -8,6 +8,7 @@ import xzz.library.dto.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,11 +99,12 @@ public class AdminServiceImpl implements AdminService {
     public BooksDto getBooks(BooksGetDto booksGetDto) {
         if (booksGetDto.getLimit() == null)
             booksGetDto.setLimit(10);
-        int start = booksGetDto.getPage() == null ? 0 : (booksGetDto.getPage()-1)*booksGetDto.getLimit();
-        List<Book> books = bookMapper.getBookList(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
-                booksGetDto.getPublisher(),booksGetDto.getStock(), booksGetDto.getLimit(), start);
-        int total = bookMapper.countBook(booksGetDto.getBookName(), booksGetDto.getBookType(), booksGetDto.getAuthor(),
-                booksGetDto.getPublisher(),booksGetDto.getStock());
+        if (booksGetDto.getPage() == null)
+            booksGetDto.setPage(0);
+        else
+            booksGetDto.setPage((booksGetDto.getPage() - 1) * booksGetDto.getLimit());
+        List<Book> books = bookMapper.getBookList(booksGetDto);
+        int total = bookMapper.countBook(booksGetDto);
         return new BooksDto(books,total);
     }
 
@@ -145,6 +147,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public String updateBook(Book book) {
         if(book == null)
             return "图书错误";
@@ -161,13 +164,12 @@ public class AdminServiceImpl implements AdminService {
     //Records
     //========================================================================================
     @Override
-    public RecordsDto getRecords(Integer limit, Integer page, String recordType) {
-        if (limit == null)
-            limit = 10;
-        int start = page == null ? 0 : (page-1)*limit;
-        List records = null;
+    public RecordsDto getRecords(RecordsGetDto recordsGetDto) {
+        int limit = recordsGetDto.getLimit() == null ? 10 : recordsGetDto.getLimit();
+        int start = recordsGetDto.getPage() == null ? 0 : (recordsGetDto.getPage() - 1) * limit;
+        List records = new ArrayList();
         int total = 0;
-        switch (recordType){
+        switch (recordsGetDto.getRecordType()){
             case "borrow" :
                 records = borrowRecordMapper.getRecords(limit, start);
                 total = borrowRecordMapper.countRecords();
