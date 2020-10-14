@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-10-14 11:46:11
+Date: 2020-10-14 11:51:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -98,7 +98,7 @@ INSERT INTO `borrow_records` VALUES ('42234475-a519-4555-b91f-cd2519cf42bb', '92
 INSERT INTO `borrow_records` VALUES ('5a481cbf-9b63-478d-bf00-f3f857036c61', '92ce0faa-3bde-4df1-82aa-69991773dbab', '02810cef-82e5-44c8-b69b-222df8043d12', '2020-10-14 09:15:09', '2020-10-14 09:52:07', '2');
 INSERT INTO `borrow_records` VALUES ('7b0419df-c920-417e-a726-702f924c0e3f', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-10-12 09:15:31', '2020-10-14 09:53:28', '2');
 INSERT INTO `borrow_records` VALUES ('8ca67071-ba53-4c58-b8df-2c4273a297c5', '92ce0faa-3bde-4df1-82aa-69991773dbab', '02b68328-2337-41ca-969d-ba19326faecc', '2020-09-14 09:15:19', '2020-10-14 09:54:26', '2');
-INSERT INTO `borrow_records` VALUES ('c6d4430e-3f53-45b0-a4f8-782c0fceb04b', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-09-13 11:27:37', '2020-10-13 11:27:37', '0');
+INSERT INTO `borrow_records` VALUES ('c6d4430e-3f53-45b0-a4f8-782c0fceb04b', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-09-13 11:27:37', '2020-10-13 11:27:37', '1');
 
 -- ----------------------------
 -- Table structure for borrow_status
@@ -296,6 +296,6 @@ DELIMITER ;
 -- ----------------------------
 DROP EVENT IF EXISTS `checked`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` EVENT `checked` ON SCHEDULE EVERY 1 SECOND STARTS '2020-10-14 11:36:06' ON COMPLETION PRESERVE DISABLE DO call borrow_checked()
+CREATE DEFINER=`root`@`localhost` EVENT `checked` ON SCHEDULE EVERY 1 SECOND STARTS '2020-10-14 11:36:06' ON COMPLETION PRESERVE ENABLE DO call borrow_checked()
 ;;
 DELIMITER ;
