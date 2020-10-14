@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-10-13 12:00:07
+Date: 2020-10-14 11:46:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ INSERT INTO `books` VALUES ('0157096e-b13f-4860-911e-20efbcd5f5df', '数字电�
 INSERT INTO `books` VALUES ('02810cef-82e5-44c8-b69b-222df8043d12', '哈佛商学院最受欢迎的领导课', 'F2', '(美) 罗伯特·史蒂文·卡普兰', '', '46.00', '2', '2', '《哈佛商学院最受欢迎的领导课》内容简介：我们往往有一种错觉，以为最优秀的领导者应该知道所有问题的答案。他们似乎天生就有准确的直觉，不可抵挡的魅力，高深的洞见，杰出的管理才能，以及激励他人的号召力。他们看上去如此自信，好像不费吹灰之力就能出色地领导众人，高效地管理团队。<br />现实却要复杂得多。事实的真相是，几乎所有成功的领导人，不管其天分有多高，都会经历一段困惑和不确定的时期——他们也会感到迷茫无助，忧心忡忡，无比孤独。而领导者是否能充分发挥潜能，关键就在于如何应对这段挣扎期。在卡普兰看来，回避困难只会让境况恶化，只有学会退后一步，问对关键问题，才能精确诊断现状，获得洞见，重整旗鼓，再度前进。<br />在《哈佛商学院最受欢迎的领导课》中，卡普兰提供了一种简洁明了而引人入胜的领导力框架，以帮助管理者改进领导效果。这个领导力框架由一系列关键问题搭建，包括愿景和要务、时间管理和工作授权等七个方面，领导者可以借助这个框架深入思考自己的工作，从而成功领导你的团队，掌控自己的职场命运。<br /><br />海报：');
 INSERT INTO `books` VALUES ('02b68328-2337-41ca-969d-ba19326faecc', '雅思王阅读真题语料库', 'H3', '王陆, 凉月', '中国人民大学出版社', '28.00', '2', '2', '本书包括5章。第一章为讲述雅思阅读必须具备的常识。第二章为512个雅思阅读核心词汇速记，这是全书最重要内容。第三章阅读词根词缀衍生记忆法，是在512个核心词的基础上的拓展。第四章阅读快速反映核心词对，是协助考试做题。第五章是阅读场景机经词汇。考生识读即可。全书内容内容来自剑5—剑8真题阅读部分，经过反复筛选，对考生备考具有实际指导意义。');
 INSERT INTO `books` VALUES ('03fb7786-6f82-496c-b157-adb8e904fbbf', '生物化学与分子生物学实验技术', 'Q5', '阿依木古丽, 蔡勇', '', '52.00', '6', '6', '');
-INSERT INTO `books` VALUES ('045740ce-efb9-4a51-8e77-6970f47e8748', '机械电气控制与PLC应用', 'T8', '', '', '58.50', '5', '5', '');
+INSERT INTO `books` VALUES ('045740ce-efb9-4a51-8e77-6970f47e8748', '机械电气控制与PLC应用', 'T8', '', '', '58.50', '4', '5', '');
 INSERT INTO `books` VALUES ('05cf259f-62e5-4512-9e72-44973090e4af', '二战经典战役', 'E1', '《时刻关注》编委会', '中国铁道出版社', '39.80', '4', '4', '着重选取了第二次世界大战时期的经典战役，从正反两方面，以全新的角度诠释了这一期间的一系列战役内容。例如：闪击波兰、血战阿登、鹰击不列颠、血捍莫斯科、斯大林格勒保卫战、偷袭珍珠港、搏杀中途岛、梦断马奇诺……在这些战役中，各国*秀的军事天才在这些经典的战役后给后人留下了很多的启示，对第二次世界大战的结束及战后的世界格局也产生了重大的影响。本书将为您一一揭秘。');
 INSERT INTO `books` VALUES ('0ba06ded-0612-419a-8b4e-ae0bdfc61729', '中国经济思想通史', 'F0', '赵靖', '北京大学出版社', '24.00', '4', '4', '');
 INSERT INTO `books` VALUES ('0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d', '看不见的森林 : 林中自然笔记', 'S7', '(美) 戴维·乔治·哈斯凯尔', '商务印书馆', '46.00', '6', '6', '这是一本森林观测笔记。 在这本书里，一位生物学家以一年的时间为主线，在每次的观测中，为我们揭开藏森林一平方米地域里的秘密。 在这本完全原创的书里，生物学家戴维以一小片森林作为整个自然界的缩影，向我们生动地展示了这片森林和居住其中的栖息者的生活状况。 书的每一章都以一次简单的观察结果作为开头，比如藏在落叶层里的火蜥蜴，春天里野花的初次绽放。通过这些观察，戴维织就了一个生物生态网，向人们解释了把最小的微生物和最大的哺乳动物联系起来的科学观点，并描述了延续数千年甚至数百万年的生态系统。戴维每天都会在这片森林里漫步，梳理出各种以大自然为家的动植物间复杂而又微妙的关系，因此每一次寻访对于他来说，都象征着一个自然故事的缩影。 本书优美的语言使读者把阅读过程看作一次寻找大自然奥秘的盛大旅行，而作者则像导游，带领大家探索存在于我们脚下或者藏在我们后院里的奇妙世界。');
@@ -92,6 +92,13 @@ CREATE TABLE `borrow_records` (
 -- ----------------------------
 -- Records of borrow_records
 -- ----------------------------
+INSERT INTO `borrow_records` VALUES ('1462813a-b9d7-46b1-aecf-54ba91db5fd9', '92ce0faa-3bde-4df1-82aa-69991773dbab', '03fb7786-6f82-496c-b157-adb8e904fbbf', '2020-10-14 09:15:25', '2020-10-14 09:45:39', '2');
+INSERT INTO `borrow_records` VALUES ('3cb13a08-5502-4195-bd0c-5ac83ebbeaaa', '92ce0faa-3bde-4df1-82aa-69991773dbab', '0157096e-b13f-4860-911e-20efbcd5f5df', '2020-10-14 09:13:32', '2020-10-14 09:47:04', '2');
+INSERT INTO `borrow_records` VALUES ('42234475-a519-4555-b91f-cd2519cf42bb', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-10-12 10:01:23', '2020-10-14 10:03:51', '2');
+INSERT INTO `borrow_records` VALUES ('5a481cbf-9b63-478d-bf00-f3f857036c61', '92ce0faa-3bde-4df1-82aa-69991773dbab', '02810cef-82e5-44c8-b69b-222df8043d12', '2020-10-14 09:15:09', '2020-10-14 09:52:07', '2');
+INSERT INTO `borrow_records` VALUES ('7b0419df-c920-417e-a726-702f924c0e3f', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-10-12 09:15:31', '2020-10-14 09:53:28', '2');
+INSERT INTO `borrow_records` VALUES ('8ca67071-ba53-4c58-b8df-2c4273a297c5', '92ce0faa-3bde-4df1-82aa-69991773dbab', '02b68328-2337-41ca-969d-ba19326faecc', '2020-09-14 09:15:19', '2020-10-14 09:54:26', '2');
+INSERT INTO `borrow_records` VALUES ('c6d4430e-3f53-45b0-a4f8-782c0fceb04b', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-09-13 11:27:37', '2020-10-13 11:27:37', '0');
 
 -- ----------------------------
 -- Table structure for borrow_status
@@ -158,13 +165,16 @@ CREATE TABLE `fine_records` (
   `borrow_id` varchar(255) NOT NULL,
   `return_id` varchar(255) NOT NULL,
   `days` int(11) NOT NULL,
-  `fine` double(10,0) NOT NULL,
+  `fine` double(10,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fine_records
 -- ----------------------------
+INSERT INTO `fine_records` VALUES ('4d4767e8-a761-4ac0-9cbd-bb323133fda8', '92ce0faa-3bde-4df1-82aa-69991773dbab', '5a481cbf-9b63-478d-bf00-f3f857036c61', '43dde036-1a94-467c-ac44-4c4862d4b037', '0', '0.00');
+INSERT INTO `fine_records` VALUES ('9e8b2aff-829d-4ad9-a7f7-09dbc8ffa8c9', '92ce0faa-3bde-4df1-82aa-69991773dbab', '8ca67071-ba53-4c58-b8df-2c4273a297c5', '1098915e-1f21-4438-972b-be917c6b529c', '30', '8.40');
+INSERT INTO `fine_records` VALUES ('b4200ae8-54f2-4a6e-9068-72a883ca4595', '92ce0faa-3bde-4df1-82aa-69991773dbab', '42234475-a519-4555-b91f-cd2519cf42bb', '70d8b136-53af-4751-9246-af38f68adcf3', '1', '0.58');
 
 -- ----------------------------
 -- Table structure for return_records
@@ -182,6 +192,12 @@ CREATE TABLE `return_records` (
 -- ----------------------------
 -- Records of return_records
 -- ----------------------------
+INSERT INTO `return_records` VALUES ('1098915e-1f21-4438-972b-be917c6b529c', '92ce0faa-3bde-4df1-82aa-69991773dbab', '8ca67071-ba53-4c58-b8df-2c4273a297c5', '2020-10-14 09:54:26', '1');
+INSERT INTO `return_records` VALUES ('2fc298d5-d9ea-4207-9697-7b1e91d0aa85', '92ce0faa-3bde-4df1-82aa-69991773dbab', '7b0419df-c920-417e-a726-702f924c0e3f', '2020-10-14 09:53:28', '0');
+INSERT INTO `return_records` VALUES ('43dde036-1a94-467c-ac44-4c4862d4b037', '92ce0faa-3bde-4df1-82aa-69991773dbab', '5a481cbf-9b63-478d-bf00-f3f857036c61', '2020-10-14 09:52:07', '1');
+INSERT INTO `return_records` VALUES ('70d8b136-53af-4751-9246-af38f68adcf3', '92ce0faa-3bde-4df1-82aa-69991773dbab', '42234475-a519-4555-b91f-cd2519cf42bb', '2020-10-14 10:03:06', '1');
+INSERT INTO `return_records` VALUES ('76cb80ec-6e58-4831-a62c-ce66d17eadac', '92ce0faa-3bde-4df1-82aa-69991773dbab', '1462813a-b9d7-46b1-aecf-54ba91db5fd9', '2020-10-14 09:45:39', '0');
+INSERT INTO `return_records` VALUES ('9740a26b-ffbb-4a43-81f8-2d5c3a71a3a4', '92ce0faa-3bde-4df1-82aa-69991773dbab', '3cb13a08-5502-4195-bd0c-5ac83ebbeaaa', '2020-10-14 09:47:04', '0');
 
 -- ----------------------------
 -- Table structure for return_status
@@ -234,12 +250,12 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('123', '123', '123', 'aaa', '0', '0', '0', '0.00');
-INSERT INTO `users` VALUES ('1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'aaa123', 'a75f5d3e293da97279a70e6835cf80aa', '李四', '0', '0', '0', '0.00');
-INSERT INTO `users` VALUES ('233', '123', '123', 'aaaaa', '0', '0', '0', '0.00');
-INSERT INTO `users` VALUES ('456', '123', '123', 'aaaa', '0', '0', '0', '0.00');
-INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', '28edb5f88af19242f90726fe231ca796', '张三', '0', '0', '0', '20.00');
-INSERT INTO `users` VALUES ('ba05892f-4403-48f2-9c36-1de685d5f3fc', 'admin', '0ea9114a57ee221805a9cd4f1ce40663', '管理员', '1', '0', '0', '0.00');
+INSERT INTO `users` VALUES ('1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'aaa123', 'a75f5d3e293da97279a70e6835cf80aa', '李四', '0', '0', '0', '10.80');
+INSERT INTO `users` VALUES ('7572249b-386a-4ef6-82bb-7cb9f2e06986', 'bbb', 'e1ec7d80057ed6a94908f5625dc991a9', '王五', '0', '0', '0', '25.20');
+INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', '28edb5f88af19242f90726fe231ca796', '张三', '0', '1', '0', '27.81');
+INSERT INTO `users` VALUES ('a26214da-4c14-4637-9470-daff75b1c34f', 'ccc', 'e036b035fefbd2197bcd26eb272640ad', '赵六', '0', '0', '0', '15.10');
+INSERT INTO `users` VALUES ('a2dfe9db-47ed-464d-9b38-9414bca85612', 'ddd', '887644eae2b82d048d5697d2cee96db4', '大宝', '0', '0', '0', '0.00');
+INSERT INTO `users` VALUES ('ba05892f-4403-48f2-9c36-1de685d5f3fc', 'admin', '0ea9114a57ee221805a9cd4f1ce40663', '管理员', '1', '0', '0', '10.00');
 
 -- ----------------------------
 -- Table structure for user_status
@@ -258,3 +274,28 @@ INSERT INTO `user_status` VALUES ('0', '正常');
 INSERT INTO `user_status` VALUES ('1', '欠费');
 INSERT INTO `user_status` VALUES ('2', '达到上限');
 INSERT INTO `user_status` VALUES ('3', '冻结');
+
+-- ----------------------------
+-- Procedure structure for borrow_checked
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `borrow_checked`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `borrow_checked`()
+BEGIN
+	UPDATE borrow_records
+	SET `status` = 1
+	WHERE
+		TO_DAYS(now()) - TO_DAYS(return_date) >= 0
+	AND `status` = 0 ;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Event structure for checked
+-- ----------------------------
+DROP EVENT IF EXISTS `checked`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` EVENT `checked` ON SCHEDULE EVERY 1 SECOND STARTS '2020-10-14 11:36:06' ON COMPLETION PRESERVE DISABLE DO call borrow_checked()
+;;
+DELIMITER ;
