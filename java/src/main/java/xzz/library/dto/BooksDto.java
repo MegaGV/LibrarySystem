@@ -5,7 +5,7 @@ import xzz.library.pojo.Book;
 import java.util.List;
 
 public class BooksDto {
-    private Integer total = 0;
+    private Integer total;
     private List<Book> data;
 
     public BooksDto(List<Book> books, int total){

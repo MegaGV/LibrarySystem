@@ -5,6 +5,13 @@ public class RecordsGetDto {
     Integer page;
     String recordType;
 
+    public void initial(){
+        if (this.limit == null)
+            this.limit = 10;
+        if (this.page == null)
+            this.page = 1;
+    }
+
     public Integer getLimit() {
         return limit;
     }

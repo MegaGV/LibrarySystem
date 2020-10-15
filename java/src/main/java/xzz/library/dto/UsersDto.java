@@ -5,7 +5,7 @@ import xzz.library.pojo.User;
 import java.util.List;
 
 public class UsersDto {
-    private Integer total = 0;
+    private Integer total;
     private List<User> data;
 
     public UsersDto(List<User> users, int total){

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xzz.library.dto.BorrowRecordDto;
 import xzz.library.dto.RecordsDto;
 import xzz.library.dto.ReturnRecordDto;
-import xzz.library.pojo.BorrowRecord;
 import xzz.library.pojo.FineRecord;
-import xzz.library.pojo.ReturnRecord;
 import xzz.library.service.RecordService;
 
 @Controller

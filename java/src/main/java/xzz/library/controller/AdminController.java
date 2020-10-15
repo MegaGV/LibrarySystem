@@ -7,8 +7,6 @@ import xzz.library.dto.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/admin")
 @CrossOrigin(allowCredentials = "true")

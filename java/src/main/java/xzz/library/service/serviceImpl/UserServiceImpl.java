@@ -20,12 +20,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public String register(User user) {
-        if (userMapper.getUserByUsername(user.getUsername()) != null){
+        if (userMapper.getUserByUsername(user.getUsername().trim()) != null)
             return "用户名重复";
-        }
         user.initial();
         while (userMapper.selectByPrimaryKey(user.getId()) != null)
             user.setId(UUID.randomUUID().toString());
+
         try{
             userMapper.insert(user);
             return null;
@@ -38,16 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(User user) {
         User dbUser = userMapper.getUserByUsername(user.getUsername().trim());
-        if (dbUser == null){
+        if (dbUser == null)
             return null;
-        }
         else{
-            if (!MD5Utils.md5Code(user.getUsername(), user.getPassword()).equals(dbUser.getPassword())){
+            if (!MD5Utils.md5Code(user.getUsername().trim(), user.getPassword()).equals(dbUser.getPassword()))
                 return null;
-            }
-            else{
+            else
                 return dbUser.getId();
-            }
         }
     }
 

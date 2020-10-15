@@ -26,12 +26,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BooksDto getBookList(BooksGetDto booksGetDto) {
-        if (booksGetDto.getLimit() == null)
-            booksGetDto.setLimit(10);
-        if (booksGetDto.getPage() == null)
-            booksGetDto.setPage(0);
-        else
-            booksGetDto.setPage((booksGetDto.getPage() - 1) * booksGetDto.getLimit());
+        booksGetDto.initial();
         List<Book> books = bookMapper.getBookList(booksGetDto);
         int total = bookMapper.countBook(booksGetDto);
         return new BooksDto(books,total);
@@ -46,9 +41,9 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public String borrowBook(String userId, String bookId) {
         User user = userMapper.selectByPrimaryKey(userId);
-        Book book = bookMapper.selectByPrimaryKey(bookId);
         if (user == null)
             return "用户错误";
+        Book book = bookMapper.selectByPrimaryKey(bookId);
         if (book == null)
             return "图书错误";
         switch (user.getStatus()){
@@ -60,6 +55,7 @@ public class BookServiceImpl implements BookService {
                     borrowRecord.setId(UUID.randomUUID().toString());
                 book.borrowBook();
                 user.borrowBook();
+
                 try{
                     borrowRecordMapper.insert(borrowRecord);
                     bookMapper.updateByPrimaryKey(book);
@@ -89,13 +85,12 @@ public class BookServiceImpl implements BookService {
             return "借阅记录错误";
         if (borrowRecord.getStatus() == 2)
             return "该借阅已归还";
-        Book book = bookMapper.selectByPrimaryKey(borrowRecord.getBookId());
         User user = userMapper.selectByPrimaryKey(borrowRecord.getUserId());
         if (user == null)
             return "用户错误";
+        Book book = bookMapper.selectByPrimaryKey(borrowRecord.getBookId());
         if (book == null)
             return "图书错误";
-
         ReturnRecord returnRecord = new ReturnRecord(borrowRecord);
         while (returnRecordMapper.selectByPrimaryKey(returnRecord.getId()) != null)
             returnRecord.setId(UUID.randomUUID().toString());

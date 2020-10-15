@@ -15,6 +15,16 @@ public class BooksGetDto {
 
     private Integer page;
 
+    public void initial() {
+        if (this.limit == null)
+            this.limit = 10;
+        // page作首个开始查找的对象，即start
+        if (this.page == null)
+            this.page = 0;
+        else
+            this.page = (this.page - 1) * this.limit;
+    }
+
     public String getBookName() {
         return bookName;
     }
@@ -70,4 +80,5 @@ public class BooksGetDto {
     public void setPage(Integer page) {
         this.page = page;
     }
+
 }

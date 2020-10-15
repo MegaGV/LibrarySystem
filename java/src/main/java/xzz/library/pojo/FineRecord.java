@@ -49,7 +49,7 @@ public class FineRecord implements Serializable {
         if (d1.get(Calendar.YEAR) != y2){
             d1 = (Calendar) d1.clone();
             do{
-                days += d1.getActualMaximum(Calendar.DAY_OF_YEAR);//得到当年的实际天数
+                days += d1.getActualMaximum(Calendar.DAY_OF_YEAR);
                 d1.add(Calendar.YEAR, 1);
             } while (d1.get(Calendar.YEAR) != y2);
         }

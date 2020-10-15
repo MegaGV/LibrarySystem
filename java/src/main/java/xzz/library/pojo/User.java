@@ -46,6 +46,7 @@ public class User implements Serializable {
 
     private void checkStatus(){
         // 状态优先级 冻结 > 欠费 > 上限 = 普通
+        // status level 3 > 1 > 2 = 0
         if (this.status != 3){
             if (this.balance < 0)
                 this.status = 1;

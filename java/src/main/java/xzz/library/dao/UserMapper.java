@@ -1,7 +1,6 @@
 package xzz.library.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import xzz.library.pojo.User;
 
@@ -26,5 +25,5 @@ public interface UserMapper {
 
     List<User> getUsers(@Param("limit") Integer limit, @Param("start") Integer start);
 
-    Integer countUsers();
+    int countUsers();
 }

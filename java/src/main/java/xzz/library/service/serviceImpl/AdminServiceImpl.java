@@ -53,6 +53,7 @@ public class AdminServiceImpl implements AdminService {
         user.initial();
         while (userMapper.selectByPrimaryKey(user.getId()) != null)
             user.setId(UUID.randomUUID().toString());
+
         try{
             userMapper.insert(user);
             return null;
@@ -67,8 +68,11 @@ public class AdminServiceImpl implements AdminService {
     public String deleteUser(String ids) {
         if (ids == null)
             return "用户错误";
+        String[] idList = ids.split(",");
+        if (idList.length == 0)
+            return "无选中用户";
+
         try {
-            String[] idList = ids.split(",");
             for (String id : idList)
                 userMapper.deleteByPrimaryKey(id);
             return null;
@@ -83,6 +87,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateUser(User user) {
         if (user == null)
             return "用户错误";
+
         try {
             userMapper.updateByPrimaryKey(user);
             return null;
@@ -97,12 +102,7 @@ public class AdminServiceImpl implements AdminService {
     //========================================================================================
     @Override
     public BooksDto getBooks(BooksGetDto booksGetDto) {
-        if (booksGetDto.getLimit() == null)
-            booksGetDto.setLimit(10);
-        if (booksGetDto.getPage() == null)
-            booksGetDto.setPage(0);
-        else
-            booksGetDto.setPage((booksGetDto.getPage() - 1) * booksGetDto.getLimit());
+        booksGetDto.initial();
         List<Book> books = bookMapper.getBookList(booksGetDto);
         int total = bookMapper.countBook(booksGetDto);
         return new BooksDto(books,total);
@@ -116,6 +116,7 @@ public class AdminServiceImpl implements AdminService {
         book.initial();
         while (bookMapper.selectByPrimaryKey(book.getId()) != null)
             book.setId(UUID.randomUUID().toString());
+
         try {
             bookMapper.insert(book);
             return null;
@@ -135,8 +136,11 @@ public class AdminServiceImpl implements AdminService {
     public String deleteBook(String ids) {
         if (ids == null)
             return "图书错误";
+        String[] idList = ids.split(",");
+        if (idList.length == 0)
+            return "无选中图书";
+
         try {
-            String[] idList = ids.split(",");
             for (String id : idList)
                 bookMapper.deleteByPrimaryKey(id);
             return null;
@@ -151,6 +155,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateBook(Book book) {
         if(book == null)
             return "图书错误";
+
         try{
             bookMapper.updateByPrimaryKey(book);
             return null;
@@ -165,8 +170,9 @@ public class AdminServiceImpl implements AdminService {
     //========================================================================================
     @Override
     public RecordsDto getRecords(RecordsGetDto recordsGetDto) {
-        int limit = recordsGetDto.getLimit() == null ? 10 : recordsGetDto.getLimit();
-        int start = recordsGetDto.getPage() == null ? 0 : (recordsGetDto.getPage() - 1) * limit;
+        recordsGetDto.initial();
+        int limit = recordsGetDto.getLimit();
+        int start = (recordsGetDto.getPage() - 1) * limit;
         List records = new ArrayList();
         int total = 0;
         switch (recordsGetDto.getRecordType()){
@@ -197,8 +203,11 @@ public class AdminServiceImpl implements AdminService {
     public String deleteBR(String ids) {
         if (ids == null)
             return "借阅记录错误";
+        String[] idList = ids.split(",");
+        if (idList.length == 0)
+            return "无选中借阅记录";
+
         try {
-            String[] idList = ids.split(",");
             for (String id : idList)
                 borrowRecordMapper.deleteByPrimaryKey(id);
             return null;
@@ -213,6 +222,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateBR(BorrowRecord borrowRecord) {
         if (borrowRecord == null)
             return "借阅信息错误";
+
         try {
             borrowRecordMapper.updateByPrimaryKey(borrowRecord);
             return null;
@@ -232,8 +242,11 @@ public class AdminServiceImpl implements AdminService {
     public String deleteRR(String ids) {
         if (ids == null)
             return "归还记录错误";
+        String[] idList = ids.split(",");
+        if (idList.length == 0)
+            return "无选中归还记录";
+
         try {
-            String[] idList = ids.split(",");
             for (String id : idList)
                 returnRecordMapper.deleteByPrimaryKey(id);
             return null;
@@ -248,6 +261,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateRR(ReturnRecord returnRecord) {
         if (returnRecord == null)
             return "归还信息错误";
+
         try {
             returnRecordMapper.updateByPrimaryKey(returnRecord);
             return null;
@@ -267,8 +281,11 @@ public class AdminServiceImpl implements AdminService {
     public String deleteFR(String ids) {
         if (ids == null)
             return "罚款记录错误";
+        String[] idList = ids.split(",");
+        if (idList.length == 0)
+            return "无选中罚款记录";
+
         try {
-            String[] idList = ids.split(",");
             for (String id : idList)
                 fineRecordMapper.deleteByPrimaryKey(id);
             return null;
@@ -283,6 +300,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateFR(FineRecord fineRecord) {
         if (fineRecord == null)
             return "罚款信息错误";
+        
         try {
             fineRecordMapper.updateByPrimaryKey(fineRecord);
             return null;
