@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/updatePassword")
     @ResponseBody
-    public String updateUser(String id, String originPassword, String newPassword){
+    public String updatePassword(String id, String originPassword, String newPassword){
         return userService.updatePassword(id, originPassword, newPassword);
     }
 

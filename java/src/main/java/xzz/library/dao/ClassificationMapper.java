@@ -13,4 +13,8 @@ public interface ClassificationMapper {
     List<Classification> selectAll();
 
     int updateByPrimaryKey(Classification record);
+
+    List<Classification> getFirstClassification();
+
+    List<Classification> getSecondClassification(String classifyChar);
 }

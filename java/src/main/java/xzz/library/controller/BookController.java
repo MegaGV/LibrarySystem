@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.BooksDto;
 import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.Book;
+import xzz.library.pojo.Classification;
 import xzz.library.service.BookService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/book")
@@ -37,5 +40,17 @@ public class BookController {
     @ResponseBody
     public String returnBook(String borrowId){
         return bookService.returnBook(borrowId);
+    }
+
+    @GetMapping("/getFirstClassification")
+    @ResponseBody
+    public List<Classification> getFirstClassification(){
+        return bookService.getFirstClassification();
+    }
+
+    @GetMapping("/getSecondClassification")
+    @ResponseBody
+    public List<Classification> getSecondClassification(String classifyChar){
+        return bookService.getSecondClassification(classifyChar);
     }
 }

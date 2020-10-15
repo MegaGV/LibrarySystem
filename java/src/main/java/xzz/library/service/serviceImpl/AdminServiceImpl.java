@@ -103,9 +103,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BooksDto getBooks(BooksGetDto booksGetDto) {
         booksGetDto.initial();
-        List<Book> books = bookMapper.getBookList(booksGetDto);
-        int total = bookMapper.countBook(booksGetDto);
-        return new BooksDto(books,total);
+        return new BooksDto(bookMapper.getBookList(booksGetDto),bookMapper.countBook(booksGetDto));
     }
 
     @Override
@@ -171,26 +169,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public RecordsDto getRecords(RecordsGetDto recordsGetDto) {
         recordsGetDto.initial();
-        int limit = recordsGetDto.getLimit();
-        int start = (recordsGetDto.getPage() - 1) * limit;
-        List records = new ArrayList();
-        int total = 0;
         switch (recordsGetDto.getRecordType()){
             case "borrow" :
-                records = borrowRecordMapper.getRecords(limit, start);
-                total = borrowRecordMapper.countRecords();
-                break;
+                return new RecordsDto(borrowRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                        borrowRecordMapper.countRecords());
             case "return":
-                records = returnRecordMapper.getRecords(limit, start);
-                total = returnRecordMapper.countRecords();
-                break;
+                new RecordsDto(returnRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                        returnRecordMapper.countRecords());
             case "fine":
-                records = fineRecordMapper.getRecords(limit, start);
-                total = fineRecordMapper.countRecords();
-                break;
+                new RecordsDto(fineRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                        fineRecordMapper.countRecords());
             default:
         }
-        return new RecordsDto(records, total);
+        return null;
     }
 
     @Override

@@ -38,23 +38,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         User dbUser = userMapper.getUserByUsername(user.getUsername().trim());
-        if (dbUser == null)
+        if (dbUser == null || !dbUser.getPassword().equals(MD5Utils.md5Code(user.getUsername().trim(), user.getPassword())))
             return null;
-        else{
-            if (dbUser.getPassword().equals(MD5Utils.md5Code(user.getUsername().trim(), user.getPassword()))) {
-                User u = new User();
-                u.setId(dbUser.getId());
-                u.setRole(dbUser.getRole());
-                return u;
-            }
-            else
-                return null;
-        }
+        User u = new User();
+        u.setId(dbUser.getId());
+        u.setRole(dbUser.getRole());
+        return u;
     }
 
     @Override
     public UserDto getUserInfo(String id) {
         User dbUser = userMapper.selectByPrimaryKey(id);
+        if (dbUser == null)
+            return null;
         UserDto userDto = new UserDto(dbUser);
         userDto.setStatus(userMapper.getUserStatus(dbUser.getStatus()));
         userDto.setRole(userMapper.getUserRole(dbUser.getRole()));
@@ -65,32 +61,32 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public String updatePassword(String id, String originPassword, String newPassword) {
         User dbUser = userMapper.selectByPrimaryKey(id);
-
-        if (MD5Utils.md5Code(dbUser.getUsername(),originPassword).equals(dbUser.getPassword())){
-            try {
-                userMapper.updatePassword(id, MD5Utils.md5Code(dbUser.getUsername(),newPassword));
-                return null;
-            } catch (Exception e){
-                e.printStackTrace();
-                return "密码修改失败";
-            }
-        }
-        else{
+        if (dbUser == null)
+            return "用户错误";
+        if (!MD5Utils.md5Code(dbUser.getUsername(),originPassword).equals(dbUser.getPassword()))
             return "原密码有误，密码修改失败";
+
+        try {
+            userMapper.updatePassword(id, MD5Utils.md5Code(dbUser.getUsername(),newPassword));
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "密码修改失败";
         }
     }
 
     @Override
     @Transactional
     public String credit(String id, Double money) {
-        User user = userMapper.selectByPrimaryKey(id);
-        if (user == null)
+        User dbUser = userMapper.selectByPrimaryKey(id);
+        if (dbUser == null)
             return "用户错误";
         if (money == null || money < 0)
             return "金额错误";
-        user.credit(money);
+        dbUser.credit(money);
+
         try{
-            userMapper.updateByPrimaryKey(user);
+            userMapper.updateByPrimaryKey(dbUser);
             return null;
         } catch (Exception e){
             e.printStackTrace();

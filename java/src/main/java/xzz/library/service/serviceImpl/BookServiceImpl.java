@@ -23,13 +23,13 @@ public class BookServiceImpl implements BookService {
     private ReturnRecordMapper returnRecordMapper;
     @Autowired
     private FineRecordMapper fineRecordMapper;
+    @Autowired
+    private ClassificationMapper classificationMapper;
 
     @Override
     public BooksDto getBookList(BooksGetDto booksGetDto) {
         booksGetDto.initial();
-        List<Book> books = bookMapper.getBookList(booksGetDto);
-        int total = bookMapper.countBook(booksGetDto);
-        return new BooksDto(books,total);
+        return new BooksDto(bookMapper.getBookList(booksGetDto),bookMapper.countBook(booksGetDto));
     }
 
     @Override
@@ -125,6 +125,16 @@ public class BookServiceImpl implements BookService {
             e.printStackTrace();
             return "归还失败";
         }
+    }
+
+    @Override
+    public List<Classification>getFirstClassification(){
+        return classificationMapper.getFirstClassification();
+    }
+
+    @Override
+    public List<Classification> getSecondClassification(String classifyChar) {
+        return classificationMapper.getSecondClassification(classifyChar);
     }
 
 }

@@ -63,32 +63,30 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public BorrowRecordDto getBR(String userId, String recordId) {
-        BorrowRecordDto borrowRecordDto = null;
         BorrowRecord borrowRecord = borrowRecordMapper.selectByPrimaryKey(recordId);
-        if (borrowRecord!= null && borrowRecord.getUserId().equals(userId)){
-            borrowRecordDto = new BorrowRecordDto(borrowRecord);
-            borrowRecordDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
-            borrowRecordDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
-        }
+        if (borrowRecord == null || !borrowRecord.getUserId().equals(userId))
+            return null;
+        BorrowRecordDto borrowRecordDto = new BorrowRecordDto(borrowRecord);
+        borrowRecordDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
+        borrowRecordDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
         return borrowRecordDto;
     }
 
     @Override
     public ReturnRecordDto getRR(String userId, String recordId) {
-        ReturnRecordDto returnRecordDto = null;
         ReturnRecord returnRecord = returnRecordMapper.selectByPrimaryKey(recordId);
-        if (returnRecord != null && returnRecord.getUserId().equals(userId)){
-            returnRecordDto = new ReturnRecordDto(returnRecord);
-            returnRecordDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
-        }
+        if (returnRecord == null || !returnRecord.getUserId().equals(userId))
+            return null;
+        ReturnRecordDto returnRecordDto = new ReturnRecordDto(returnRecord);
+        returnRecordDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
         return returnRecordDto;
     }
 
     @Override
     public FineRecord getFR(String userId, String recordId) {
         FineRecord fineRecord = fineRecordMapper.selectByPrimaryKey(recordId);
-        if (fineRecord != null && fineRecord.getUserId().equals(userId))
-            return fineRecord;
-        return null;
+        if (fineRecord == null || !fineRecord.getUserId().equals(userId))
+            return null;
+        return fineRecord;
     }
 }

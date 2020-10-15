@@ -33,4 +33,13 @@
     select id, classify_char, classify_num, classify_books
     from classifications
   </select>
+  <select id="getFirstClassification" resultMap="BaseResultMap" >
+    select classify_char, classify_books
+    from classifications
+  </select>
+  <select id="getSecondClassification" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select classify_char, classify_num, classify_books
+    from classifications
+    where classify_char=#{classify_char}
+  </select>
 </mapper>
