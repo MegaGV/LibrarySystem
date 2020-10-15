@@ -1,22 +1,22 @@
 <template>
     <div :style="background" >
         <div class="reg-logs">
-            <el-form ref="user" :model="user" class="login-box">
+            <el-form ref="user" :rules="rules" :model="user" class="login-box">
                 <div class="title">
                     <h3 style="float:left">注册</h3>
                 </div>
                 <div class="padding-cont">
-                    <el-form-item>
+                    <el-form-item prop="username">
                         <el-input type="text" v-model="user.username" placeholder="帐号"></el-input>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item prop="password">
                         <el-input type="password" v-model="user.password" placeholder="密码"></el-input>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item prop="nickname">
                         <el-input type="text" v-model="user.nickname" placeholder="昵称"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="register" style="width:420px;">注册</el-button>
+                        <el-button type="primary" @click="submitForm('user')" style="width:420px;">注册</el-button>
                     </el-form-item>
                     <router-link to="/" class="btn-login">
                         <span style="color: #AFB1B3;">已有账号？</span>
@@ -36,7 +36,7 @@ export default {
             width: '1920px',
             height: '911px',
             margin:'0',
-            backgroundImage: "url(" + require("../img/reg-bg.png") + ")",
+            backgroundImage: "url(" + require("../assets/reg-bg.png") + ")",
             backgroundRepeat:'no-repeat',
             backgroundSize:'cover'
         },
@@ -44,33 +44,55 @@ export default {
             username: "",
             password: "",
             nickname: "",
+        },
+        rules: {
+          username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' }
+          ],
+          nickname: [
+            { required: true, message: '请输入昵称', trigger: 'blur' }
+          ]
         }
     }
   },
   methods: {
-      register(){
-          this.$axios
-            .post("api/library/user/register", this.user)
-            .then(res => {
-                    if (res.data == null){
-                        alert("注册成功，即将跳往登录页面");
-                        this.$router.push('/');
-                    }
-                    else{
-                        alert(res.data)
-                    }
-                })
-            .catch(err => {
-                alert("系统繁忙，请稍后再试");
-                console.log(err);
-                });
-        }
+      submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios
+                    .post("api/library/user/register", this.user)
+                    .then(res => {
+                            if (res.data == null || res.data == ""){
+                                this.$message({
+                                    message: '注册成功，跳往登录页面',
+                                    type: 'success'
+                                });
+                                this.$router.push('/');
+                            }
+                            else{
+                                this.$message.error(res.data);
+                            }
+                        })
+                    .catch(err => {
+                            this.$message.error("系统繁忙，请稍后再试");
+                            console.log(err);
+                        });
+                } 
+              else {
+                  return false;
+                }
+        });
+      },
     },
+    
   
 }
 </script>
 
-<style >
+<style scope>
 .reg-logs{
     width: 480px;
     height: 515px;

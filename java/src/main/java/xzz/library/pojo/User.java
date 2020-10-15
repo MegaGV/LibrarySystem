@@ -1,15 +1,11 @@
 package xzz.library.pojo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import xzz.library.dao.UserMapper;
 import xzz.library.util.MD5Utils;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 public class User implements Serializable {
-    @Autowired
-    private UserMapper userMapper;
 
     private String id;
 

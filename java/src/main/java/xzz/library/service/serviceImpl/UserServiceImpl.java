@@ -36,15 +36,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(User user) {
+    public User login(User user) {
         User dbUser = userMapper.getUserByUsername(user.getUsername().trim());
         if (dbUser == null)
             return null;
         else{
-            if (!MD5Utils.md5Code(user.getUsername().trim(), user.getPassword()).equals(dbUser.getPassword()))
-                return null;
+            if (dbUser.getPassword().equals(MD5Utils.md5Code(user.getUsername().trim(), user.getPassword()))) {
+                User u = new User();
+                u.setId(dbUser.getId());
+                u.setRole(dbUser.getRole());
+                return u;
+            }
             else
-                return dbUser.getId();
+                return null;
         }
     }
 

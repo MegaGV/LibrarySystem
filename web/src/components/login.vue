@@ -1,19 +1,19 @@
 <template>
     <div :style="background" >
         <div class="reg-log" >
-            <el-form ref="user" :model="user" class="login-box" id="login">
+            <el-form ref="user" :model="user" :rules="rules" class="login-box" id="login">
                 <div class="items">       
                     <a class="active">账号登录</a>
                 </div>
                 <div class="padding-cont pt-login">
-                    <el-form-item >
+                    <el-form-item prop="username">
                         <el-input v-model="user.username" type="text" placeholder="账号"></el-input>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item prop="password">
                         <el-input v-model="user.password" type="password" placeholder="密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submit" style="height: 50px;width:420px;">登录</el-button>
+                        <el-button type="primary" @click="submitForm('user')" style="height: 50px;width:420px;">登录</el-button>
                     </el-form-item>
                     
                     <router-link to="/register" class="btn-register">
@@ -26,7 +26,7 @@
     </div>
 </template>
 
-<script>
+<script scope>
 export default {
   data() {
       return {
@@ -34,7 +34,7 @@ export default {
             width: '1920px',
             height: '911px',
             margin:'0',
-            backgroundImage: "url(" + require("../img/login-bg2.jpg") + ")",
+            backgroundImage: "url(" + require("../assets/login-bg2.jpg") + ")",
             backgroundRepeat:'no-repeat',
             backgroundSize:'cover'
         },
@@ -43,34 +43,50 @@ export default {
             password:"",
             role:""
         },
+        rules: {
+          username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' }
+          ]
+        }
     }
   },
   methods: {
-    submit(){
-        this.$axios
-            .get("api/library/user/login", this.user)
-            .then(res => {
-                if(res.data == null)
-                    alert("用户名或密码错误");
-                else{
-                    console.log(res.data);
-                    window.sessionStorage.setItem("user",JSON.stringify(res.data));
-                    this.user.role = res.data.role;
-                    this.jumpToList();
+      submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios
+                    .post("api/library/user/login", this.user)
+                    .then(res => {
+                        console.log(res.data);
+                        if(res.data == ""){
+                             this.$message.error("用户名或密码错误");
+                        }
+                        else{
+                            window.sessionStorage.setItem("user",JSON.stringify(res.data.id));
+                            window.sessionStorage.setItem("role",JSON.stringify(res.data.role));
+                            this.$message({
+                                    message: '登录成功',
+                                    type: 'success'
+                                });
+                            if(res.data.role == '0')
+                                this.$router.push('/userHome')
+                            else
+                                this.$router.push('/adminHome')
+                        }
+                    })
+                    .catch(err => {
+                        alert("系统繁忙，请稍后再试");
+                        console.log(err);
+                    });
+                } 
+              else {
+                  return false;
                 }
-            })
-            .catch(err => {
-                alert("系统繁忙，请稍后再试");
-                console.log(err);
-            });
-        },
-        jumpToList() {
-            alert("登录成功");
-            if(this.user.role == '0')
-                this.$router.push('/userHome')
-            else
-                this.$router.push('/adminHome')
-        }
+        });
+      },
     },
   
 }
