@@ -1,7 +1,7 @@
 <template>
     <div :style="background" >
         <div class="reg-logs">
-            <el-form ref="user" :rules="rules" :model="user" class="login-box">
+            <el-form ref="user" :model="user" :rules="rules" class="register-box">
                 <div class="title">
                     <h3 style="float:left">注册</h3>
                 </div>
@@ -65,7 +65,7 @@ export default {
                   this.$axios
                     .post("api/library/user/register", this.user)
                     .then(res => {
-                            if (res.data == null || res.data == ""){
+                            if (res.data == ""){
                                 this.$message({
                                     message: '注册成功，跳往登录页面',
                                     type: 'success'
@@ -101,7 +101,7 @@ export default {
     top: 50%;
     transform: translate(-50%,-65%);
 }
-.identity-box {
+.register-box {
     width: 480px;
     height: 504px;
     padding: 47px 41px 0;
@@ -111,55 +111,16 @@ export default {
     box-sizing: border-box;
     border-radius: 4px;
 }
-.identity-box h3 {
+.register-box h3 {
     font-size: 32px;
     font-weight: 400;
     color: #3B3D45;
     text-align: left;
 }
-.identity-box .choose {
-    margin-top: 70px;
-    margin-left: 15px;
-}
-.identity-box .choose a {
-    display: block;
-    width: 330px;
-    font-size: 16px;
-    color: #fff;
-    height: 64px;
-    line-height: 64px;
-    text-align: center;
-    background: #32BAF0;
-    border-radius: 4px;
-    margin-left: 70px;
-    position: relative;
-}
-.identity-box .choose a.student {
-    margin-top: 70px;
-}
-.img{
-    top: 2px;
-    width: 60px;
-    height: 60px;
-    float: left;
-}
 .btn-login{
     float: right;
     margin-top: 24px;
     text-decoration: none;
-}
-.login-box {
-    background: #FFF;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 4px;
-}
-.back {
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    margin-right: 22px;
-    margin-top:32px;
 }
 .title h3 {
     line-height: 40px;

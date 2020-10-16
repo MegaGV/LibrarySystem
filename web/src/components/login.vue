@@ -1,11 +1,11 @@
 <template>
     <div :style="background" >
         <div class="reg-log" >
-            <el-form ref="user" :model="user" :rules="rules" class="login-box" id="login">
+            <el-form ref="user" :model="user" :rules="rules" class="login-box">
                 <div class="items">       
                     <a class="active">账号登录</a>
                 </div>
-                <div class="padding-cont pt-login">
+                <div class="padding-cont">
                     <el-form-item prop="username">
                         <el-input v-model="user.username" type="text" placeholder="账号"></el-input>
                     </el-form-item>
@@ -41,7 +41,6 @@ export default {
         user:{
             username:"",
             password:"",
-            role:""
         },
         rules: {
           username: [
@@ -72,13 +71,13 @@ export default {
                                     type: 'success'
                                 });
                             if(res.data.role == '0')
-                                this.$router.push('/userHome')
+                                this.$router.push('/userHome');
                             else
-                                this.$router.push('/adminHome')
+                                this.$router.push('/adminHome');
                         }
                     })
                     .catch(err => {
-                        alert("系统繁忙，请稍后再试");
+                        this.$message.error("系统繁忙，请稍后再试");
                         console.log(err);
                     });
                 } 
@@ -115,14 +114,6 @@ export default {
     font-size: 26px;
     font-family: PingFangSC-Medium;
     font-weight: 500;
-}
-
-.auto-login:hover {
-    background-position: left -34px;
-    color: #4d90fe;
-}
-.forget:hover {
-    color: #4d90fe;
 }
 .btn-register {
     float: right;
