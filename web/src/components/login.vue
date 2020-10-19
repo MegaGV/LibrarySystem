@@ -65,7 +65,6 @@ export default {
                         }
                         else{
                             window.sessionStorage.setItem("user",JSON.stringify(res.data.id));
-                            window.sessionStorage.setItem("role",JSON.stringify(res.data.role));
                             this.$message({
                                     message: '登录成功',
                                     type: 'success'

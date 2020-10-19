@@ -25,9 +25,24 @@ export default new Router({
       component: () => import('../components/userHome.vue')
     },
     {
+      path: '/userInfo',
+      name: 'usereInfo',
+      component: () => import("../components/userInfo.vue")
+    },
+    {
       path: '/adminHome',
       name: 'adminHome',
       component: () => import('../components/adminHome.vue')
+    },
+    {
+      path: '/books',
+      name: 'books',
+      component: () => import("../components/books.vue")
+    },
+    {
+      path: '/records',
+      name: 'records',
+      component: () => import("../components/records.vue")
     },
   ]
 })
