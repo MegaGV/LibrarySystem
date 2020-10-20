@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.UserMapper;
+import xzz.library.dto.CreditDto;
+import xzz.library.dto.PasswordResetDto;
 import xzz.library.dto.UserDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
@@ -59,15 +61,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String updatePassword(String id, String originPassword, String newPassword) {
-        User dbUser = userMapper.selectByPrimaryKey(id);
+    public String updatePassword(PasswordResetDto passwordResetDto) {
+        User dbUser = userMapper.selectByPrimaryKey(passwordResetDto.getUserId());
         if (dbUser == null)
             return "用户错误";
-        if (!MD5Utils.md5Code(dbUser.getUsername(),originPassword).equals(dbUser.getPassword()))
+        if (!MD5Utils.md5Code(dbUser.getUsername(),passwordResetDto.getOriginPassword()).equals(dbUser.getPassword()))
             return "原密码有误，密码修改失败";
 
         try {
-            userMapper.updatePassword(id, MD5Utils.md5Code(dbUser.getUsername(),newPassword));
+            userMapper.updatePassword(passwordResetDto.getUserId(),
+                    MD5Utils.md5Code(dbUser.getUsername(),passwordResetDto.getNewPassword()));
             return null;
         } catch (Exception e){
             e.printStackTrace();
@@ -77,13 +80,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String credit(String id, Double money) {
-        User dbUser = userMapper.selectByPrimaryKey(id);
+    public String credit(CreditDto creditDto) {
+        User dbUser = userMapper.selectByPrimaryKey(creditDto.getUserId());
         if (dbUser == null)
             return "用户错误";
-        if (money == null || money < 0)
+        if (creditDto.getMoney() == null || creditDto.getMoney() < 0)
             return "金额错误";
-        dbUser.credit(money);
+        dbUser.credit(creditDto.getMoney());
 
         try{
             userMapper.updateByPrimaryKey(dbUser);

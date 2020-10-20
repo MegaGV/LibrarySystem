@@ -64,7 +64,7 @@ export default {
                              this.$message.error("用户名或密码错误");
                         }
                         else{
-                            window.sessionStorage.setItem("user",JSON.stringify(res.data.id));
+                            window.sessionStorage.setItem("user",res.data.id);
                             this.$message({
                                     message: '登录成功',
                                     type: 'success'

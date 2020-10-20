@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import xzz.library.dto.CreditDto;
+import xzz.library.dto.PasswordResetDto;
 import xzz.library.dto.UserDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
@@ -40,13 +42,13 @@ public class UserController {
 
     @PostMapping("/updatePassword")
     @ResponseBody
-    public String updatePassword(String id, String originPassword, String newPassword){
-        return userService.updatePassword(id, originPassword, newPassword);
+    public String updatePassword(@RequestBody PasswordResetDto passwordResetDto){
+        return userService.updatePassword(passwordResetDto);
     }
 
     @PostMapping("/credit")
     @ResponseBody
-    public String credit(String id, Double money){
-        return userService.credit(id, money);
+    public String credit(@RequestBody CreditDto creditDto){
+        return userService.credit(creditDto);
     }
 }

@@ -9,9 +9,6 @@
         </ul>
         <ul class="nav-right">
             <li class="nav-right-item">
-                <span style="line-height:">欢迎,李四</span>
-            </li>
-            <li class="nav-right-item">
                 <el-dropdown style="margin-top:10px">
                     <el-avatar icon="el-icon-user-solid"></el-avatar>
                     <el-dropdown-menu slot="dropdown">
