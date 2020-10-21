@@ -52,7 +52,7 @@
             <!-- bookList -->
             <div class="result-box">
                 <el-table stripe :data="books">
-                    <el-table-column label="序号" align="center">
+                    <el-table-column label="序号" width="50" align="center">
                         <template slot-scope="scope">
                             <p>{{scope.$index + 1 + (searchForm.page - 1)*searchForm.limit}}</p>
                         </template>
@@ -64,9 +64,15 @@
                     <el-table-column prop="price" label="定价" :show-overflow-tooltip="true" align="center" />
                     <el-table-column prop="stock" label="在库数" :show-overflow-tooltip="true" align="center" />
                     <el-table-column prop="total" label="库存" :show-overflow-tooltip="true" align="center" />
-                    <el-table-column prop="detail" label="简介" :show-overflow-tooltip="true" align="center" />
+                    <el-table-column label="操作" width="250" align="center">
+                        <template slot-scope="scope">
+                            <el-button @click="viewBook(scope.row)">查看详情</el-button>
+                            <el-button type="primary" @click="borrowBook(scope.row)" :disabled="scope.row.stock=='0'">借阅</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
             </div>
+            
             <!-- page -->
             <div class="page-part">
                 <el-pagination
@@ -79,7 +85,39 @@
                     :total="total">
                 </el-pagination>
             </div>
-            
+
+            <!-- bookDetail -->
+            <div>
+                <el-dialog title="书籍信息" :visible.sync="bookVisible"  width="40%">
+                    <el-form :model="bookForm" label-width="100px">
+                        <el-form-item   label="书名：" style="width: 90%" >
+                            <span>{{bookForm.bookName}}</span>
+                        </el-form-item>
+                        <el-form-item label="图书类型：" style="width: 90%" >
+                            <span>{{bookForm.bookType}}</span>
+                        </el-form-item>
+                        <el-form-item label="作者：" style="width: 90%" >
+                            <span>{{bookForm.author}}</span>
+                        </el-form-item>
+                        <el-form-item label="出版社：" style="width: 90%" >
+                            <span>{{bookForm.publisher}}</span>
+                        </el-form-item>
+                        <el-form-item label="定价：" style="width: 90%" >
+                            <span>{{bookForm.price}}</span>
+                        </el-form-item>
+                        <el-form-item label="在库数：" style="width: 90%" >
+                            <span>{{bookForm.stock}}</span>
+                        </el-form-item>
+                        <el-form-item label="库存：" style="width: 90%" >
+                            <span>{{bookForm.total}}</span>
+                        </el-form-item>
+                        <el-form-item label="简介：" style="width: 90%" >
+                            <span v-html="bookForm.detail" />
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+            </div>
+
         </div>
 
     </div>
@@ -102,6 +140,8 @@ export default {
             bookTypes:[],
             books:[],
             total:0,
+            bookVisible: false,
+            bookForm:"",
         }
     },
     mounted(){
@@ -178,8 +218,33 @@ export default {
                 this.searchForm.bookType = this.selectTypes[this.selectTypes.length - 1];
             else
                 this.searchForm.bookType = '';
+        },
+        viewBook(book){
+            this.bookForm = book;
+            this.bookVisible = true;
+        },
+        borrowBook(book){
+            if (book.stock == '0')
+                this.$message('该书库存不足，无法借阅');
+            var userId = window.sessionStorage.getItem("user") ;
+            this.$axios.post('api/library/book/borrowBook?userId=' + userId +"&bookId=" + book.id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message({
+                        message: '借阅成功',
+                        type: 'success'
+                    });
+                    this.getBookList();
+                }
+                else {
+                    this.$message.error(res.data);
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
         }
-
     }
 }
 </script>

@@ -57,7 +57,7 @@
                     </el-table-column>
                     <el-table-column  label="操作" width="160" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewRecord(scope.row, 'borrow')">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewRecord(scope.row, 'borrow')">查看详情</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -74,7 +74,7 @@
                     </el-table-column>
                     <el-table-column label="借阅记录" :show-overflow-tooltip="true" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewBorrowRecord(scope.row.borrowId)">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewBorrowRecord(scope.row.borrowId)">查看详情</el-button>
                         </template>
                     </el-table-column>
                     <el-table-column prop="returnDate" label="归还日期" :show-overflow-tooltip="true" align="center"/>
@@ -87,7 +87,7 @@
                     </el-table-column>
                     <el-table-column  label="操作" width="160" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewRecord(scope.row, 'return')">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewRecord(scope.row, 'return')">查看详情</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -104,19 +104,19 @@
                     </el-table-column>
                     <el-table-column label="借阅记录" :show-overflow-tooltip="true" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewBorrowRecord(scope.row.borrowId)">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewBorrowRecord(scope.row.borrowId)">查看详情</el-button>
                         </template>
                     </el-table-column>
                     <el-table-column label="归还记录" :show-overflow-tooltip="true" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewReturnRecord(scope.row.returnId)">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewReturnRecord(scope.row.returnId)">查看详情</el-button>
                         </template>
                     </el-table-column>
                     <el-table-column prop="days" label="超时天数" :show-overflow-tooltip="true" align="center"/>
                     <el-table-column prop="fine" label="罚款金额" :show-overflow-tooltip="true" align="center"/>
                     <el-table-column  label="操作" width="160" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewRecord(scope.row, 'fine')">&nbsp;查看详情&nbsp;</el-button>
+                            <el-button @click="viewRecord(scope.row, 'fine')">查看详情</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -152,10 +152,10 @@
                         <el-form-item label="出版社：" style="width: 90%" >
                             <span>{{bookForm.publisher}}</span>
                         </el-form-item>
-                        <el-form-item label="定价：：" style="width: 90%" >
+                        <el-form-item label="定价：" style="width: 90%" >
                             <span>{{bookForm.price}}</span>
                         </el-form-item>
-                        <el-form-item label="在库数" style="width: 90%" >
+                        <el-form-item label="在库数：" style="width: 90%" >
                             <span>{{bookForm.stock}}</span>
                         </el-form-item>
                         <el-form-item label="库存：" style="width: 90%" >
