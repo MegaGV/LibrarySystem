@@ -3,10 +3,10 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import xzz.library.dto.BookTypeDto;
 import xzz.library.dto.BooksDto;
 import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.Book;
-import xzz.library.pojo.Classification;
 import xzz.library.service.BookService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/getBookList")
+    @PostMapping("/getBookList")
     @ResponseBody
     public BooksDto getBookList(@RequestBody BooksGetDto booksGetDto){
         return bookService.getBookList(booksGetDto);
@@ -42,15 +42,10 @@ public class BookController {
         return bookService.returnBook(borrowId);
     }
 
-    @GetMapping("/getFirstClassification")
+    @GetMapping("/getBookTypes")
     @ResponseBody
-    public List<Classification> getFirstClassification(){
-        return bookService.getFirstClassification();
+    public BookTypeDto getBookTypes(){
+        return bookService.getBookTypes();
     }
 
-    @GetMapping("/getSecondClassification")
-    @ResponseBody
-    public List<Classification> getSecondClassification(String classifyChar){
-        return bookService.getSecondClassification(classifyChar);
-    }
 }

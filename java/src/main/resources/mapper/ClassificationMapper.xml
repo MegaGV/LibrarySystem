@@ -36,10 +36,11 @@
   <select id="getFirstClassification" resultMap="BaseResultMap" >
     select classify_char, classify_books
     from classifications
+    where classify_num IS NULL
   </select>
   <select id="getSecondClassification" resultMap="BaseResultMap" parameterType="java.lang.String">
     select classify_char, classify_num, classify_books
     from classifications
-    where classify_char=#{classify_char}
+    where classify_char=#{classify_char} and classify_num IS NOT NULL
   </select>
 </mapper>

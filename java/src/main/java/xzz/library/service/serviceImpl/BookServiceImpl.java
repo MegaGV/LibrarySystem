@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.*;
+import xzz.library.dto.BookTypeDto;
+import xzz.library.pojo.BookType;
 import xzz.library.dto.BooksDto;
 import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.*;
 import xzz.library.service.BookService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -128,13 +132,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Classification>getFirstClassification(){
-        return classificationMapper.getFirstClassification();
-    }
-
-    @Override
-    public List<Classification> getSecondClassification(String classifyChar) {
-        return classificationMapper.getSecondClassification(classifyChar);
+    public BookTypeDto getBookTypes() {
+        List<BookType> bookTypes = new ArrayList<>();
+        int total = 0;
+        List<Classification> firstClassifications = classificationMapper.getFirstClassification();
+        if (firstClassifications != null){
+            total += firstClassifications.size();
+            for (Classification classification : firstClassifications){
+                bookTypes.add(new BookType(classification));
+            }
+            for (BookType bookType : bookTypes){
+                List<Classification> secondClassifications = classificationMapper.getSecondClassification(bookType.getValue());
+                if (secondClassifications != null) {
+                    total += secondClassifications.size();
+                    for (Classification classification : secondClassifications)
+                        bookType.addChildren(new BookType(classification));
+                    //bookType.makeChildren(secondClassifications);
+                }
+            }
+        }
+        return new BookTypeDto(bookTypes, total);
     }
 
 }

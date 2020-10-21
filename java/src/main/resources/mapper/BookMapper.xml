@@ -46,7 +46,7 @@
     from books
   </select>
   <select id="getBookList" parameterType="xzz.library.dto.BooksGetDto" resultMap="BaseResultMap" >
-    select id, book_name, book_type, author, publisher, price, stock, total
+    select id, book_name, book_type, author, publisher, price, stock, total, detail
     from books
     <where>
       <if test="bookName!=null and bookName !=''">
@@ -61,8 +61,11 @@
       <if test="publisher!=null and publisher !=''">
         and publisher like concat("%",#{publisher},"%")
       </if>
-      <if test="stock!=null and stock !=''">
-        and stock != 0
+      <if test="stock!=null and stock ==1">
+        and stock!=0
+      </if>
+      <if test="stock!=null and stock ==0">
+        and stock=0
       </if>
     </where>
     limit #{page}, #{limit}
@@ -83,8 +86,11 @@
       <if test="publisher!=null and publisher !=''">
         and publisher like concat("%",#{publisher},"%")
       </if>
-      <if test="stock!=null and stock !=''">
-        and stock != 0
+      <if test="stock!=null and stock ==1">
+        and stock!=0
+      </if>
+      <if test="stock!=null and stock ==0">
+        and stock=0
       </if>
     </where>
   </select>
