@@ -3,7 +3,7 @@
         <div class="nav">
             <ul class="nav-left">
                 <li class="nav-left-item">
-                    <el-image class="logo" :src="logo" style="width: 200px; height: 50px"></el-image>
+                    <el-image class="logo" :src="logo" style="width: 200px; height: 50px" @click="toUserHome"></el-image>
                 </li>
             </ul>
             <ul class="nav-right">
