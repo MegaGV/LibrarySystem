@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-10-14 11:51:46
+Date: 2020-10-21 12:08:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,21 +39,21 @@ INSERT INTO `books` VALUES ('0157096e-b13f-4860-911e-20efbcd5f5df', '数字电�
 INSERT INTO `books` VALUES ('02810cef-82e5-44c8-b69b-222df8043d12', '哈佛商学院最受欢迎的领导课', 'F2', '(美) 罗伯特·史蒂文·卡普兰', '', '46.00', '2', '2', '《哈佛商学院最受欢迎的领导课》内容简介：我们往往有一种错觉，以为最优秀的领导者应该知道所有问题的答案。他们似乎天生就有准确的直觉，不可抵挡的魅力，高深的洞见，杰出的管理才能，以及激励他人的号召力。他们看上去如此自信，好像不费吹灰之力就能出色地领导众人，高效地管理团队。<br />现实却要复杂得多。事实的真相是，几乎所有成功的领导人，不管其天分有多高，都会经历一段困惑和不确定的时期——他们也会感到迷茫无助，忧心忡忡，无比孤独。而领导者是否能充分发挥潜能，关键就在于如何应对这段挣扎期。在卡普兰看来，回避困难只会让境况恶化，只有学会退后一步，问对关键问题，才能精确诊断现状，获得洞见，重整旗鼓，再度前进。<br />在《哈佛商学院最受欢迎的领导课》中，卡普兰提供了一种简洁明了而引人入胜的领导力框架，以帮助管理者改进领导效果。这个领导力框架由一系列关键问题搭建，包括愿景和要务、时间管理和工作授权等七个方面，领导者可以借助这个框架深入思考自己的工作，从而成功领导你的团队，掌控自己的职场命运。<br /><br />海报：');
 INSERT INTO `books` VALUES ('02b68328-2337-41ca-969d-ba19326faecc', '雅思王阅读真题语料库', 'H3', '王陆, 凉月', '中国人民大学出版社', '28.00', '2', '2', '本书包括5章。第一章为讲述雅思阅读必须具备的常识。第二章为512个雅思阅读核心词汇速记，这是全书最重要内容。第三章阅读词根词缀衍生记忆法，是在512个核心词的基础上的拓展。第四章阅读快速反映核心词对，是协助考试做题。第五章是阅读场景机经词汇。考生识读即可。全书内容内容来自剑5—剑8真题阅读部分，经过反复筛选，对考生备考具有实际指导意义。');
 INSERT INTO `books` VALUES ('03fb7786-6f82-496c-b157-adb8e904fbbf', '生物化学与分子生物学实验技术', 'Q5', '阿依木古丽, 蔡勇', '', '52.00', '6', '6', '');
-INSERT INTO `books` VALUES ('045740ce-efb9-4a51-8e77-6970f47e8748', '机械电气控制与PLC应用', 'T8', '', '', '58.50', '4', '5', '');
+INSERT INTO `books` VALUES ('045740ce-efb9-4a51-8e77-6970f47e8748', '机械电气控制与PLC应用', 'T8', '', '', '58.50', '3', '5', '');
 INSERT INTO `books` VALUES ('05cf259f-62e5-4512-9e72-44973090e4af', '二战经典战役', 'E1', '《时刻关注》编委会', '中国铁道出版社', '39.80', '4', '4', '着重选取了第二次世界大战时期的经典战役，从正反两方面，以全新的角度诠释了这一期间的一系列战役内容。例如：闪击波兰、血战阿登、鹰击不列颠、血捍莫斯科、斯大林格勒保卫战、偷袭珍珠港、搏杀中途岛、梦断马奇诺……在这些战役中，各国*秀的军事天才在这些经典的战役后给后人留下了很多的启示，对第二次世界大战的结束及战后的世界格局也产生了重大的影响。本书将为您一一揭秘。');
 INSERT INTO `books` VALUES ('0ba06ded-0612-419a-8b4e-ae0bdfc61729', '中国经济思想通史', 'F0', '赵靖', '北京大学出版社', '24.00', '4', '4', '');
 INSERT INTO `books` VALUES ('0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d', '看不见的森林 : 林中自然笔记', 'S7', '(美) 戴维·乔治·哈斯凯尔', '商务印书馆', '46.00', '6', '6', '这是一本森林观测笔记。 在这本书里，一位生物学家以一年的时间为主线，在每次的观测中，为我们揭开藏森林一平方米地域里的秘密。 在这本完全原创的书里，生物学家戴维以一小片森林作为整个自然界的缩影，向我们生动地展示了这片森林和居住其中的栖息者的生活状况。 书的每一章都以一次简单的观察结果作为开头，比如藏在落叶层里的火蜥蜴，春天里野花的初次绽放。通过这些观察，戴维织就了一个生物生态网，向人们解释了把最小的微生物和最大的哺乳动物联系起来的科学观点，并描述了延续数千年甚至数百万年的生态系统。戴维每天都会在这片森林里漫步，梳理出各种以大自然为家的动植物间复杂而又微妙的关系，因此每一次寻访对于他来说，都象征着一个自然故事的缩影。 本书优美的语言使读者把阅读过程看作一次寻找大自然奥秘的盛大旅行，而作者则像导游，带领大家探索存在于我们脚下或者藏在我们后院里的奇妙世界。');
 INSERT INTO `books` VALUES ('14315e47-c398-47d1-b297-2ac8401dc14e', 'Excel VBA程序开发自学宝典', 'T3', '罗刚君', '电子工业出版社', '79.00', '1', '1', '《Excel VBA程序开发自学宝典（第2版）》是VBA入门的经典教材，对VBA的基础理论、语法规则、代码优化、编写思路、开发函数与使用数组等都进行了详尽的理论阐述和案例演示，同时还搭配窗体与控件、正则表达式、字典、File System Object、API、类模块、脚本语言的应用，以及开发功能区、开发加载宏、封装代码等高级应用，力求完整地展示了VBA的功能与魅力。通读本书，您不仅能学到如何开发函数、编写程序，还能设计报表系统，独立开发Excel百宝箱式的大中型插件。<br />本书是畅销书《Excel VBA程序开发自学宝典》的升级版本。《Excel VBA程序开发自学宝典》第1版于2009年10月上市，基于Excel 2007版本撰写，曾多次销罄重印，并在当当网和亚马逊网连续三个季度居VBA类图书销量第一名。然而本着精益求精的原则，作者在售后服务QQ群和售后论坛中收集了大量的用户反馈信息，对图书进行改版，删除了部分实用性不大的内容，增加了正则表达式、字典的应用、开发功能区与封装代码等章节，增加了开发插件的案例，全书改用Excel 2010截图，并修正了第1版中无法兼容Excel 2010的部分代码与设计思路，促使教学内容更具通用性。<br /><br /> 注：本书实物有686页，目录有778页。第30章目录后面标有说明，本章及附录内容（687-778页）均在光盘内。');
 INSERT INTO `books` VALUES ('2257cbed-e9f3-4207-a409-54879296169b', '空气动力学基础', 'V2', '曾明, 刘伟, 邹建军', '', '36.00', '6', '6', '');
 INSERT INTO `books` VALUES ('288dd68f-d221-4bdd-92c5-f2852113e780', '操作系统：精髓与设计原理（原书第6版）', 'T0', '（美）斯托林斯', '机械工业出版社', '69.00', '3', '3', '本书是计算机界巨擘William Stallings的经典著作之一，其第4版曾获得美国计算机科学与工程类大奖，得到了全球计算机教育界和工程技术人员的好评。书中不仅全面地讲述了操作系统的基本概念、原理和方法，而且还以当代最流行的操作系统为例，全面清楚地展现了当代操作系统的本质和特点。作者针对近几年操作系统领域的*变化，对操作系统的设计原理进行深入的阐述，同时将其对操作系统整个领域全面而深入的理解呈现给读者。');
-INSERT INTO `books` VALUES ('2a451f37-0c35-4ea7-b9a1-0510ae533f28', '等离子体弧熔融裂解 : 危险废弃物处理前沿技术', 'X7', '丁恩振, 丁家亮', '', '30.00', '7', '7', '');
+INSERT INTO `books` VALUES ('2a451f37-0c35-4ea7-b9a1-0510ae533f28', '等离子体弧熔融裂解 : 危险废弃物处理前沿技术', 'X7', '丁恩振, 丁家亮', '', '30.00', '0', '1', '');
 INSERT INTO `books` VALUES ('386ea8ff-94f5-4557-adf6-b711035aaf57', '从零开始读懂心理学', 'B8', '文真明', '', '36.80', '2', '2', '');
 INSERT INTO `books` VALUES ('3e9990ae-4ecf-4a7c-8572-2f977ab70a4d', '世界桥梁趣谈', 'U4', '唐寰澄', '北京出版社', '26.00', '6', '6', '');
 INSERT INTO `books` VALUES ('3f0085f4-b6ac-41cd-8314-b3d5a358d315', '数据结构、算法与应用 C++语言描述（原书第2版）', 'T0', '(美)萨尼', '机械工业出版社', '79.00', '2', '2', '　本书共分三个部分。第一部分从第1章到第4章，旨在复习C++程序设计的概念以及程序性能的分析和测量方法。第二部分从第5章到第16章，研究数据结构，包括线性表、数组和矩阵、栈、队列、字典、二叉树、优先级队列、竞赛树、搜索树和图等。第三部分从第17章到第21章，研究常用算法，包括贪婪算法、分而治之算法、动态规划、回溯算法和分枝定界算法。本书有800多道练习题和50多个应用实例。内容广博，组织合理，论述清晰，循序渐进，而且对程序性能的分析和测量系统入微。本书不仅是数据结构和算法的经典教材，而且是计算机科学与工程领域的理想参考书。');
 INSERT INTO `books` VALUES ('3f0314cf-10e9-468c-a32c-09010535e127', '马云 : 一路这样走来', 'K8', '李亮', '贵州人民出版社', '32.00', '1', '1', '《马云 一路这样走来》是一本详细记录马云载跌宕人生年创业精髓的倾情力作。本书结合马云的传奇经历，深刻剖析马云创业过程中的各个环节，讲述其成就事业之道为人处世之道。身材矮小的马云，却是这个世界上最大的互联网市场中的大人物。短短年间，他从英语教师成长为互联网大亨，并带领阿里巴巴成为全世界最大的电子商务平台的经历，折射出中国互联网的崛起和发展历程。 翻开《马云 一路走来》这本书，体悟马云的成功之道；反复阅读，吸收马云的人生智慧。');
 INSERT INTO `books` VALUES ('451a512a-e76d-4880-ab19-75b3b247390b', 'C程序设计语言 第2版·新版', 'T0', '（美）克尼汉，（美）里奇', '机械工业出版社', '30.00', '2', '2', '本书是由C语言的设计者Brian W. Kernighan和Dennis M. Ritchie编写的一部介绍标准C语言及其程序设计方法的权威性经典著作。全面、系统地讲述了C语言的各个特性及程序设计的基本方法，包括基本概念、类型和表达式、控制流、函数与程序结构、指针与数组、结构、输入与输出、UNIX系统接口、标准库等内容。');
-INSERT INTO `books` VALUES ('4c94fc31-6f27-44e7-8b88-6a2b77ad7474', '纪录片专题片概论', 'J9', '倪祥保, 邵雯艳', '', '25.00', '1', '1', '《纪录片专题片概论》从艺术本体出发，就纪录片和专题片伪艺术与真艺术的本体属性、唤起情感与表现情感、重结果与重过程、内容形式上的模式化与个性化以及对待受众的不同关系等诸多方面的差异展开详细、深入的探讨，通过比较进一步凸显专题片的特征，避免了以泛艺术的观点混淆专题片和纪录片的界定。');
-INSERT INTO `books` VALUES ('60eb327f-2984-4109-b66b-eee67de33956', '数学建模基础案例', 'O1', '杜建卫, 王若鹏', '', '52.80', '2', '2', '');
+INSERT INTO `books` VALUES ('4c94fc31-6f27-44e7-8b88-6a2b77ad7474', '纪录片专题片概论', 'J9', '倪祥保, 邵雯艳', '', '25.00', '0', '1', '《纪录片专题片概论》从艺术本体出发，就纪录片和专题片伪艺术与真艺术的本体属性、唤起情感与表现情感、重结果与重过程、内容形式上的模式化与个性化以及对待受众的不同关系等诸多方面的差异展开详细、深入的探讨，通过比较进一步凸显专题片的特征，避免了以泛艺术的观点混淆专题片和纪录片的界定。');
+INSERT INTO `books` VALUES ('60eb327f-2984-4109-b66b-eee67de33956', '数学建模基础案例', 'O1', '杜建卫, 王若鹏', '', '52.80', '0', '2', '');
 INSERT INTO `books` VALUES ('654b4602-0c87-46c9-8d7c-21dffa819c2f', 'C++程序设计语言（第1—3部分）（原书第4版）', 'T0', '（美）本贾尼·斯特劳斯特鲁普', '机械工业出版社', '139.00', '3', '3', '《C 程序设计语言》（原书第4版）是C 领域最经典的参考书，介绍了C 11的各项新特性和新功能。全书共分四部分。第一部分（第1~5章）是引言，包括C 的背景知识，C 语言及其标准库的简要介绍；第二部分（第6~15章）介绍C 的内置类型和基本特性，以及如何用它们构造程序；第三部分（第16~29章）介绍C 的抽象机制及如何用这些机制编写面向对象程序和泛型程序；第四部分（第30~44章）概述标准库并讨论一些兼容性问题。由于篇幅问题，原书中文版分两册出版，分别对应原书的第一至三部分和第四部分。这一册为第一至三部分。');
 INSERT INTO `books` VALUES ('67caccc5-e8fc-4884-9c11-189ab187d717', '刑事诉讼法', 'D9', '国家司法考试辅导教材编写组', '', '25.00', '1', '1', '');
 INSERT INTO `books` VALUES ('8faec636-9699-4ade-bb94-f6393c8109be', '新榜样 : 新媒体运营实战指南', 'G2', '新榜编', '电子工业出版社', '50.00', '4', '4', '本书为“新榜”全新打造的新媒体运营实战指南，全书基于对当前各类公众号的对比分析，阐述互联网时代各类公众号运营之道。全书分为五个部分，分别为：如何让政务公众号接地气，如何让自媒体公众号重获新生，如何做垂直领域的特色公众号，新媒体深度人物，以及新媒体深度分析等。');
@@ -99,6 +99,7 @@ INSERT INTO `borrow_records` VALUES ('5a481cbf-9b63-478d-bf00-f3f857036c61', '92
 INSERT INTO `borrow_records` VALUES ('7b0419df-c920-417e-a726-702f924c0e3f', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-10-12 09:15:31', '2020-10-14 09:53:28', '2');
 INSERT INTO `borrow_records` VALUES ('8ca67071-ba53-4c58-b8df-2c4273a297c5', '92ce0faa-3bde-4df1-82aa-69991773dbab', '02b68328-2337-41ca-969d-ba19326faecc', '2020-09-14 09:15:19', '2020-10-14 09:54:26', '2');
 INSERT INTO `borrow_records` VALUES ('c6d4430e-3f53-45b0-a4f8-782c0fceb04b', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-09-13 11:27:37', '2020-10-13 11:27:37', '1');
+INSERT INTO `borrow_records` VALUES ('df92e91b-889a-4ff1-ba79-8f012841e05d', '92ce0faa-3bde-4df1-82aa-69991773dbab', '045740ce-efb9-4a51-8e77-6970f47e8748', '2020-10-20 17:43:29', '2020-11-19 17:43:29', '0');
 
 -- ----------------------------
 -- Table structure for borrow_status
@@ -124,7 +125,7 @@ DROP TABLE IF EXISTS `classifications`;
 CREATE TABLE `classifications` (
   `id` int(11) NOT NULL,
   `classify_char` varchar(255) NOT NULL,
-  `classify_num` int(11) NOT NULL DEFAULT '-1',
+  `classify_num` int(11) DEFAULT NULL,
   `classify_books` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,28 +133,45 @@ CREATE TABLE `classifications` (
 -- ----------------------------
 -- Records of classifications
 -- ----------------------------
-INSERT INTO `classifications` VALUES ('0', 'A', '-1', '马克思、恩格斯著作');
-INSERT INTO `classifications` VALUES ('1', 'B', '-1', '哲学、宗教');
-INSERT INTO `classifications` VALUES ('2', 'C', '-1', '社会科学总论');
-INSERT INTO `classifications` VALUES ('3', 'D', '-1', '政治、法律');
-INSERT INTO `classifications` VALUES ('4', 'E', '-1', '军事');
-INSERT INTO `classifications` VALUES ('5', 'F', '-1', '经济');
-INSERT INTO `classifications` VALUES ('6', 'G', '-1', '文化、科学、教育、体育');
-INSERT INTO `classifications` VALUES ('7', 'H', '-1', '语言、文字');
-INSERT INTO `classifications` VALUES ('8', 'I', '-1', '文学');
-INSERT INTO `classifications` VALUES ('9', 'J', '-1', '艺术');
-INSERT INTO `classifications` VALUES ('10', 'K', '-1', '历史、地理');
-INSERT INTO `classifications` VALUES ('11', 'N', '-1', '自然科学总论');
-INSERT INTO `classifications` VALUES ('12', 'O', '-1', '数理科学与化学');
-INSERT INTO `classifications` VALUES ('13', 'P', '-1', '天文学、地球科学');
-INSERT INTO `classifications` VALUES ('14', 'Q', '-1', '生物科学');
-INSERT INTO `classifications` VALUES ('15', 'R', '-1', '医药、卫生');
-INSERT INTO `classifications` VALUES ('16', 'S', '-1', '农业科学');
-INSERT INTO `classifications` VALUES ('17', 'T', '-1', '工业技术');
-INSERT INTO `classifications` VALUES ('18', 'U', '-1', '交通运输');
-INSERT INTO `classifications` VALUES ('19', 'V', '-1', '航空、航天');
-INSERT INTO `classifications` VALUES ('20', 'X', '-1', '环境科学、安全科学');
-INSERT INTO `classifications` VALUES ('21', 'Z', '-1', '综合性图书');
+INSERT INTO `classifications` VALUES ('0', 'A', null, '马克思主义、列宁主义、毛泽东思想、邓小平理论');
+INSERT INTO `classifications` VALUES ('1', 'B', null, '哲学、宗教');
+INSERT INTO `classifications` VALUES ('2', 'C', null, '社会科学总论');
+INSERT INTO `classifications` VALUES ('3', 'D', null, '政治、法律');
+INSERT INTO `classifications` VALUES ('4', 'E', null, '军事');
+INSERT INTO `classifications` VALUES ('5', 'F', null, '经济');
+INSERT INTO `classifications` VALUES ('6', 'G', null, '文化、科学、教育、体育');
+INSERT INTO `classifications` VALUES ('7', 'H', null, '语言、文字');
+INSERT INTO `classifications` VALUES ('8', 'I', null, '文学');
+INSERT INTO `classifications` VALUES ('9', 'J', null, '艺术');
+INSERT INTO `classifications` VALUES ('10', 'K', null, '历史、地理');
+INSERT INTO `classifications` VALUES ('11', 'N', null, '自然科学总论');
+INSERT INTO `classifications` VALUES ('12', 'O', null, '数理科学与化学');
+INSERT INTO `classifications` VALUES ('13', 'P', null, '天文学、地球科学');
+INSERT INTO `classifications` VALUES ('14', 'Q', null, '生物科学');
+INSERT INTO `classifications` VALUES ('15', 'R', null, '医药、卫生');
+INSERT INTO `classifications` VALUES ('16', 'S', null, '农业科学');
+INSERT INTO `classifications` VALUES ('17', 'T', null, '工业技术');
+INSERT INTO `classifications` VALUES ('18', 'U', null, '交通运输');
+INSERT INTO `classifications` VALUES ('19', 'V', null, '航空、航天');
+INSERT INTO `classifications` VALUES ('20', 'X', null, '环境科学、安全科学');
+INSERT INTO `classifications` VALUES ('21', 'Z', null, '综合性图书');
+INSERT INTO `classifications` VALUES ('22', 'A', '1', '马克思、恩格斯著作');
+INSERT INTO `classifications` VALUES ('23', 'A', '2', '列宁著作');
+INSERT INTO `classifications` VALUES ('24', 'A', '3', '斯大林著作');
+INSERT INTO `classifications` VALUES ('25', 'A', '4', '毛泽东著作');
+INSERT INTO `classifications` VALUES ('26', 'A', '5', '马克思、恩格斯、列宁、斯大林、毛泽东、邓小平著作汇编');
+INSERT INTO `classifications` VALUES ('27', 'A', '7', '马克思、恩格斯、列宁、斯大林、毛泽东、邓小平生平和传记');
+INSERT INTO `classifications` VALUES ('28', 'A', '8', '马克思主义、列宁主义、毛泽东思想、邓小平理论的学习和研究');
+INSERT INTO `classifications` VALUES ('29', 'B', '0', '哲学理论');
+INSERT INTO `classifications` VALUES ('30', 'B', '1', '世界哲学');
+INSERT INTO `classifications` VALUES ('31', 'B', '2', '中国哲学');
+INSERT INTO `classifications` VALUES ('32', 'B', '8', '思维科学');
+INSERT INTO `classifications` VALUES ('33', 'C', '0', '社会科学理论与方法论');
+INSERT INTO `classifications` VALUES ('34', 'C', '1', '社会科学现状及发展');
+INSERT INTO `classifications` VALUES ('35', 'C', '9', '社会学');
+INSERT INTO `classifications` VALUES ('36', 'D', '6', '中国政治');
+INSERT INTO `classifications` VALUES ('37', 'D', '9', '法律');
+INSERT INTO `classifications` VALUES ('38', 'E', '1', '世界军事');
 
 -- ----------------------------
 -- Table structure for fine_records
@@ -172,9 +190,7 @@ CREATE TABLE `fine_records` (
 -- ----------------------------
 -- Records of fine_records
 -- ----------------------------
-INSERT INTO `fine_records` VALUES ('4d4767e8-a761-4ac0-9cbd-bb323133fda8', '92ce0faa-3bde-4df1-82aa-69991773dbab', '5a481cbf-9b63-478d-bf00-f3f857036c61', '43dde036-1a94-467c-ac44-4c4862d4b037', '0', '0.00');
 INSERT INTO `fine_records` VALUES ('9e8b2aff-829d-4ad9-a7f7-09dbc8ffa8c9', '92ce0faa-3bde-4df1-82aa-69991773dbab', '8ca67071-ba53-4c58-b8df-2c4273a297c5', '1098915e-1f21-4438-972b-be917c6b529c', '30', '8.40');
-INSERT INTO `fine_records` VALUES ('b4200ae8-54f2-4a6e-9068-72a883ca4595', '92ce0faa-3bde-4df1-82aa-69991773dbab', '42234475-a519-4555-b91f-cd2519cf42bb', '70d8b136-53af-4751-9246-af38f68adcf3', '1', '0.58');
 
 -- ----------------------------
 -- Table structure for return_records
@@ -250,9 +266,9 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'aaa123', 'a75f5d3e293da97279a70e6835cf80aa', '李四', '0', '0', '0', '10.80');
+INSERT INTO `users` VALUES ('1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'aaa123', '5b4f52d6aa7de0a10a9cecb91ef51454', '李四', '0', '0', '0', '16.20');
 INSERT INTO `users` VALUES ('7572249b-386a-4ef6-82bb-7cb9f2e06986', 'bbb', 'e1ec7d80057ed6a94908f5625dc991a9', '王五', '0', '0', '0', '25.20');
-INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', '28edb5f88af19242f90726fe231ca796', '张三', '0', '1', '0', '27.81');
+INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', 'afecb53f1f5315531ba8661a93d7c400', '张三', '0', '2', '0', '27.81');
 INSERT INTO `users` VALUES ('a26214da-4c14-4637-9470-daff75b1c34f', 'ccc', 'e036b035fefbd2197bcd26eb272640ad', '赵六', '0', '0', '0', '15.10');
 INSERT INTO `users` VALUES ('a2dfe9db-47ed-464d-9b38-9414bca85612', 'ddd', '887644eae2b82d048d5697d2cee96db4', '大宝', '0', '0', '0', '0.00');
 INSERT INTO `users` VALUES ('ba05892f-4403-48f2-9c36-1de685d5f3fc', 'admin', '0ea9114a57ee221805a9cd4f1ce40663', '管理员', '1', '0', '0', '10.00');
@@ -296,6 +312,6 @@ DELIMITER ;
 -- ----------------------------
 DROP EVENT IF EXISTS `checked`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` EVENT `checked` ON SCHEDULE EVERY 1 SECOND STARTS '2020-10-14 11:36:06' ON COMPLETION PRESERVE ENABLE DO call borrow_checked()
+CREATE DEFINER=`root`@`localhost` EVENT `checked` ON SCHEDULE EVERY 1 SECOND STARTS '2020-10-14 11:36:06' ON COMPLETION PRESERVE DISABLE DO call borrow_checked()
 ;;
 DELIMITER ;
