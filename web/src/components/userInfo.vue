@@ -51,7 +51,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="已借图书：">
-                            <div v-if="userInfo.borrowed < 10">
+                            <div v-if="userInfo.borrowed < 5">
                                 <span v-text="userInfo.borrowed" style="color:green"></span>
                             </div>
                             <div v-else>
@@ -75,7 +75,7 @@
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="余额：">
-                            <div v-if="userInfo.balance > 0">
+                            <div v-if="userInfo.balance >= 0">
                                 <span v-text="userInfo.balance" style="color:green"></span>
                             </div>
                             <div v-else>
@@ -198,22 +198,7 @@ export default {
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
-        else{
-            this.$axios.get('api/library/user/getUserInfo?id=' + id)
-            .then(res => {
-                if (res.data == ""){
-                    this.$message.error("获取用户失败");
-                }
-                else{
-                    this.userInfo = res.data;
-                    console.log(this.userInfo);
-                }
-            })
-            .catch(err => {
-                this.$message.error("系统繁忙，请稍后再试");
-                console.log(err);
-            })
-        }
+        this.getUserInfo();
     },
     methods:{
         logout() {
@@ -232,6 +217,23 @@ export default {
         resetPasswordForm(){
           this.passwordVisible = false;
           this.$refs['passwordForm'].resetFields();
+        },
+        getUserInfo(){
+            var id = sessionStorage.getItem("user");
+            this.$axios.get('api/library/user/getUserInfo?id=' + id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败");
+                }
+                else{
+                    this.userInfo = res.data;
+                    console.log(this.userInfo);
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
         },
         submitPasswordForm(formName) {
           this.passwordForm.userId = sessionStorage.getItem("user");
@@ -272,13 +274,14 @@ export default {
                     .post("api/library/user/credit", this.creditForm)
                     .then(res => {
                         if(res.data == ""){
-                             this.$message({
+                            this.$message({
                                     message: '充值成功',
                                     type: 'success'
                                 });
+                            this.getUserInfo();
                         }
                         else{
-                             this.$message.error(res.data);
+                            this.$message.error(res.data);
                         }
                     })
                     .catch(err => {
