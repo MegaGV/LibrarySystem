@@ -1,8 +1,5 @@
 package xzz.library.pojo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import xzz.library.dao.FineRecordMapper;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,11 +22,7 @@ public class FineRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public FineRecord(){
-
-    }
-
-    public FineRecord(BorrowRecord borrowRecord, ReturnRecord returnRecord, Double price){
+    public void initial(BorrowRecord borrowRecord, ReturnRecord returnRecord, Double price){
         this.id = UUID.randomUUID().toString();
         this.userId = borrowRecord.getUserId();
         this.borrowId = borrowRecord.getId();

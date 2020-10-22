@@ -1,9 +1,7 @@
 package xzz.library.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import xzz.library.dao.BorrowRecordMapper;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -31,11 +29,7 @@ public class BorrowRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public BorrowRecord(){
-
-    }
-
-    public BorrowRecord(String userId, String bookId){
+    public void initial(String userId, String bookId){
         this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.bookId = bookId;

@@ -3,9 +3,7 @@ package xzz.library.service;
 import xzz.library.dto.BorrowRecordDto;
 import xzz.library.dto.RecordsDto;
 import xzz.library.dto.ReturnRecordDto;
-import xzz.library.pojo.BorrowRecord;
 import xzz.library.pojo.FineRecord;
-import xzz.library.pojo.ReturnRecord;
 
 public interface RecordService {
     RecordsDto getRecords(String id, String recordType);

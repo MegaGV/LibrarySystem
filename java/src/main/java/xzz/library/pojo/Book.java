@@ -1,8 +1,5 @@
 package xzz.library.pojo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import xzz.library.dao.BookMapper;
-
 import java.io.Serializable;
 import java.util.UUID;
 

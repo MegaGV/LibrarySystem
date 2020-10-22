@@ -1,9 +1,7 @@
 package xzz.library.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import xzz.library.dao.ReturnRecordMapper;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,11 +23,7 @@ public class ReturnRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public ReturnRecord(){
-
-    }
-
-    public ReturnRecord(BorrowRecord borrowRecord){
+    public void initial(BorrowRecord borrowRecord){
         this.id = UUID.randomUUID().toString();
         this.userId = borrowRecord.getUserId();
         this.borrowId = borrowRecord.getId();

@@ -54,7 +54,8 @@ public class BookServiceImpl implements BookService {
             case 0:
                 if (book.getStock() == 0)
                     return "该书已无库存，无法借阅";
-                BorrowRecord borrowRecord = new BorrowRecord(userId, bookId);
+                BorrowRecord borrowRecord = new BorrowRecord();
+                borrowRecord.initial(userId, bookId);
                 while (borrowRecordMapper.selectByPrimaryKey(borrowRecord.getId()) != null)
                     borrowRecord.setId(UUID.randomUUID().toString());
                 book.borrowBook();
@@ -95,7 +96,8 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.selectByPrimaryKey(borrowRecord.getBookId());
         if (book == null)
             return "图书错误";
-        ReturnRecord returnRecord = new ReturnRecord(borrowRecord);
+        ReturnRecord returnRecord = new ReturnRecord();
+        returnRecord.initial(borrowRecord);
         while (returnRecordMapper.selectByPrimaryKey(returnRecord.getId()) != null)
             returnRecord.setId(UUID.randomUUID().toString());
         switch (borrowRecord.getStatus()){
@@ -104,7 +106,8 @@ public class BookServiceImpl implements BookService {
                 break;
             case 1:
                 returnRecord.setStatus(1);
-                fineRecord = new FineRecord(borrowRecord, returnRecord, book.getPrice());
+                fineRecord = new FineRecord();
+                fineRecord.initial(borrowRecord, returnRecord, book.getPrice());
                 while (fineRecordMapper.selectByPrimaryKey(fineRecord.getId()) != null)
                     fineRecord.setId(UUID.randomUUID().toString());
                 user.getFine(fineRecord.getFine());
@@ -147,7 +150,6 @@ public class BookServiceImpl implements BookService {
                     total += secondClassifications.size();
                     for (Classification classification : secondClassifications)
                         bookType.addChildren(new BookType(classification));
-                    //bookType.makeChildren(secondClassifications);
                 }
             }
         }

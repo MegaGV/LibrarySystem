@@ -1,7 +1,6 @@
 package xzz.library.service;
 
 import xzz.library.dto.BookTypeDto;
-import xzz.library.pojo.BookType;
 import xzz.library.dto.BooksDto;
 import xzz.library.dto.BooksGetDto;
 import xzz.library.pojo.Book;

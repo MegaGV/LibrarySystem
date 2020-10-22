@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         User dbUser = userMapper.getUserByUsername(user.getUsername().trim());
-        if (dbUser == null || !dbUser.getPassword().equals(MD5Utils.md5Code(user.getUsername().trim(), user.getPassword())))
+        if (dbUser == null || dbUser.getStatus() == 3 ||!dbUser.getPassword().equals(MD5Utils.md5Code(user.getUsername().trim(), user.getPassword())))
             return null;
         User u = new User();
         u.setId(dbUser.getId());
