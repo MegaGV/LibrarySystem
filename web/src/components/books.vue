@@ -43,7 +43,7 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="getBookList()">查询</el-button>
+                        <el-button type="primary" @click="searchBooks()">查询</el-button>
                     </el-form-item>
                 </el-form>
                 
@@ -207,10 +207,15 @@ export default {
         },
         handleSizeChange(val) {
             this.searchForm.limit = val;
+            this.searchForm.page=1;
             this.getBookList();
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
+            this.getBookList();
+        },
+        searchBooks(){
+            this.searchForm.page=1;
             this.getBookList();
         },
         handleTypeChange(){
