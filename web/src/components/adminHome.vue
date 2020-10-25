@@ -10,13 +10,13 @@
                         <template slot="title">
                             <i class="el-icon-menu" />数据管理
                         </template>
-                        <el-menu-item index="2">用户管理</el-menu-item>
-                        <el-menu-item index="3">图书管理</el-menu-item>
+                        <el-menu-item index="2" @click="indexChangeHandle('2')">用户管理</el-menu-item>
+                        <el-menu-item index="3" @click="indexChangeHandle('3')">图书管理</el-menu-item>
                         <el-submenu index="4">
                             <template slot="title">记录管理</template>
-                            <el-menu-item index="4-1">借阅记录管理</el-menu-item>
-                            <el-menu-item index="4-2">归还记录管理</el-menu-item>
-                            <el-menu-item index="4-3">罚款记录管理</el-menu-item>
+                            <el-menu-item index="4-1" @click="indexChangeHandle('4-1')">借阅记录管理</el-menu-item>
+                            <el-menu-item index="4-2" @click="indexChangeHandle('4-2')">归还记录管理</el-menu-item>
+                            <el-menu-item index="4-3" @click="indexChangeHandle('4-3')">罚款记录管理</el-menu-item>
                         </el-submenu>     
                     </el-submenu>
                     <el-submenu index="5">
@@ -27,15 +27,23 @@
                 </el-menu>
             </el-aside>
             <el-main>
-                <adminUserManage ></adminUserManage>
+                <adminUserManage v-if="selectIndex==2" key='1'></adminUserManage>
+                <adminBookManage v-if="selectIndex==3" key='2'></adminBookManage>
+                <adminBRManage v-if="selectIndex==4-1" key='3'></adminBRManage>
+                <adminRRManage v-if="selectIndex==4-2" key='4'></adminRRManage>
+                <adminFRManage v-if="selectIndex==4-3" key='5'></adminFRManage>
             </el-main>
         </el-container>
     </el-container>
 </template>
 <script>
 import adminUserManage from '@/components/adminUserManage'
+import adminBookManage from '@/components/adminBookManage'
+import adminBRManage from '@/components/adminBRManage'
+import adminRRManage from '@/components/adminRRManage'
+import adminFRManage from '@/components/adminFRManage'
 export default {
-    components:{adminUserManage},
+    components:{adminUserManage, adminBookManage, adminBRManage, adminRRManage, adminFRManage},
     data(){
         return {
             selectIndex:"",
@@ -67,7 +75,9 @@ export default {
 
     },
     methods:{
-        
+        indexChangeHandle(key){
+            this.selectIndex = key;
+        },
     }
 }
 </script>
