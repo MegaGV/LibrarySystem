@@ -34,7 +34,7 @@ public interface AdminService {
     //========================================================================================
     //Records
     //========================================================================================
-    RecordsDto getRecords(RecordsGetDto recordsGetDto);
+    RecordsDto getRecords(Integer limit, Integer page, String recordType);
 
     BorrowRecord getBR(String id);
 

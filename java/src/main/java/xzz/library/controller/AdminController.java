@@ -85,8 +85,8 @@ public class AdminController {
     //========================================================================================
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsDto getRecords(@RequestBody RecordsGetDto recordsGetDto){
-        return adminService.getRecords(recordsGetDto);
+    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
+        return adminService.getRecords(limit, page, recordType);
     }
 
     @GetMapping("/getBR")

@@ -6,7 +6,7 @@
         <!-- table -->
         <el-button type="primary" @click="openAddForm" class="top-button">新增用户</el-button>
         <el-button type="danger" @click="DelUser" class="top-button">删除用户</el-button>
-        <el-table stripe :data="users" @selection-change="handleSelectionChange">>
+        <el-table @selection-change="handleSelectionChange" :data="users" stripe>
             <el-table-column type="selection" width="50" />
             <el-table-column label="序号" width="50" align="center">
                 <template slot-scope="scope">
@@ -73,7 +73,7 @@
                             <el-option key="2" label="2" value="2"></el-option>
                             <el-option key="3" label="3" value="3"></el-option>
                         </el-select>
-                        </el-form-item>
+                    </el-form-item>
                     <el-form-item prop="balance" label="余额" style="width: 90%" >
                             <el-input v-model.number="userForm.balance" type="number"  placeholder="请输入内容" />
                     </el-form-item>

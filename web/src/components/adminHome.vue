@@ -27,11 +27,11 @@
                 </el-menu>
             </el-aside>
             <el-main>
-                <adminUserManage v-if="selectIndex==2" key='1'></adminUserManage>
-                <adminBookManage v-if="selectIndex==3" key='2'></adminBookManage>
-                <adminBRManage v-if="selectIndex==4-1" key='3'></adminBRManage>
-                <adminRRManage v-if="selectIndex==4-2" key='4'></adminRRManage>
-                <adminFRManage v-if="selectIndex==4-3" key='5'></adminFRManage>
+                <adminUserManage v-if="selectIndex=='2'"></adminUserManage>
+                <adminBookManage v-if="selectIndex=='3'"></adminBookManage>
+                <adminBRManage v-if="selectIndex=='4-1'"></adminBRManage>
+                <adminRRManage v-if="selectIndex=='4-2'"></adminRRManage>
+                <adminFRManage v-if="selectIndex=='4-3'"></adminFRManage>
             </el-main>
         </el-container>
     </el-container>

@@ -169,17 +169,19 @@ public class AdminServiceImpl implements AdminService {
     //Records
     //========================================================================================
     @Override
-    public RecordsDto getRecords(RecordsGetDto recordsGetDto) {
-        recordsGetDto.initial();
-        switch (recordsGetDto.getRecordType()){
+    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
+        if (limit == null)
+            limit = 5;
+        int start = page == null ? 0 : (page-1)*limit;
+        switch (recordType){
             case "borrow" :
-                return new RecordsDto(borrowRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                return new RecordsDto(borrowRecordMapper.getRecords(limit, start),
                         borrowRecordMapper.countRecords());
             case "return":
-                new RecordsDto(returnRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                return new RecordsDto(returnRecordMapper.getRecords(limit, start),
                         returnRecordMapper.countRecords());
             case "fine":
-                new RecordsDto(fineRecordMapper.getRecords(recordsGetDto.getLimit(), recordsGetDto.getPage()),
+                return new RecordsDto(fineRecordMapper.getRecords(limit, start),
                         fineRecordMapper.countRecords());
             default:
         }
