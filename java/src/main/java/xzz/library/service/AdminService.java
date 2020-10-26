@@ -16,7 +16,7 @@ public interface AdminService {
 
     String addUser(User user);
 
-    String deleteUser(String ids);
+    String deleteUser(String[] ids);
 
     //========================================================================================
     //Books

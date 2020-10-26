@@ -7,6 +7,7 @@ import xzz.library.dao.*;
 import xzz.library.dto.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
+import xzz.library.util.MD5Utils;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public UsersDto getUsers(Integer limit, Integer page) {
         if (limit == null)
-            limit = 10;
+            limit = 5;
         int start = page == null ? 0 : (page-1)*limit;
         List<User> users = userMapper.getUsers(limit, start);
         int total = userMapper.countUsers();
@@ -64,15 +65,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteUser(String ids) {
+    public String deleteUser(String[] ids) {
         if (ids == null)
             return "用户错误";
-        String[] idList = ids.split(",");
-        if (idList.length == 0)
+        if (ids.length == 0)
             return "无选中用户";
         
         try {
-            for (String id : idList)
+            for (String id : ids)
                 userMapper.deleteByPrimaryKey(id);
             return null;
         } catch (Exception e){
@@ -86,7 +86,10 @@ public class AdminServiceImpl implements AdminService {
     public String updateUser(User user) {
         if (user == null)
             return "用户错误";
-        
+        User dbUser = userMapper.selectByPrimaryKey(user.getId());
+        if (!dbUser.getPassword().equals(user.getPassword()))
+            user.setPassword(MD5Utils.md5Code(user.getUsername(), user.getPassword()));
+
         try {
             userMapper.updateByPrimaryKey(user);
             return null;

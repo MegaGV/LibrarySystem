@@ -43,7 +43,7 @@ public class AdminController {
 
     @PostMapping("/deleteUser")
     @ResponseBody
-    public String deleteUser(String ids){
+    public String deleteUser(@RequestBody String[] ids){
         return adminService.deleteUser(ids);
     }
 

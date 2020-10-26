@@ -69,7 +69,7 @@
     limit #{start}, #{limit}
   </select>
   <select id="countUsers" resultType="java.lang.Integer">
-    select count(id)
+    select count(0)
     from users
   </select>
 </mapper>
