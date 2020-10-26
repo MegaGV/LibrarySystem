@@ -312,14 +312,13 @@ export default {
         },
         closeUpdateForm(){
             this.updateFormVisible = false;
-            this.resetForm();
         },
         openAddForm(){
+            this.resetForm();
             this.addFormVisible = true;
         },
         closeAddForm(){
             this.addFormVisible = false;
-            this.resetForm();
         },
     }
 }

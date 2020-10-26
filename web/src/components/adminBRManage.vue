@@ -19,6 +19,7 @@
             <el-table-column prop="status" label="状态" :show-overflow-tooltip="true" align="center" />
             <el-table-column label="操作" width="250" align="center">
                 <template slot-scope="scope">
+                    <el-button type="primary" @click="ReturnBook(scope.row.id)" :disabled="scope.row.status == 2">归还</el-button>
                     <el-button @click="ViewRecord(scope.row)">查看详情</el-button>
                 </template>
             </el-table-column>
@@ -150,6 +151,25 @@ export default {
                 status: ""
             }
         },
+        ReturnBook(bid){
+            this.$axios.post('api/library/book/returnBook?borrowId=' + bid)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message({
+                         message: '归还成功',
+                         type: 'success'
+                    });
+                    this.getRecords();
+                }
+                else{
+                    this.$message.error(res.data);
+                    }
+                })
+                .catch(err => {
+                    this.$message.error("系统繁忙，请稍后再试");
+                    console.log(err);
+                });
+        }
     }
 }
 </script>
