@@ -44,9 +44,9 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="searchBooks()">查询</el-button>
+                        <el-button type="" @click="emptySearch()">清空</el-button>
                     </el-form-item>
                 </el-form>
-                
             </div>
 
             <!-- bookList -->
@@ -204,6 +204,14 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        },
+        emptySearch(){
+            this.searchForm.bookName = "";
+            this.searchForm.bookType = "";
+            this.searchForm.author = "";
+            this.searchForm.publisher = "";
+            this.searchForm.stock = "";
+            this.selectTypes = "";
         },
         handleSizeChange(val) {
             this.searchForm.limit = val;

@@ -27,7 +27,7 @@ public interface AdminService {
 
     Book getBook(String id);
 
-    String deleteBook(String ids);
+    String deleteBook(String[] ids);
 
     String updateBook(Book book);
 
@@ -38,19 +38,19 @@ public interface AdminService {
 
     BorrowRecord getBR(String id);
 
-    String deleteBR(String ids);
+    String deleteBR(String[] ids);
 
     String updateBR(BorrowRecord borrowRecord);
 
     ReturnRecord getRR(String id);
 
-    String deleteRR(String ids);
+    String deleteRR(String[] ids);
 
     String updateRR(ReturnRecord returnRecord);
 
     FineRecord getFR(String id);
 
-    String deleteFR(String ids);
+    String deleteFR(String[] ids);
 
     String updateFR(FineRecord fineRecord);
 }

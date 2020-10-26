@@ -17,7 +17,7 @@ public class BooksGetDto {
 
     public void initial() {
         if (this.limit == null)
-            this.limit = 10;
+            this.limit = 5;
         // page作首个开始查找的对象，即start
         if (this.page == null)
             this.page = 0;

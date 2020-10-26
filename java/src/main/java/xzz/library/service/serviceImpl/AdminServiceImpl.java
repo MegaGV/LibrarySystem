@@ -133,15 +133,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteBook(String ids) {
+    public String deleteBook(String[] ids) {
         if (ids == null)
             return "图书错误";
-        String[] idList = ids.split(",");
-        if (idList.length == 0)
+        if (ids.length == 0)
             return "无选中图书";
         
         try {
-            for (String id : idList)
+            for (String id : ids)
                 bookMapper.deleteByPrimaryKey(id);
             return null;
         } catch (Exception e){
@@ -195,15 +194,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteBR(String ids) {
+    public String deleteBR(String[] ids) {
         if (ids == null)
             return "借阅记录错误";
-        String[] idList = ids.split(",");
-        if (idList.length == 0)
+        if (ids.length == 0)
             return "无选中借阅记录";
         
         try {
-            for (String id : idList)
+            for (String id : ids)
                 borrowRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){
@@ -234,15 +232,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteRR(String ids) {
+    public String deleteRR(String[] ids) {
         if (ids == null)
             return "归还记录错误";
-        String[] idList = ids.split(",");
-        if (idList.length == 0)
+        if (ids.length == 0)
             return "无选中归还记录";
         
         try {
-            for (String id : idList)
+            for (String id : ids)
                 returnRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){
@@ -273,15 +270,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public String deleteFR(String ids) {
+    public String deleteFR(String[] ids) {
         if (ids == null)
             return "罚款记录错误";
-        String[] idList = ids.split(",");
-        if (idList.length == 0)
+        if (ids.length == 0)
             return "无选中罚款记录";
         
         try {
-            for (String id : idList)
+            for (String id : ids)
                 fineRecordMapper.deleteByPrimaryKey(id);
             return null;
         }catch (Exception e){

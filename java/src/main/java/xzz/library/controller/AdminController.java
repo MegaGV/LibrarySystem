@@ -50,7 +50,7 @@ public class AdminController {
     //========================================================================================
     //Books
     //========================================================================================
-    @GetMapping("/getBooks")
+    @PostMapping("/getBooks")
     @ResponseBody
     public BooksDto getBooks(@RequestBody BooksGetDto booksGetDto){
         return adminService.getBooks(booksGetDto);
@@ -70,7 +70,7 @@ public class AdminController {
 
     @PostMapping("/deleteBook")
     @ResponseBody
-    public String deleteBook(String ids){
+    public String deleteBook(@RequestBody String[] ids){
         return adminService.deleteBook(ids);
     }
 
@@ -97,7 +97,7 @@ public class AdminController {
 
     @PostMapping("/deleteBR")
     @ResponseBody
-    public String deleteBR(String ids){
+    public String deleteBR(@RequestBody String[] ids){
         return adminService.deleteBR(ids);
     }
 
@@ -115,7 +115,7 @@ public class AdminController {
 
     @PostMapping("/deleteRR")
     @ResponseBody
-    public String deleteRR(String ids){
+    public String deleteRR(@RequestBody String[] ids){
         return adminService.deleteRR(ids);
     }
 
@@ -133,7 +133,7 @@ public class AdminController {
 
     @PostMapping("/deleteFR")
     @ResponseBody
-    public String deleteFR(String ids){
+    public String deleteFR(@RequestBody String[] ids){
         return adminService.deleteFR(ids);
     }
 
