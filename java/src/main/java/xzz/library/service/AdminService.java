@@ -6,35 +6,35 @@ import xzz.library.pojo.*;
 public interface AdminService {
 
     //========================================================================================
-    //Users
+    // Users
     //========================================================================================
-    UsersDto getUsers(Integer limit, Integer page);
+    UsersListDto getUsers(Integer limit, Integer page);
 
     User getUser(String id);
-
-    String updateUser(User user);
 
     String addUser(User user);
 
     String deleteUser(String[] ids);
 
-    //========================================================================================
-    //Books
-    //========================================================================================
-    BooksDto getBooks(BooksGetDto booksGetDto);
+    String updateUser(User user);
 
-    String addBook(Book book);
+    //========================================================================================
+    // Books
+    //========================================================================================
+    BooksListDto getBooks(BooksSearchInfoDto booksSearchInfoDto);
 
     Book getBook(String id);
+
+    String addBook(Book book);
 
     String deleteBook(String[] ids);
 
     String updateBook(Book book);
 
     //========================================================================================
-    //Records
+    // Records
     //========================================================================================
-    RecordsDto getRecords(Integer limit, Integer page, String recordType);
+    RecordsListDto getRecords(Integer limit, Integer page, String recordType);
 
     BorrowRecord getBR(String id);
 

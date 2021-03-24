@@ -4,11 +4,15 @@ import xzz.library.pojo.User;
 
 import java.util.List;
 
-public class UsersDto {
+public class UsersListDto {
+    //========================================================================================
+    // Description: 后端返回到前端的用户列表类
+    //========================================================================================
     private Integer total;
+    
     private List<User> data;
 
-    public UsersDto(List<User> users, int total){
+    public UsersListDto(List<User> users, int total){
         this.data = users;
         this.total = total;
     }

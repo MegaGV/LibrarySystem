@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.UserMapper;
-import xzz.library.dto.CreditDto;
-import xzz.library.dto.PasswordResetDto;
-import xzz.library.dto.UserDto;
+import xzz.library.dto.CreditInfoDto;
+import xzz.library.dto.PasswordResetInfoDto;
+import xzz.library.dto.UserInfoDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
@@ -49,28 +49,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserInfo(String id) {
+    public UserInfoDto getUserInfo(String id) {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if (dbUser == null)
             return null;
-        UserDto userDto = new UserDto(dbUser);
-        userDto.setStatus(userMapper.getUserStatus(dbUser.getStatus()));
-        userDto.setRole(userMapper.getUserRole(dbUser.getRole()));
-        return userDto;
+        UserInfoDto userInfoDto = new UserInfoDto(dbUser);
+        userInfoDto.setStatus(userMapper.getUserStatus(dbUser.getStatus()));
+        userInfoDto.setRole(userMapper.getUserRole(dbUser.getRole()));
+        return userInfoDto;
     }
 
     @Override
     @Transactional
-    public String updatePassword(PasswordResetDto passwordResetDto) {
-        User dbUser = userMapper.selectByPrimaryKey(passwordResetDto.getUserId());
+    public String updatePassword(PasswordResetInfoDto passwordResetInfoDto) {
+        User dbUser = userMapper.selectByPrimaryKey(passwordResetInfoDto.getUserId());
         if (dbUser == null)
             return "用户错误";
-        if (!MD5Utils.md5Code(dbUser.getUsername(),passwordResetDto.getOriginPassword()).equals(dbUser.getPassword()))
+        if (!MD5Utils.md5Code(dbUser.getUsername(), passwordResetInfoDto.getOriginPassword()).equals(dbUser.getPassword()))
             return "原密码有误，密码修改失败";
 
         try {
-            userMapper.updatePassword(passwordResetDto.getUserId(),
-                    MD5Utils.md5Code(dbUser.getUsername(),passwordResetDto.getNewPassword()));
+            userMapper.updatePassword(passwordResetInfoDto.getUserId(),
+                    MD5Utils.md5Code(dbUser.getUsername(), passwordResetInfoDto.getNewPassword()));
             return null;
         } catch (Exception e){
             e.printStackTrace();
@@ -80,13 +80,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String credit(CreditDto creditDto) {
-        User dbUser = userMapper.selectByPrimaryKey(creditDto.getUserId());
+    public String credit(CreditInfoDto creditInfoDto) {
+        User dbUser = userMapper.selectByPrimaryKey(creditInfoDto.getUserId());
         if (dbUser == null)
             return "用户错误";
-        if (creditDto.getMoney() == null || creditDto.getMoney() < 0)
+        if (creditInfoDto.getMoney() == null || creditInfoDto.getMoney() < 0)
             return "金额错误";
-        dbUser.credit(creditDto.getMoney());
+        dbUser.credit(creditInfoDto.getMoney());
 
         try{
             userMapper.updateByPrimaryKey(dbUser);

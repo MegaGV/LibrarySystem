@@ -2,11 +2,15 @@ package xzz.library.dto;
 
 import java.util.List;
 
-public class RecordsDto {
+public class RecordsListDto {
+    //========================================================================================
+    // Description: 后端返回到前端的记录列表类
+    //========================================================================================
     private Integer total;
+
     private List data;
 
-    public RecordsDto(List data, int total){
+    public RecordsListDto(List data, int total){
         this.data = data;
         this.total = total;
     }

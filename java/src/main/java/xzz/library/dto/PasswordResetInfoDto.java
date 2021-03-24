@@ -1,9 +1,15 @@
 package xzz.library.dto;
 
-public class PasswordResetDto {
+public class PasswordResetInfoDto {
+    //========================================================================================
+    // Description: 前端返回到后端的密码重置信息类
+    //========================================================================================
     String userId;
+
     String originPassword;
+
     String newPassword;
+
     String newPasswordCheck;
 
     public String getUserId() {

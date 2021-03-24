@@ -2,7 +2,10 @@ package xzz.library.dto;
 
 import xzz.library.pojo.User;
 
-public class UserDto {
+public class UserInfoDto {
+    //========================================================================================
+    // Description: 后端返回到前端的用户类
+    //========================================================================================
     private String username;
 
     private String nickname;
@@ -15,7 +18,7 @@ public class UserDto {
 
     private Double balance;
 
-    public UserDto(User user){
+    public UserInfoDto(User user){
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         this.borrowed = user.getBorrowed();

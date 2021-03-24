@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookType {
-    String value;
-    String label;
-    List<BookType> children;
+
+    private String value;
+
+    private String label;
+
+    private List<BookType> children;
 
     public BookType(String value, String label){
         this.value = value;

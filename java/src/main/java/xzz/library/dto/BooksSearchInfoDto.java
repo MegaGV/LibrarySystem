@@ -1,6 +1,9 @@
 package xzz.library.dto;
 
-public class BooksGetDto {
+public class BooksSearchInfoDto {
+    //========================================================================================
+    // Description: 前端发送到后端形成的图书检索类
+    //========================================================================================
     private String bookName;
 
     private String bookType;

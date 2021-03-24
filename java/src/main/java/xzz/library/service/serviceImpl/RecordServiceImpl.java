@@ -6,9 +6,9 @@ import xzz.library.dao.BookMapper;
 import xzz.library.dao.BorrowRecordMapper;
 import xzz.library.dao.FineRecordMapper;
 import xzz.library.dao.ReturnRecordMapper;
-import xzz.library.dto.BorrowRecordDto;
-import xzz.library.dto.RecordsDto;
-import xzz.library.dto.ReturnRecordDto;
+import xzz.library.dto.BorrowRecordListDto;
+import xzz.library.dto.RecordsListDto;
+import xzz.library.dto.ReturnRecordListDto;
 import xzz.library.pojo.BorrowRecord;
 import xzz.library.pojo.FineRecord;
 import xzz.library.pojo.ReturnRecord;
@@ -29,17 +29,17 @@ public class RecordServiceImpl implements RecordService {
     private FineRecordMapper fineRecordMapper;
 
     @Override
-    public RecordsDto getRecords(String id, String recordType) {
+    public RecordsListDto getRecords(String id, String recordType) {
         List records = new ArrayList();
         switch (recordType){
             case "borrow" :
                 {
                     List<BorrowRecord> originRecords = borrowRecordMapper.getRecordsByUserid(id);
                     for (BorrowRecord borrowRecord : originRecords) {
-                        BorrowRecordDto borrowRecordDto = new BorrowRecordDto(borrowRecord);
-                        borrowRecordDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
-                        borrowRecordDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
-                        records.add(borrowRecordDto);
+                        BorrowRecordListDto borrowRecordListDto = new BorrowRecordListDto(borrowRecord);
+                        borrowRecordListDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
+                        borrowRecordListDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
+                        records.add(borrowRecordListDto);
                     }
                 }
                 break;
@@ -47,9 +47,9 @@ public class RecordServiceImpl implements RecordService {
                 {
                     List<ReturnRecord> originRecords = returnRecordMapper.getRecordsByUserid(id);
                     for (ReturnRecord returnRecord : originRecords){
-                        ReturnRecordDto returnRecordDto = new ReturnRecordDto(returnRecord);
-                        returnRecordDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
-                        records.add(returnRecordDto);
+                        ReturnRecordListDto returnRecordListDto = new ReturnRecordListDto(returnRecord);
+                        returnRecordListDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
+                        records.add(returnRecordListDto);
                     }
                 }
                 break;
@@ -58,28 +58,28 @@ public class RecordServiceImpl implements RecordService {
                 break;
             default:
         }
-        return new RecordsDto(records, records.size());
+        return new RecordsListDto(records, records.size());
     }
 
     @Override
-    public BorrowRecordDto getBR(String userId, String recordId) {
+    public BorrowRecordListDto getBR(String userId, String recordId) {
         BorrowRecord borrowRecord = borrowRecordMapper.selectByPrimaryKey(recordId);
         if (borrowRecord == null || !borrowRecord.getUserId().equals(userId))
             return null;
-        BorrowRecordDto borrowRecordDto = new BorrowRecordDto(borrowRecord);
-        borrowRecordDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
-        borrowRecordDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
-        return borrowRecordDto;
+        BorrowRecordListDto borrowRecordListDto = new BorrowRecordListDto(borrowRecord);
+        borrowRecordListDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
+        borrowRecordListDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
+        return borrowRecordListDto;
     }
 
     @Override
-    public ReturnRecordDto getRR(String userId, String recordId) {
+    public ReturnRecordListDto getRR(String userId, String recordId) {
         ReturnRecord returnRecord = returnRecordMapper.selectByPrimaryKey(recordId);
         if (returnRecord == null || !returnRecord.getUserId().equals(userId))
             return null;
-        ReturnRecordDto returnRecordDto = new ReturnRecordDto(returnRecord);
-        returnRecordDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
-        return returnRecordDto;
+        ReturnRecordListDto returnRecordListDto = new ReturnRecordListDto(returnRecord);
+        returnRecordListDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
+        return returnRecordListDto;
     }
 
     @Override

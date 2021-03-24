@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import java.util.List;
-import xzz.library.dto.BooksGetDto;
+import xzz.library.dto.BooksSearchInfoDto;
 import xzz.library.pojo.Book;
 
 public interface BookMapper {
@@ -15,7 +15,7 @@ public interface BookMapper {
 
     int updateByPrimaryKey(Book record);
 
-    List<Book> getBookList(BooksGetDto booksGetDto);
+    List<Book> getBookList(BooksSearchInfoDto booksSearchInfoDto);
 
-    int countBook(BooksGetDto booksGetDto);
+    int countBook(BooksSearchInfoDto booksSearchInfoDto);
 }

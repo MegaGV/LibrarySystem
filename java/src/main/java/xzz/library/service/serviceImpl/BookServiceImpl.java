@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.*;
-import xzz.library.dto.BookTypeDto;
+import xzz.library.dto.BookTypeListDto;
 import xzz.library.pojo.BookType;
-import xzz.library.dto.BooksDto;
-import xzz.library.dto.BooksGetDto;
+import xzz.library.dto.BooksListDto;
+import xzz.library.dto.BooksSearchInfoDto;
 import xzz.library.pojo.*;
 import xzz.library.service.BookService;
 
@@ -31,9 +31,9 @@ public class BookServiceImpl implements BookService {
     private ClassificationMapper classificationMapper;
 
     @Override
-    public BooksDto getBookList(BooksGetDto booksGetDto) {
-        booksGetDto.initial();
-        return new BooksDto(bookMapper.getBookList(booksGetDto),bookMapper.countBook(booksGetDto));
+    public BooksListDto getBookList(BooksSearchInfoDto booksSearchInfoDto) {
+        booksSearchInfoDto.initial();
+        return new BooksListDto(bookMapper.getBookList(booksSearchInfoDto),bookMapper.countBook(booksSearchInfoDto));
     }
 
     @Override
@@ -135,7 +135,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookTypeDto getBookTypes() {
+    public BookTypeListDto getBookTypes() {
         List<BookType> bookTypes = new ArrayList<>();
         int total = 0;
         List<Classification> firstClassifications = classificationMapper.getFirstClassification();
@@ -153,7 +153,7 @@ public class BookServiceImpl implements BookService {
                 }
             }
         }
-        return new BookTypeDto(bookTypes, total);
+        return new BookTypeListDto(bookTypes, total);
     }
 
 }

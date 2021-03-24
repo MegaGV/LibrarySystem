@@ -6,7 +6,10 @@ import xzz.library.pojo.ReturnRecord;
 
 import java.util.Date;
 
-public class ReturnRecordDto {
+public class ReturnRecordListDto {
+    //========================================================================================
+    // Description: 后端返回到前端的归还记录列表类
+    //========================================================================================
     private String id;
 
     private String borrowId;
@@ -17,7 +20,7 @@ public class ReturnRecordDto {
 
     private String status;
 
-    public ReturnRecordDto(ReturnRecord returnRecord){
+    public ReturnRecordListDto(ReturnRecord returnRecord){
         this.id = returnRecord.getId();
         this.borrowId = returnRecord.getBorrowId();
         this.returnDate = returnRecord.getReturnDate();

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xzz.library.dto.CreditDto;
-import xzz.library.dto.PasswordResetDto;
-import xzz.library.dto.UserDto;
+import xzz.library.dto.CreditInfoDto;
+import xzz.library.dto.PasswordResetInfoDto;
+import xzz.library.dto.UserInfoDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 
@@ -19,6 +19,9 @@ import xzz.library.service.UserService;
 @RequestMapping("/user")
 @CrossOrigin(allowCredentials = "true")
 public class UserController {
+    //========================================================================================
+    // Operations: 注册、登录、获取用户信息、更新密码、充值
+    //========================================================================================
     @Autowired
     private UserService userService;
 
@@ -36,19 +39,19 @@ public class UserController {
 
     @GetMapping("/getUserInfo")
     @ResponseBody
-    public UserDto getUserInfo(String id){
+    public UserInfoDto getUserInfo(String id){
         return userService.getUserInfo(id);
     }
 
     @PostMapping("/updatePassword")
     @ResponseBody
-    public String updatePassword(@RequestBody PasswordResetDto passwordResetDto){
-        return userService.updatePassword(passwordResetDto);
+    public String updatePassword(@RequestBody PasswordResetInfoDto passwordResetInfoDto){
+        return userService.updatePassword(passwordResetInfoDto);
     }
 
     @PostMapping("/credit")
     @ResponseBody
-    public String credit(@RequestBody CreditDto creditDto){
-        return userService.credit(creditDto);
+    public String credit(@RequestBody CreditInfoDto creditInfoDto){
+        return userService.credit(creditInfoDto);
     }
 }

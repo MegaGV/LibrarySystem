@@ -3,6 +3,7 @@ package xzz.library.pojo;
 import java.io.Serializable;
 
 public class Classification implements Serializable {
+
     private Integer id;
 
     private String classifyChar;

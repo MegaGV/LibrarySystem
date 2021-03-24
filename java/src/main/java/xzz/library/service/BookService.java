@@ -1,14 +1,12 @@
 package xzz.library.service;
 
-import xzz.library.dto.BookTypeDto;
-import xzz.library.dto.BooksDto;
-import xzz.library.dto.BooksGetDto;
+import xzz.library.dto.BookTypeListDto;
+import xzz.library.dto.BooksListDto;
+import xzz.library.dto.BooksSearchInfoDto;
 import xzz.library.pojo.Book;
 
-import java.util.List;
-
 public interface BookService {
-    BooksDto getBookList(BooksGetDto booksGetDto);
+    BooksListDto getBookList(BooksSearchInfoDto booksSearchInfoDto);
 
     String borrowBook(String userId, String bookId);
 
@@ -16,5 +14,5 @@ public interface BookService {
 
     Book getBookDetail(String bookId);
 
-    BookTypeDto getBookTypes();
+    BookTypeListDto getBookTypes();
 }

@@ -15,11 +15,12 @@ public class AdminController {
     private AdminService adminService;
 
     //========================================================================================
-    //Users
+    // Users
+    // Operations: 获取用户列表、获取用户信息、添加用户、删除用户、更新用户
     //========================================================================================
     @GetMapping("/getUsers")
     @ResponseBody
-    public UsersDto getUsers(Integer limit, Integer page){
+    public UsersListDto getUsers(Integer limit, Integer page){
         return adminService.getUsers(limit, page);
     }
 
@@ -35,37 +36,38 @@ public class AdminController {
         return adminService.addUser(user);
     }
 
-    @PostMapping("/updateUser")
-    @ResponseBody
-    public String updateUser(@RequestBody User user){
-        return adminService.updateUser(user);
-    }
-
     @PostMapping("/deleteUser")
     @ResponseBody
     public String deleteUser(@RequestBody String[] ids){
         return adminService.deleteUser(ids);
     }
 
+    @PostMapping("/updateUser")
+    @ResponseBody
+    public String updateUser(@RequestBody User user){
+        return adminService.updateUser(user);
+    }
+
     //========================================================================================
-    //Books
+    // Books
+    // Operations: 获取图书列表、获取图书信息、添加图书、删除图书、更新图书
     //========================================================================================
     @PostMapping("/getBooks")
     @ResponseBody
-    public BooksDto getBooks(@RequestBody BooksGetDto booksGetDto){
-        return adminService.getBooks(booksGetDto);
-    }
-
-    @PostMapping("/addBook")
-    @ResponseBody
-    public String addBook(@RequestBody Book book){
-        return adminService.addBook(book);
+    public BooksListDto getBooks(@RequestBody BooksSearchInfoDto booksSearchInfoDto){
+        return adminService.getBooks(booksSearchInfoDto);
     }
 
     @GetMapping("/getBook")
     @ResponseBody
     public Book getBook(String id){
         return adminService.getBook(id);
+    }
+
+    @PostMapping("/addBook")
+    @ResponseBody
+    public String addBook(@RequestBody Book book){
+        return adminService.addBook(book);
     }
 
     @PostMapping("/deleteBook")
@@ -81,11 +83,12 @@ public class AdminController {
     }
 
     //========================================================================================
-    //Records
+    // Records
+    // Operations: 获取记录列表、获取记录、删除记录、更新记录(除列表外均按种类单独一个函数)
     //========================================================================================
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
+    public RecordsListDto getRecords(Integer limit, Integer page, String recordType){
         return adminService.getRecords(limit, page, recordType);
     }
 

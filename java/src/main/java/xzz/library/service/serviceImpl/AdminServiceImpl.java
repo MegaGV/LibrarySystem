@@ -26,16 +26,15 @@ public class AdminServiceImpl implements AdminService {
     private FineRecordMapper fineRecordMapper;
 
     //========================================================================================
-    //Users
+    // Users
     //========================================================================================
     @Override
-    public UsersDto getUsers(Integer limit, Integer page) {
+    public UsersListDto getUsers(Integer limit, Integer page) {
         if (limit == null)
             limit = 5;
-        int start = page == null ? 0 : (page-1)*limit;
-        List<User> users = userMapper.getUsers(limit, start);
-        int total = userMapper.countUsers();
-        return new UsersDto(users, total);
+        int start = page == null ? 0 : (page - 1) * limit;
+
+        return new UsersListDto(userMapper.getUsers(limit, start), userMapper.countUsers());
     }
 
     @Override
@@ -54,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
         while (userMapper.selectByPrimaryKey(user.getId()) != null)
             user.setId(UUID.randomUUID().toString());
         
-        try{
+        try {
             userMapper.insert(user);
             return null;
         } catch (Exception e){
@@ -87,6 +86,7 @@ public class AdminServiceImpl implements AdminService {
         if (user == null)
             return "用户错误";
         User dbUser = userMapper.selectByPrimaryKey(user.getId());
+        // 管理员看到的密码也是经过md5加密过的，所以直接两个密码进行比对
         if (!dbUser.getPassword().equals(user.getPassword()))
             user.setPassword(MD5Utils.md5Code(user.getUsername(), user.getPassword()));
 
@@ -100,12 +100,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    //Books
+    // Books
     //========================================================================================
     @Override
-    public BooksDto getBooks(BooksGetDto booksGetDto) {
-        booksGetDto.initial();
-        return new BooksDto(bookMapper.getBookList(booksGetDto),bookMapper.countBook(booksGetDto));
+    public BooksListDto getBooks(BooksSearchInfoDto booksSearchInfoDto) {
+        booksSearchInfoDto.initial();
+        return new BooksListDto(bookMapper.getBookList(booksSearchInfoDto),bookMapper.countBook(booksSearchInfoDto));
     }
 
     @Override
@@ -165,22 +165,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    //Records
+    // Records
     //========================================================================================
     @Override
-    public RecordsDto getRecords(Integer limit, Integer page, String recordType){
+    public RecordsListDto getRecords(Integer limit, Integer page, String recordType){
         if (limit == null)
             limit = 5;
-        int start = page == null ? 0 : (page-1)*limit;
+        int start = page == null ? 0 : (page - 1) * limit;
         switch (recordType){
             case "borrow" :
-                return new RecordsDto(borrowRecordMapper.getRecords(limit, start),
+                return new RecordsListDto(borrowRecordMapper.getRecords(limit, start),
                         borrowRecordMapper.countRecords());
             case "return":
-                return new RecordsDto(returnRecordMapper.getRecords(limit, start),
+                return new RecordsListDto(returnRecordMapper.getRecords(limit, start),
                         returnRecordMapper.countRecords());
             case "fine":
-                return new RecordsDto(fineRecordMapper.getRecords(limit, start),
+                return new RecordsListDto(fineRecordMapper.getRecords(limit, start),
                         fineRecordMapper.countRecords());
             default:
         }

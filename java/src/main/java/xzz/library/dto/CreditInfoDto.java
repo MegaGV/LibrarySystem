@@ -1,7 +1,11 @@
 package xzz.library.dto;
 
-public class CreditDto {
+public class CreditInfoDto {
+    //========================================================================================
+    // Description: 前端返回到后端的充值信息类
+    //========================================================================================
     String userId;
+
     Double money;
 
     public String getUserId() {

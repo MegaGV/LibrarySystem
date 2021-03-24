@@ -7,7 +7,10 @@ import xzz.library.pojo.BorrowRecord;
 
 import java.util.Date;
 
-public class BorrowRecordDto {
+public class BorrowRecordListDto {
+    //========================================================================================
+    // Description: 后端返回到前端的借阅记录列表类
+    //========================================================================================
     private String id;
 
     private String userId;
@@ -24,7 +27,7 @@ public class BorrowRecordDto {
 
     private String status;
 
-    public BorrowRecordDto(BorrowRecord borrowRecord){
+    public BorrowRecordListDto(BorrowRecord borrowRecord){
         this.id = borrowRecord.getId();
         this.userId = borrowRecord.getUserId();
         this.borrowDate = borrowRecord.getBorrowDate();

@@ -4,11 +4,15 @@ import xzz.library.pojo.BookType;
 
 import java.util.List;
 
-public class BookTypeDto {
+public class BookTypeListDto {
+    //========================================================================================
+    // Description: 后端返回到前端的图书种类列表类
+    //========================================================================================
     private Integer total;
+
     private List<BookType> data;
 
-    public BookTypeDto(List<BookType> bookTypes, int total){
+    public BookTypeListDto(List<BookType> bookTypes, int total){
         this.data = bookTypes;
         this.total = total;
     }
