@@ -6,7 +6,7 @@ import xzz.library.dto.ReturnRecordListDto;
 import xzz.library.pojo.FineRecord;
 
 public interface RecordService {
-    RecordsListDto getRecords(String id, String recordType);
+    RecordsListDto getRecords(String userId, String recordType);
 
     BorrowRecordListDto getBR(String userId, String recordId);
 

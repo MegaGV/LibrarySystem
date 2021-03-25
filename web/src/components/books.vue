@@ -44,7 +44,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="searchBooks()">查询</el-button>
-                        <el-button type="" @click="emptySearch()">清空</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -145,11 +145,22 @@ export default {
         }
     },
     mounted(){
-        var id = window.sessionStorage.getItem("user") ;
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
+        this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
         this.getBookList();
         this.getBookTypes();
     },
@@ -205,7 +216,7 @@ export default {
                 console.log(err);
             })
         },
-        emptySearch(){
+        clearSearch(){
             this.searchForm.bookName = "";
             this.searchForm.bookType = "";
             this.searchForm.author = "";
@@ -239,7 +250,7 @@ export default {
         borrowBook(book){
             if (book.stock == '0')
                 this.$message('该书库存不足，无法借阅');
-            var userId = window.sessionStorage.getItem("user") ;
+            var userId = sessionStorage.getItem("user");
             this.$axios.post('api/library/book/borrowBook?userId=' + userId +"&bookId=" + book.id)
             .then(res => {
                 if (res.data == ""){

@@ -89,25 +89,42 @@ export default {
         }
     },
     mounted(){
-        var id = sessionStorage.getItem("user") ;
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
-        this.getRecords();
+        this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+                else{
+                    if (res.data.role != '管理员'){
+                        alert("用户权限不足，即将回到登录界面");
+                        this.$router.push('/');
+                    }
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        this.getRecords('fine');
     },
     methods:{
         handleSizeChange(val) {
             this.searchForm.limit = val;
             this.searchForm.page=1;
-            this.getRecords();
+            this.getRecords('fine');
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
-            this.getRecords();
+            this.getRecords('fine');
         },
-        getRecords(){
-            this.$axios.get('api/library/admin/getRecords?recordType=fine&limit=' + this.searchForm.limit + "&page=" + this.searchForm.page)
+        getRecords(recordType){
+            this.$axios.get('api/library/admin/getRecords?limit=' + this.searchForm.limit + "&page=" + this.searchForm.page +  "&recordType=" + recordType)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取罚款记录列表失败");

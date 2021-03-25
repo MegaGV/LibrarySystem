@@ -94,25 +94,42 @@ export default {
         }
     },
     mounted(){
-        var id = sessionStorage.getItem("user") ;
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
-        this.getRecords();
+        this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+                else{
+                    if (res.data.role != '管理员'){
+                        alert("用户权限不足，即将回到登录界面");
+                        this.$router.push('/');
+                    }
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        this.getRecords('borrow');
     },
     methods:{
         handleSizeChange(val) {
             this.searchForm.limit = val;
             this.searchForm.page=1;
-            this.getRecords();
+            this.getRecords('borrow');
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
-            this.getRecords();
+            this.getRecords('borrow');
         },
-        getRecords(){
-            this.$axios.get('api/library/admin/getRecords?recordType=borrow&limit=' + this.searchForm.limit + "&page=" + this.searchForm.page)
+        getRecords(recordType){
+            this.$axios.get('api/library/admin/getRecords?limit=' + this.searchForm.limit + "&page=" + this.searchForm.page +  "&recordType=" + recordType)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取借阅记录列表失败");
@@ -159,7 +176,7 @@ export default {
                          message: '归还成功',
                          type: 'success'
                     });
-                    this.getRecords();
+                    this.getRecords('borrow');
                 }
                 else{
                     this.$message.error(res.data);

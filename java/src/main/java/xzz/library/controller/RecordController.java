@@ -24,8 +24,8 @@ public class RecordController {
 
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsListDto getRecords(String id, String recordType){
-        return recordService.getRecords(id, recordType);
+    public RecordsListDto getRecords(String userId, String recordType){
+        return recordService.getRecords(userId, recordType);
     }
 
     @GetMapping("/getBR")

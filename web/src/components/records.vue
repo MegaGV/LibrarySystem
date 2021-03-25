@@ -241,12 +241,23 @@ export default {
         }
     },
     mounted(){
-        var id = window.sessionStorage.getItem("user") ;
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
-        this.getRecord('borrow');
+        this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        this.getRecords('borrow');
     },
     methods:{
         logout() {
@@ -270,9 +281,9 @@ export default {
             this.currentPage = 1;
             this.records = [];
             switch(key){
-                case '1': this.getRecord('borrow');break;
-                case '2': this.getRecord('return');break;
-                case '3': this.getRecord('fine');break;
+                case '1': this.getRecords('borrow');break;
+                case '2': this.getRecords('return');break;
+                case '3': this.getRecords('fine');break;
                 default: console.log("wrong record type");
             }
             console.log(this.records);
@@ -284,9 +295,9 @@ export default {
         handleCurrentChange(val) {
             this.currentPage = val;
         },
-        getRecord(recordType){
-            var id = window.sessionStorage.getItem("user");
-            this.$axios.get('api/library/record/getRecords?id=' + id + "&recordType=" + recordType)
+        getRecords(recordType){
+            var userid = sessionStorage.getItem("user");
+            this.$axios.get('api/library/record/getRecords?userId=' + userid + "&recordType=" + recordType)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取记录失败");
@@ -309,7 +320,7 @@ export default {
             }
         },
         viewBorrowRecord(recordId){
-            var userId = window.sessionStorage.getItem("user");
+            var userId = sessionStorage.getItem("user");
             this.$axios.get('api/library/record/getBR?userId=' + userId + "&recordId=" + recordId)
             .then(res => {
                 if (res.data == ""){
@@ -326,7 +337,7 @@ export default {
             })
         },
         viewReturnRecord(recordId){
-            var userId = window.sessionStorage.getItem("user");
+            var userId = sessionStorage.getItem("user");
             this.$axios.get('api/library/record/getRR?userId=' + userId + "&recordId=" + recordId)
             .then(res => {
                 if (res.data == ""){

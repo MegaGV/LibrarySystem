@@ -193,8 +193,8 @@ export default {
         }
     },
     mounted(){
-        var id = sessionStorage.getItem("user");
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
@@ -214,20 +214,17 @@ export default {
         toUserHome(){
             this.$router.push('/userHome');
         },
-        resetPasswordForm(){
-          this.passwordVisible = false;
-          this.$refs['passwordForm'].resetFields();
-        },
         getUserInfo(){
-            var id = sessionStorage.getItem("user");
-            this.$axios.get('api/library/user/getUserInfo?id=' + id)
+            var userId = sessionStorage.getItem("user");
+            this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
             .then(res => {
                 if (res.data == ""){
-                    this.$message.error("获取用户失败");
+                   this.$message.error("获取用户失败，即将回到登录界面");
+                   this.$router.push('/');
                 }
                 else{
                     this.userInfo = res.data;
-                    console.log(this.userInfo);
+                    // console.log(this.userInfo);
                 }
             })
             .catch(err => {
@@ -261,6 +258,10 @@ export default {
                   return false;
                 }
             });
+        },
+        resetPasswordForm(){
+          this.passwordVisible = false;
+          this.$refs['passwordForm'].resetFields();
         },
         resetcreditForm(){
             this.creditVisible = false;

@@ -28,7 +28,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="getBooks()">查询</el-button>
-                        <el-button type="" @click="emptySearch()">清空</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
                     </el-form-item>
                 </el-form>
             </el-collapse-item>
@@ -211,11 +211,28 @@ export default {
         }
     },
     mounted(){
-        var id = sessionStorage.getItem("user") ;
-        if (id == null ){
+        var userId = sessionStorage.getItem("user");
+        if (userId == null ){
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
+        this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+                else{
+                    if (res.data.role != '管理员'){
+                        alert("用户权限不足，即将回到登录界面");
+                        this.$router.push('/');
+                    }
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
         this.getBooks();
         this.getBookTypes();
     },
@@ -264,7 +281,7 @@ export default {
                 console.log(err);
             })
         },
-        emptySearch(){
+        clearSearch(){
             this.searchForm.bookName = "";
             this.searchForm.bookType = "";
             this.searchForm.author = "";

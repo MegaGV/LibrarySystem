@@ -29,12 +29,12 @@ public class RecordServiceImpl implements RecordService {
     private FineRecordMapper fineRecordMapper;
 
     @Override
-    public RecordsListDto getRecords(String id, String recordType) {
+    public RecordsListDto getRecords(String userId, String recordType) {
         List records = new ArrayList();
         switch (recordType){
             case "borrow" :
                 {
-                    List<BorrowRecord> originRecords = borrowRecordMapper.getRecordsByUserid(id);
+                    List<BorrowRecord> originRecords = borrowRecordMapper.getRecordsByUserid(userId);
                     for (BorrowRecord borrowRecord : originRecords) {
                         BorrowRecordListDto borrowRecordListDto = new BorrowRecordListDto(borrowRecord);
                         borrowRecordListDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
@@ -45,7 +45,7 @@ public class RecordServiceImpl implements RecordService {
                 break;
             case "return":
                 {
-                    List<ReturnRecord> originRecords = returnRecordMapper.getRecordsByUserid(id);
+                    List<ReturnRecord> originRecords = returnRecordMapper.getRecordsByUserid(userId);
                     for (ReturnRecord returnRecord : originRecords){
                         ReturnRecordListDto returnRecordListDto = new ReturnRecordListDto(returnRecord);
                         returnRecordListDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
@@ -54,7 +54,7 @@ public class RecordServiceImpl implements RecordService {
                 }
                 break;
             case "fine":
-                records = fineRecordMapper.getRecordsByUserid(id);
+                records = fineRecordMapper.getRecordsByUserid(userId);
                 break;
             default:
         }
