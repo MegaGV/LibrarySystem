@@ -15,9 +15,9 @@ public interface ReturnRecordMapper {
 
     int updateByPrimaryKey(ReturnRecord record);
 
-    List<ReturnRecord> getRecordsByUserid(String id);
+    List<ReturnRecord> getRecordsByUserid(String userId);
 
-    String getReturnRecordStatus(Integer id);
+    String getReturnRecordStatus(Integer statusId);
 
     List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
 

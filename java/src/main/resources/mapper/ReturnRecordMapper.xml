@@ -38,12 +38,12 @@
   <select id="getRecordsByUserid" resultMap="BaseResultMap" >
     select id, user_id, borrow_id, return_date, status
     from return_records
-    where user_id=#{id}
+    where user_id=#{userId}
   </select>
   <select id="getReturnRecordStatus" resultType="java.lang.String">
     select status
     from return_status
-    where id=#{id}
+    where id=#{statusId}
   </select>
   <select id="getRecords" resultMap="BaseResultMap" >
     select id, user_id, borrow_id, return_date, status

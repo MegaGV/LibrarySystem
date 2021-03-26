@@ -26,8 +26,8 @@ public class AdminController {
 
     @GetMapping("/getUser")
     @ResponseBody
-    public User getUser(String id){
-        return adminService.getUser(id);
+    public User getUser(String userId){
+        return adminService.getUser(userId);
     }
 
     @PostMapping("/addUser")
@@ -60,8 +60,8 @@ public class AdminController {
 
     @GetMapping("/getBook")
     @ResponseBody
-    public Book getBook(String id){
-        return adminService.getBook(id);
+    public Book getBook(String bookId){
+        return adminService.getBook(bookId);
     }
 
     @PostMapping("/addBook")
@@ -94,8 +94,8 @@ public class AdminController {
 
     @GetMapping("/getBR")
     @ResponseBody
-    public BorrowRecord getBR(String id){
-        return adminService.getBR(id);
+    public BorrowRecord getBR(String borrowId){
+        return adminService.getBR(borrowId);
     }
 
     @PostMapping("/deleteBR")
@@ -112,8 +112,8 @@ public class AdminController {
 
     @GetMapping("/getRR")
     @ResponseBody
-    public ReturnRecord getRR(String id){
-        return adminService.getRR(id);
+    public ReturnRecord getRR(String returnId){
+        return adminService.getRR(returnId);
     }
 
     @PostMapping("/deleteRR")
@@ -130,8 +130,8 @@ public class AdminController {
 
     @GetMapping("/getFR")
     @ResponseBody
-    public FineRecord getFR(String id){
-        return adminService.getFR(id);
+    public FineRecord getFR(String fineId){
+        return adminService.getFR(fineId);
     }
 
     @PostMapping("/deleteFR")

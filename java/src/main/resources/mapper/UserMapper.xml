@@ -51,12 +51,12 @@
   <select id="getUserStatus" resultType="java.lang.String" >
     select status
     from user_status
-    where id=#{id}
+    where id=#{statusId}
   </select>
   <select id="getUserRole" resultType="java.lang.String" >
     select `role`
     from `role`
-    where id=#{id}
+    where id=#{roleId}
   </select>
   <update id="updatePassword">
     update users

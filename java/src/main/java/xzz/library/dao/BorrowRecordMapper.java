@@ -15,9 +15,9 @@ public interface BorrowRecordMapper {
 
     int updateByPrimaryKey(BorrowRecord record);
 
-    List<BorrowRecord> getRecordsByUserid(String id);
+    List<BorrowRecord> getRecordsByUserid(String userId);
 
-    String getBorrowRecordStatus(Integer id);
+    String getBorrowRecordStatus(Integer statusId);
 
     List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
 

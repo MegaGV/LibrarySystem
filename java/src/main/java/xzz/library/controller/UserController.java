@@ -39,8 +39,8 @@ public class UserController {
 
     @GetMapping("/getUserInfo")
     @ResponseBody
-    public UserInfoDto getUserInfo(String id){
-        return userService.getUserInfo(id);
+    public UserInfoDto getUserInfo(String userId){
+        return userService.getUserInfo(userId);
     }
 
     @PostMapping("/updatePassword")

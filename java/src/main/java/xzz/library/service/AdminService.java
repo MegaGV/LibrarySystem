@@ -10,7 +10,7 @@ public interface AdminService {
     //========================================================================================
     UsersListDto getUsers(Integer limit, Integer page);
 
-    User getUser(String id);
+    User getUser(String userId);
 
     String addUser(User user);
 
@@ -23,7 +23,7 @@ public interface AdminService {
     //========================================================================================
     BooksListDto getBooks(BooksSearchInfoDto booksSearchInfoDto);
 
-    Book getBook(String id);
+    Book getBook(String bookId);
 
     String addBook(Book book);
 
@@ -36,19 +36,19 @@ public interface AdminService {
     //========================================================================================
     RecordsListDto getRecords(Integer limit, Integer page, String recordType);
 
-    BorrowRecord getBR(String id);
+    BorrowRecord getBR(String borrowId);
 
     String deleteBR(String[] ids);
 
     String updateBR(BorrowRecord borrowRecord);
 
-    ReturnRecord getRR(String id);
+    ReturnRecord getRR(String returnId);
 
     String deleteRR(String[] ids);
 
     String updateRR(ReturnRecord returnRecord);
 
-    FineRecord getFR(String id);
+    FineRecord getFR(String fineId);
 
     String deleteFR(String[] ids);
 

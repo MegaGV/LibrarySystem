@@ -9,7 +9,6 @@ import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 import xzz.library.util.MD5Utils;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -38,8 +37,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public User getUser(String id) {
-        return userMapper.selectByPrimaryKey(id);
+    public User getUser(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
     }
 
     @Override
@@ -127,8 +126,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Book getBook(String id) {
-        return bookMapper.selectByPrimaryKey(id);
+    public Book getBook(String bookId) {
+        return bookMapper.selectByPrimaryKey(bookId);
     }
 
     @Override
@@ -188,8 +187,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public BorrowRecord getBR(String id) {
-        return borrowRecordMapper.selectByPrimaryKey(id);
+    public BorrowRecord getBR(String borrowId) {
+        return borrowRecordMapper.selectByPrimaryKey(borrowId);
     }
 
     @Override
@@ -226,8 +225,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ReturnRecord getRR(String id) {
-        return returnRecordMapper.selectByPrimaryKey(id);
+    public ReturnRecord getRR(String returnId) {
+        return returnRecordMapper.selectByPrimaryKey(returnId);
     }
 
     @Override
@@ -264,8 +263,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public FineRecord getFR(String id) {
-        return fineRecordMapper.selectByPrimaryKey(id);
+    public FineRecord getFR(String fineId) {
+        return fineRecordMapper.selectByPrimaryKey(fineId);
     }
 
     @Override

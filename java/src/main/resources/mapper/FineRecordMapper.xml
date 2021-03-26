@@ -40,7 +40,7 @@
   <select id="getRecordsByUserid" resultMap="BaseResultMap" >
     select id, user_id, borrow_id, return_id, days, fine
     from fine_records
-    where user_id=#{id}
+    where user_id=#{userId}
   </select>
   <select id="getRecords" resultMap="BaseResultMap" >
     select id, user_id, borrow_id, return_id, days, fine

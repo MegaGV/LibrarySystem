@@ -10,7 +10,7 @@ public interface UserService {
 
     User login(User user);
 
-    UserInfoDto getUserInfo(String id);
+    UserInfoDto getUserInfo(String userId);
 
     String updatePassword(PasswordResetInfoDto passwordResetInfoDto);
 

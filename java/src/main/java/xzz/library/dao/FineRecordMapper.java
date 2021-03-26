@@ -15,7 +15,7 @@ public interface FineRecordMapper {
 
     int updateByPrimaryKey(FineRecord record);
 
-    List<FineRecord> getRecordsByUserid(String id);
+    List<FineRecord> getRecordsByUserid(String userId);
 
     List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
 

@@ -17,9 +17,9 @@ public interface UserMapper {
 
     User getUserByUsername(String username);
 
-    String getUserStatus(Integer id);
+    String getUserStatus(Integer statusId);
 
-    String getUserRole(Integer id);
+    String getUserRole(Integer roleId);
 
     void updatePassword(@Param("id") String id, @Param("newPassword") String newPassword);
 
