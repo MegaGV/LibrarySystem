@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-10-22 22:49:49
+Date: 2021-03-26 18:04:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -292,6 +292,23 @@ INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', 'afec
 INSERT INTO `users` VALUES ('a26214da-4c14-4637-9470-daff75b1c34f', 'ccc', 'e036b035fefbd2197bcd26eb272640ad', '赵六', '0', '0', '0', '15.10');
 INSERT INTO `users` VALUES ('a2dfe9db-47ed-464d-9b38-9414bca85612', 'ddd', '887644eae2b82d048d5697d2cee96db4', '大宝', '0', '0', '0', '0.00');
 INSERT INTO `users` VALUES ('ba05892f-4403-48f2-9c36-1de685d5f3fc', 'admin', '0ea9114a57ee221805a9cd4f1ce40663', '管理员', '1', '0', '0', '10.00');
+
+-- ----------------------------
+-- Table structure for user_booklist
+-- ----------------------------
+DROP TABLE IF EXISTS `user_booklist`;
+CREATE TABLE `user_booklist` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `list_name` varchar(255) NOT NULL,
+  `books` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_booklist
+-- ----------------------------
+INSERT INTO `user_booklist` VALUES ('1462813a-b9d7-46b1-aecf-47ba91db5fd9', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '我的书单', '');
 
 -- ----------------------------
 -- Table structure for user_status

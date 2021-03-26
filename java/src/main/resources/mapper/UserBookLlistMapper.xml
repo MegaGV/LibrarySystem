@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xzz.library.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="xzz.library.pojo.UserBookList" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="list_name" property="listName" jdbcType="VARCHAR" />
+    <result column="books" property="books" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_booklist
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="xzz.library.pojo.UserBookList" >
+    insert into user_booklist (id, user_id, list_name, books)
+    values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{list_name,jdbcType=VARCHAR},
+      #{books,jdbcType=detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.UserBookList" >
+    update user_booklist
+    set user_id = #{user_id,jdbcType=VARCHAR},
+      list_name = #{list_name,jdbcType=VARCHAR},
+      books = #{books,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, user_id, list_name, books
+    from user_booklist
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, user_id, list_name, books
+    from user_booklist
+  </select>
+</mapper>

@@ -3,14 +3,18 @@ package xzz.library.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xzz.library.dao.UserBookListMapper;
 import xzz.library.dao.UserMapper;
 import xzz.library.dto.CreditInfoDto;
 import xzz.library.dto.PasswordResetInfoDto;
+import xzz.library.dto.UserBookListDto;
 import xzz.library.dto.UserInfoDto;
 import xzz.library.pojo.User;
+import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserBookListMapper userBookListMapper;
 
     @Override
     @Transactional
@@ -102,6 +108,12 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return "充值失败";
         }
+    }
+
+    @Override
+    public UserBookListDto getUserBookLists(String userId) {
+        List<UserBookList> userBookLists = userBookListMapper.getBookListsByUserid(userId);
+        return new UserBookListDto(userBookLists, userBookLists.size());
     }
 
 }
