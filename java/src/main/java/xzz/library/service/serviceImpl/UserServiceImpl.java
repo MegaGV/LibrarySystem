@@ -49,10 +49,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoDto getUserInfo(String userId) {
+    public String userCheck(String userId) {
         User dbUser = userMapper.selectByPrimaryKey(userId);
         if (dbUser == null)
             return null;
+        else
+            return userMapper.getUserRole((dbUser.getRole()));
+    }
+
+    @Override
+    public UserInfoDto getUserInfo(String userId) {
+        User dbUser = userMapper.selectByPrimaryKey(userId);
         UserInfoDto userInfoDto = new UserInfoDto(dbUser);
         userInfoDto.setStatus(userMapper.getUserStatus(dbUser.getStatus()));
         userInfoDto.setRole(userMapper.getUserRole(dbUser.getRole()));

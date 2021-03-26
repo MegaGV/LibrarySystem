@@ -198,6 +198,17 @@ export default {
             alert("未登录，即将回到登录界面");
             this.$router.push('/');
         }
+        this.$axios.get('api/library/user/userCheck?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取用户失败，即将回到登录界面");
+                    this.$router.push('/');
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
         this.getUserInfo();
     },
     methods:{
@@ -218,14 +229,8 @@ export default {
             var userId = sessionStorage.getItem("user");
             this.$axios.get('api/library/user/getUserInfo?userId=' + userId)
             .then(res => {
-                if (res.data == ""){
-                   this.$message.error("获取用户失败，即将回到登录界面");
-                   this.$router.push('/');
-                }
-                else{
-                    this.userInfo = res.data;
-                    // console.log(this.userInfo);
-                }
+                this.userInfo = res.data;
+                // console.log(this.userInfo);
             })
             .catch(err => {
                 this.$message.error("系统繁忙，请稍后再试");

@@ -20,7 +20,8 @@ import xzz.library.service.UserService;
 @CrossOrigin(allowCredentials = "true")
 public class UserController {
     //========================================================================================
-    // Operations: 注册、登录、获取用户信息、更新密码、充值
+    // Basic system
+    // Operations: 注册、登录、检测用户存在
     //========================================================================================
     @Autowired
     private UserService userService;
@@ -37,6 +38,16 @@ public class UserController {
         return userService.login(user);
     }
 
+    @GetMapping("/userCheck")
+    @ResponseBody
+    public String userCheck(String userId) {
+        return userService.userCheck(userId);
+    }
+
+    //========================================================================================
+    // User
+    // Operations: 获取用户信息、更新密码、充值
+    //========================================================================================
     @GetMapping("/getUserInfo")
     @ResponseBody
     public UserInfoDto getUserInfo(String userId){
