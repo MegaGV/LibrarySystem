@@ -7,6 +7,7 @@ import xzz.library.dao.BookMapper;
 import xzz.library.dao.UserBookListMapper;
 import xzz.library.dao.UserMapper;
 import xzz.library.dto.*;
+import xzz.library.pojo.Book;
 import xzz.library.pojo.User;
 import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserService;
@@ -119,15 +120,18 @@ public class UserServiceImpl implements UserService {
 
     public BooksListDto getListBooks(String userBookListId){
         UserBookList userBookList = userBookListMapper.selectByPrimaryKey(userBookListId);
+        List<Book> books = new ArrayList<>();
 
-        UserBookListDto userBookListDto = new UserBookListDto(userBookList);
-        String[] books = userBookList.getBooks().split(",");
-        for (String book : books){
-            userBookListDto.addBook(bookMapper.selectByPrimaryKey(book));
+        String[] bookIds = userBookList.getBooks().split(",");
+        for (String bookId : bookIds){
+            Book book = bookMapper.selectByPrimaryKey(bookId);
+            if (book != null)
+                books.add(book);
+            else // 有找不到的书，添加空对象标记
+                books.add(new Book());
         }
-//        userBookListDtos.add(userBookListDto);
 
-        return new BooksListDto()
+        return new BooksListDto(books, books.size());
     }
 
 }

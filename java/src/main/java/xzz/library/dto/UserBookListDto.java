@@ -16,13 +16,6 @@ public class UserBookListDto {
 
     private List<Book> bookList;
 
-    public void addBook(Book book){
-        if (book != null)
-            this.bookList.add(book);
-        else // 有找不到的书，添加空对象标记
-            this.bookList.add(new Book());
-    }
-
     public UserBookListDto(UserBookList userBookList){
         this.id = userBookList.getId();
         this.userId = userBookList.getUserId();
