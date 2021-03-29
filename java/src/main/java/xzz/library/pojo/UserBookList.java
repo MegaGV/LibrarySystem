@@ -14,14 +14,7 @@ public class UserBookList implements Serializable {
 
     private String books;
 
-    private List<String> bookList;
-
     private static final long serialVersionUID = 1L;
-
-    public void initial(){
-        this.bookList = Arrays.asList(books.split(","));
-        this.books = null;
-    }
 
     public String getId() {
         return id;
@@ -53,13 +46,5 @@ public class UserBookList implements Serializable {
 
     public void setBooks(String books) {
         this.books = books;
-    }
-
-    public List<String> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<String> bookList) {
-        this.bookList = bookList;
     }
 }

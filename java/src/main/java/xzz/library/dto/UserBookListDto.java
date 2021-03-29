@@ -1,32 +1,64 @@
 package xzz.library.dto;
 
+import xzz.library.pojo.Book;
 import xzz.library.pojo.UserBookList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserBookListDto {
-    private Integer total;
 
-    private List<UserBookList> data;
+    private String id;
 
-    public UserBookListDto(List<UserBookList> bookLists, int total){
-        this.data = bookLists;
-        this.total = total;
+    private String userId;
+
+    private String listName;
+
+    private List<Book> bookList;
+
+    public void addBook(Book book){
+        if (book != null)
+            this.bookList.add(book);
+        else // 有找不到的书，添加空对象标记
+            this.bookList.add(new Book());
     }
 
-    public Integer getTotal() {
-        return total;
+    public UserBookListDto(UserBookList userBookList){
+        this.id = userBookList.getId();
+        this.userId = userBookList.getUserId();
+        this.listName = userBookList.getListName();
+        this.bookList = new ArrayList<>();
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public String getId() {
+        return id;
     }
 
-    public List<UserBookList> getData() {
-        return data;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setData(List<UserBookList> data) {
-        this.data = data;
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 }

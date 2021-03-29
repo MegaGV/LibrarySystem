@@ -1,6 +1,5 @@
 package xzz.library.dao;
 
-import xzz.library.dto.UserBookListDto;
 import xzz.library.pojo.UserBookList;
 
 import java.util.List;

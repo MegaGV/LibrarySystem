@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="xzz.library.dao.UserMapper" >
+<mapper namespace="xzz.library.dao.UserBookListMapper" >
   <resultMap id="BaseResultMap" type="xzz.library.pojo.UserBookList" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -31,5 +31,10 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, user_id, list_name, books
     from user_booklist
+  </select>
+  <select id="getBookListsByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, user_id, list_name, books
+    from user_booklist
+    where user_id = #{userId}
   </select>
 </mapper>
