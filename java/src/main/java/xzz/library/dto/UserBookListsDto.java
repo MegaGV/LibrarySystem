@@ -5,6 +5,9 @@ import xzz.library.pojo.UserBookList;
 import java.util.List;
 
 public class UserBookListsDto {
+    //========================================================================================
+    // Description: 后端返回到前端的书单列表类
+    //========================================================================================
     private Integer total;
 
     private List<UserBookList> data;
@@ -12,6 +15,11 @@ public class UserBookListsDto {
     public UserBookListsDto(List<UserBookList> bookLists, int total){
         this.data = bookLists;
         this.total = total;
+    }
+
+    public UserBookListsDto(List<UserBookList> bookLists){
+        this.data = bookLists;
+        this.total = bookLists.size();
     }
 
     public Integer getTotal() {

@@ -22,10 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private BookMapper bookMapper;
-    @Autowired
-    private UserBookListMapper userBookListMapper;
 
     @Override
     @Transactional
@@ -112,26 +108,5 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public UserBookListsDto getUserBookLists(String userId) {
-        List<UserBookList> userBookLists = userBookListMapper.getBookListsByUserid(userId);
-        return new UserBookListsDto(userBookLists, userBookLists.size());
-    }
-
-    public BooksListDto getListBooks(String userBookListId){
-        UserBookList userBookList = userBookListMapper.selectByPrimaryKey(userBookListId);
-        List<Book> books = new ArrayList<>();
-
-        String[] bookIds = userBookList.getBooks().split(",");
-        for (String bookId : bookIds){
-            Book book = bookMapper.selectByPrimaryKey(bookId);
-            if (book != null)
-                books.add(book);
-            else // 有找不到的书，添加空对象标记
-                books.add(new Book());
-        }
-
-        return new BooksListDto(books, books.size());
-    }
 
 }
