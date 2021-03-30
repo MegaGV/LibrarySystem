@@ -58,7 +58,7 @@ public class RecordServiceImpl implements RecordService {
                 break;
             default:
         }
-        return new RecordsListDto(records, records.size());
+        return new RecordsListDto(records);
     }
 
     @Override

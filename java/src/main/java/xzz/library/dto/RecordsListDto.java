@@ -14,6 +14,12 @@ public class RecordsListDto {
         this.data = data;
         this.total = total;
     }
+
+    public RecordsListDto(List data){
+        this.data = data;
+        this.total = data.size();
+    }
+
     public Integer getTotal() {
         return total;
     }

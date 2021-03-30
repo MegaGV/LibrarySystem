@@ -17,6 +17,11 @@ public class UsersListDto {
         this.total = total;
     }
 
+    public UsersListDto(List<User> users){
+        this.data = users;
+        this.total = users.size();
+    }
+
     public Integer getTotal() {
         return total;
     }

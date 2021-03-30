@@ -17,6 +17,11 @@ public class BookTypeListDto {
         this.total = total;
     }
 
+    public BookTypeListDto(List<BookType> bookTypes){
+        this.data = bookTypes;
+        this.total = bookTypes.size();
+    }
+
     public Integer getTotal() {
         return total;
     }
