@@ -15,7 +15,7 @@
   <insert id="insert" parameterType="xzz.library.pojo.UserBookList" >
     insert into user_booklist (id, user_id, list_name, description, books)
     values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{list_name,jdbcType=VARCHAR},
-            #{description,jdbcType=detail,jdbcType=LONGVARCHAR}, #{books,jdbcType=detail,jdbcType=LONGVARCHAR})
+            #{description,jdbcType=LONGVARCHAR}, #{books,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.UserBookList" >
     update user_booklist
@@ -39,4 +39,9 @@
     from user_booklist
     where user_id = #{userId}
   </select>
+  <update id="updateBooksByPrimaryKey" parameterType="java.lang.String" >
+    update user_booklist
+    set books = #{books,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

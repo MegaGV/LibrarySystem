@@ -9,7 +9,7 @@ import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserBookListService;
 
 @Controller
-@RequestMapping("/bookList")
+@RequestMapping("/userBookList")
 @CrossOrigin(allowCredentials = "true")
 public class UserBookListController {
     //========================================================================================
@@ -25,10 +25,10 @@ public class UserBookListController {
         return userBookListService.getUserBookLists(userId);
     }
 
-    @GetMapping("/getListBooks")
+    @GetMapping("/getUserBookList")
     @ResponseBody
-    public UserBookListDto getListBooks(String bookListId){
-        return userBookListService.getListBooks(bookListId);
+    public UserBookListDto getUserBookList(String bookListId){
+        return userBookListService.getUserBookList(bookListId);
     }
 
     @PostMapping("/addUserBookList")
@@ -39,13 +39,25 @@ public class UserBookListController {
 
     @PostMapping("/deleteUserBookList")
     @ResponseBody
-    public String deleteUserBookList(String userBookListId, String userId){
-        return userBookListService.deleteUserBookList(userBookListId, userId);
+    public String deleteUserBookList(String userId, String userBookListId){
+        return userBookListService.deleteUserBookList(userId, userBookListId);
     }
 
     @PostMapping("/updateUserBookList")
     @ResponseBody
     public String updateUserBookList(@RequestBody UserBookList userBookList){
         return userBookListService.updateUserBookList(userBookList);
+    }
+
+    @PostMapping("/addBook")
+    @ResponseBody
+    public String addBook(String userId, String bookId, String userBookListId ){
+        return userBookListService.updateBook(userId, bookId, userBookListId, true);
+    }
+
+    @PostMapping("/removeBook")
+    @ResponseBody
+    public String removeBook(String userId, String bookId, String userBookListId ){
+        return userBookListService.updateBook(userId, bookId, userBookListId, false);
     }
 }
