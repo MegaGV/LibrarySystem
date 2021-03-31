@@ -12,6 +12,8 @@ public class StringListUtils {
     public static String removeOne(String originStr, String target){ // 已确认源串中存在目标子串
         int i = originStr.indexOf(target);
         StringBuilder sb = new StringBuilder(originStr);
+        if (target.length() == originStr.length()) // 如果是唯一一个元素
+            return "";
         if (i + target.length() == originStr.length()) // 如果删除对象是末尾元素
             sb.delete(i, i + target.length());
         else
@@ -19,10 +21,10 @@ public class StringListUtils {
         return sb.toString();
     }
 
-    public static Integer countChar(String originStr, char target){
+    public static Integer count(String originStr){
         int result = 0;
         for (int i = 0; i < originStr.length(); i++) {
-            if (originStr.charAt(i) == target)
+            if (originStr.charAt(i) == ',')
                 result++;
         }
         return result;

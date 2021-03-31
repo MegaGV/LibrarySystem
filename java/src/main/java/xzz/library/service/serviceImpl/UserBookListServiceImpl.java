@@ -84,9 +84,6 @@ public class UserBookListServiceImpl implements UserBookListService {
     public String updateUserBookList(UserBookList userBookList) {
         if (userBookList == null)
             return "信息有误";
-        UserBookList dbList = userBookListMapper.selectByPrimaryKey(userBookList.getId());
-        if (!dbList.getUserId().equals(userBookList.getUserId()))
-            return "无法编辑他人书单";
 
         try{
             userBookListMapper.updateByPrimaryKey(userBookList);
@@ -107,20 +104,20 @@ public class UserBookListServiceImpl implements UserBookListService {
             return "无法编辑他人书单";
         String books = dbList.getBooks();
         if (isAdd) {
-            if (StringListUtils.countChar(books, ',') >= 19) // 暂时限制书单长度为20
+            if (StringListUtils.count(books) >= 9) // 暂时限制书单长度为10
                 return "书单书目达到上限";
-            else if (books.contains(bookId))
+            if (bookMapper.selectByPrimaryKey(bookId) == null)
+                return "图书不存在";
+            if (books.contains(bookId))
                 return "该书已在书单中";
-            else
-                books = StringListUtils.addOne(books, bookId);
+            books = StringListUtils.addOne(books, bookId);
         }
         else {
             if (books.isEmpty())
                 return "书单为空";
-            else if (!books.contains(bookId))
+            if (!books.contains(bookId))
                 return "该书不在书单中";
-            else
-                books = StringListUtils.removeOne(books, bookId);
+            books = StringListUtils.removeOne(books, bookId);
         }
 
         try{

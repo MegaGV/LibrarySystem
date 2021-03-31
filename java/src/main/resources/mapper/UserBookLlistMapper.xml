@@ -14,13 +14,13 @@
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.UserBookList" >
     insert into user_booklist (id, user_id, list_name, description, books)
-    values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{list_name,jdbcType=VARCHAR},
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{listName,jdbcType=VARCHAR},
             #{description,jdbcType=LONGVARCHAR}, #{books,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.UserBookList" >
     update user_booklist
-    set user_id = #{user_id,jdbcType=VARCHAR},
-      list_name = #{list_name,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      list_name = #{listName,jdbcType=VARCHAR},
       description = #{description,jdbcType=LONGVARCHAR},
       books = #{books,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}

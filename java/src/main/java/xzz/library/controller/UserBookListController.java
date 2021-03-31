@@ -14,7 +14,7 @@ import xzz.library.service.UserBookListService;
 public class UserBookListController {
     //========================================================================================
     // BookList
-    // Operations: 获取书单、获取书单书目、书单增删改
+    // Operations: 获取书单、获取书单书目、书单增删改、添加或移出图书
     //========================================================================================
     @Autowired
     private UserBookListService userBookListService;
