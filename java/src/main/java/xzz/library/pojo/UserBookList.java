@@ -1,8 +1,7 @@
 package xzz.library.pojo;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
+import java.util.UUID;
 
 public class UserBookList implements Serializable {
 
@@ -12,9 +11,16 @@ public class UserBookList implements Serializable {
 
     private String listName;
 
+    private String description;
+
     private String books;
 
     private static final long serialVersionUID = 1L;
+
+    public void initial(){
+        this.id = UUID.randomUUID().toString();
+        this.books = "";
+    }
 
     public String getId() {
         return id;
@@ -38,6 +44,14 @@ public class UserBookList implements Serializable {
 
     public void setListName(String listName) {
         this.listName = listName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getBooks() {

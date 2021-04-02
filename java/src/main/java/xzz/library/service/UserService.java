@@ -19,5 +19,4 @@ public interface UserService {
 
     String credit(CreditInfoDto creditInfoDto);
 
-    UserBookListsDto getUserBookLists(String userId);
 }

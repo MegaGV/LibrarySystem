@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xzz.library.dto.CreditInfoDto;
 import xzz.library.dto.PasswordResetInfoDto;
-import xzz.library.dto.UserBookListsDto;
 import xzz.library.dto.UserInfoDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
@@ -67,9 +66,4 @@ public class UserController {
         return userService.credit(creditInfoDto);
     }
 
-    @GetMapping("/getUserBookLists")
-    @ResponseBody
-    public UserBookListsDto getUserBookLists(String userId){
-        return userService.getUserBookLists(userId);
-    }
 }

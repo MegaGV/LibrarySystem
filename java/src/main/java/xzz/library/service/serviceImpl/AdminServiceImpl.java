@@ -23,6 +23,8 @@ public class AdminServiceImpl implements AdminService {
     private ReturnRecordMapper returnRecordMapper;
     @Autowired
     private FineRecordMapper fineRecordMapper;
+    @Autowired
+    private UserBookListMapper userBookListMapper;
 
     //========================================================================================
     // Users
@@ -297,6 +299,72 @@ public class AdminServiceImpl implements AdminService {
         }catch (Exception e){
             e.printStackTrace();
             return "罚款信息更新失败";
+        }
+    }
+
+    //========================================================================================
+    // Records
+    //========================================================================================
+    @Override
+    public UserBookListsDto getUserBookLists(UserBookListSearchInfoDto userBookListSearchInfoDto) {
+        userBookListSearchInfoDto.initial();
+        return new UserBookListsDto(userBookListMapper.getUserBookList(userBookListSearchInfoDto),
+                userBookListMapper.countUserBookList(userBookListSearchInfoDto));
+    }
+
+    @Override
+    public UserBookList getUserBookList(String userBookListId) {
+        return userBookListMapper.selectByPrimaryKey(userBookListId);
+    }
+
+    @Override
+    @Transactional
+    public String addUserBookList(UserBookList userBookList) {
+        if (userBookList == null)
+            return "书单错误";
+        userBookList.initial();
+        while (bookMapper.selectByPrimaryKey(userBookList.getId()) != null)
+            userBookList.setId(UUID.randomUUID().toString());
+
+        try {
+            userBookListMapper.insert(userBookList);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "书单添加失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteUserBookList(String[] ids) {
+        if (ids == null)
+            return "书单错误";
+        if (ids.length == 0)
+            return "无选中书单";
+
+        try {
+            for (String id : ids)
+                userBookListMapper.deleteByPrimaryKey(id);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "删除书单失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateUserBookList(UserBookList userBookList) {
+        if(userBookList == null)
+            return "书单错误";
+
+        try{
+            userBookListMapper.updateByPrimaryKey(userBookList);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "修改书单失败";
         }
     }
 }

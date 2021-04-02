@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="list_name" property="listName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
     <result column="books" property="books" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
@@ -12,29 +13,60 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.UserBookList" >
-    insert into user_booklist (id, user_id, list_name, books)
-    values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{list_name,jdbcType=VARCHAR},
-      #{books,jdbcType=detail,jdbcType=LONGVARCHAR})
+    insert into user_booklist (id, user_id, list_name, description, books)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{listName,jdbcType=VARCHAR},
+            #{description,jdbcType=LONGVARCHAR}, #{books,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.UserBookList" >
     update user_booklist
-    set user_id = #{user_id,jdbcType=VARCHAR},
-      list_name = #{list_name,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      list_name = #{listName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
       books = #{books,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, user_id, list_name, books
+    select id, user_id, list_name, description, books
     from user_booklist
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, user_id, list_name, books
+    select id, user_id, list_name, description, books
     from user_booklist
   </select>
   <select id="getBookListsByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, user_id, list_name, books
+    select id, user_id, list_name, description, books
     from user_booklist
     where user_id = #{userId}
+  </select>
+  <update id="updateBooksByPrimaryKey" parameterType="java.lang.String" >
+    update user_booklist
+    set books = #{books,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getUserBookList" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="BaseResultMap" >
+    select id, user_id, list_name, description, books
+    from user_booklist
+    <where>
+      <if test="listName!=null and listName !=''">
+        list_name like concat("%",#{listName},"%")
+      </if>
+      <if test="userId!=null and userId !=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
+    limit #{page}, #{limit}
+  </select>
+  <select id="countUserBookList" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="java.lang.Integer" >
+    select count(0)
+    from user_booklist
+    <where>
+      <if test="listName!=null and listName !=''">
+        list_name like concat("%",#{listName},"%")
+      </if>
+      <if test="userId!=null and userId !=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
   </select>
 </mapper>
