@@ -53,4 +53,18 @@ public interface AdminService {
     String deleteFR(String[] ids);
 
     String updateFR(FineRecord fineRecord);
+
+    //========================================================================================
+    // UserBookLists
+    //========================================================================================
+    UserBookListsDto getUserBookLists(UserBookListSearchInfoDto userBookListSearchInfoDto);
+
+    UserBookList getUserBookList(String userBookListId);
+
+    String addUserBookList(UserBookList userBookList);
+
+    String deleteUserBookList(String[] ids);
+
+    String updateUserBookList(UserBookList userBookList);
+
 }

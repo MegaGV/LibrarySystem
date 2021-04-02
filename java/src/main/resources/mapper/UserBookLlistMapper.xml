@@ -44,4 +44,29 @@
     set books = #{books,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="getUserBookList" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="BaseResultMap" >
+    select id, user_id, list_name, description, books
+    from user_booklist
+    <where>
+      <if test="listName!=null and listName !=''">
+        list_name like concat("%",#{listName},"%")
+      </if>
+      <if test="userId!=null and userId !=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
+    limit #{page}, #{limit}
+  </select>
+  <select id="countUserBookList" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="java.lang.Integer" >
+    select count(0)
+    from user_booklist
+    <where>
+      <if test="listName!=null and listName !=''">
+        list_name like concat("%",#{listName},"%")
+      </if>
+      <if test="userId!=null and userId !=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
+  </select>
 </mapper>

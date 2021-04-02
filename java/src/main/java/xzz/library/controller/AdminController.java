@@ -145,4 +145,38 @@ public class AdminController {
     public String updateFR(@RequestBody FineRecord fineRecord){
         return adminService.updateFR(fineRecord);
     }
+
+    //========================================================================================
+    // UserBookList
+    // Operations: 获取书单列表、获取书单信息、添加书单、删除书单、更新书单
+    //========================================================================================
+    @PostMapping("/getUserBookLists")
+    @ResponseBody
+    public UserBookListsDto getUserBookLists(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
+        return adminService.getUserBookLists(userBookListSearchInfoDto);
+    }
+
+    @GetMapping("/getUserBookList")
+    @ResponseBody
+    public UserBookList getUserBookList(String userBookListId){
+        return adminService.getUserBookList(userBookListId);
+    }
+
+    @PostMapping("/addUserBookList")
+    @ResponseBody
+    public String addUserBookList(@RequestBody UserBookList userBookList){
+        return adminService.addUserBookList(userBookList);
+    }
+
+    @PostMapping("/deleteUserBookList")
+    @ResponseBody
+    public String deleteUserBookList(@RequestBody String[] ids){
+        return adminService.deleteUserBookList(ids);
+    }
+
+    @PostMapping("/updateUserBookList")
+    @ResponseBody
+    public String updateUserBookList(@RequestBody UserBookList userBookList){
+        return adminService.updateUserBookList(userBookList);
+    }
 }

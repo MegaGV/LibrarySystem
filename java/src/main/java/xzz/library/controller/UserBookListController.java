@@ -27,8 +27,8 @@ public class UserBookListController {
 
     @GetMapping("/getUserBookList")
     @ResponseBody
-    public UserBookListDto getUserBookList(String bookListId){
-        return userBookListService.getUserBookList(bookListId);
+    public UserBookListDto getUserBookList(String userBookListId){
+        return userBookListService.getUserBookList(userBookListId);
     }
 
     @PostMapping("/addUserBookList")
