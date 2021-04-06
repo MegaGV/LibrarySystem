@@ -23,24 +23,24 @@ public class UserBookListServiceImpl implements UserBookListService {
     private UserBookListMapper userBookListMapper;
 
     @Override
-    public UserBookListsDto getUserBookLists(String userId) {
-        return new UserBookListsDto(userBookListMapper.getBookListsByUserid(userId));
+    public UserBookListListDto getUserBookLists(String userId) {
+        return new UserBookListListDto(userBookListMapper.getBookListsByUserid(userId));
     }
 
     @Override
-    public UserBookListDto getUserBookList(String userBookListId){
+    public UserBookListInfoDto getUserBookList(String userBookListId){
         UserBookList userBookList = userBookListMapper.selectByPrimaryKey(userBookListId);
-        UserBookListDto userBookListDto = new UserBookListDto(userBookList);
+        UserBookListInfoDto userBookListInfoDto = new UserBookListInfoDto(userBookList);
 
         String[] bookIds = userBookList.getBooks().split(",");
         for (String bookId : bookIds){
             Book book = bookMapper.selectByPrimaryKey(bookId);
             if (book != null)
-                userBookListDto.addBook(book);
+                userBookListInfoDto.addBook(book);
             else // 有找不到的书，添加空对象标记
-                userBookListDto.addBook(new Book());
+                userBookListInfoDto.addBook(new Book());
         }
-        return userBookListDto;
+        return userBookListInfoDto;
     }
 
     @Override

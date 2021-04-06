@@ -3,18 +3,12 @@ package xzz.library.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xzz.library.dao.BookMapper;
-import xzz.library.dao.UserBookListMapper;
 import xzz.library.dao.UserMapper;
 import xzz.library.dto.*;
-import xzz.library.pojo.Book;
 import xzz.library.pojo.User;
-import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service

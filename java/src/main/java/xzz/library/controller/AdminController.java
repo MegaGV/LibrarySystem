@@ -152,7 +152,7 @@ public class AdminController {
     //========================================================================================
     @PostMapping("/getUserBookLists")
     @ResponseBody
-    public UserBookListsDto getUserBookLists(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
+    public UserBookListListDto getUserBookLists(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
         return adminService.getUserBookLists(userBookListSearchInfoDto);
     }
 
