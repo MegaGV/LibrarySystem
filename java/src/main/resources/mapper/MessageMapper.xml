@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xzz.library.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="xzz.library.pojo.Message" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from messages
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="xzz.library.pojo.Messages" >
+    insert into messages (id, user_id, title, content, status)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{content,jdbcType=LONGVARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Messages" >
+    update messages
+    set user_id = #{userId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, user_id, title, content, status
+    from messages
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, user_id, title, content, status
+    from messages
+  </select>
+  <select id="getMessagesByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, user_id, title, content, status
+    from messages
+    where user_id = #{userId}
+  </select>
+  <select id="getMessageStatus" resultType="java.lang.String" >
+    select status
+    from message_status
+    where id=#{statusId}
+  </select>
+</mapper>
