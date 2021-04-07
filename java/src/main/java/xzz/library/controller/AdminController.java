@@ -179,4 +179,38 @@ public class AdminController {
     public String updateUserBookList(@RequestBody UserBookList userBookList){
         return adminService.updateUserBookList(userBookList);
     }
+
+    //========================================================================================
+    // Messages
+    // Operations: 获取通知列表、获取通知信息、添加通知、删除通知、更新通知
+    //========================================================================================
+    @PostMapping("/getMessageList")
+    @ResponseBody
+    public MessageListDto getMessageList(@RequestBody MessageSearchInfoDto messageSearchInfoDto){
+        return adminService.getMessageList(messageSearchInfoDto);
+    }
+
+    @GetMapping("/getMessage")
+    @ResponseBody
+    public Message getMessage(String messageId){
+        return adminService.getMessage(messageId);
+    }
+
+    @PostMapping("/addMessage")
+    @ResponseBody
+    public String addMessage(@RequestBody Message message){
+        return adminService.addMessage(message);
+    }
+
+    @PostMapping("/deleteMessage")
+    @ResponseBody
+    public String deleteMessage(@RequestBody String[] ids){
+        return adminService.deleteMessage(ids);
+    }
+
+    @PostMapping("/updateMessage")
+    @ResponseBody
+    public String updateMessage(@RequestBody Message message){
+        return adminService.updateMessage(message);
+    }
 }

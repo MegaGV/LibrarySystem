@@ -1,10 +1,6 @@
 package xzz.library.dto;
 
-
 import xzz.library.pojo.Message;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MessageInfoDto {
     //========================================================================================

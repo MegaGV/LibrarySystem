@@ -44,7 +44,7 @@
     set books = #{books,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="getUserBookList" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="BaseResultMap" >
+  <select id="getUserBookLists" parameterType="xzz.library.dto.UserBookListSearchInfoDto" resultMap="BaseResultMap" >
     select id, user_id, list_name, description, books
     from user_booklist
     <where>

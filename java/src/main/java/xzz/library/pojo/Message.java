@@ -1,6 +1,7 @@
 package xzz.library.pojo;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Message implements Serializable {
 
@@ -15,6 +16,10 @@ public class Message implements Serializable {
     private Integer status;
 
     private static final long serialVersionUID = 1L;
+
+    public void initial(){
+        this.id = UUID.randomUUID().toString();
+    }
 
     public String getId() {
         return id;

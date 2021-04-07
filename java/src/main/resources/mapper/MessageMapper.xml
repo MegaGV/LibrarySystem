@@ -34,7 +34,7 @@
     select id, user_id, title, content, status
     from messages
   </select>
-  <select id="getMessagesByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getMessageListByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select id, user_id, title, content, status
     from messages
     where user_id = #{userId}
@@ -44,4 +44,31 @@
     from message_status
     where id=#{statusId}
   </select>
+  <update id="updateStatus" >
+    update messages
+    set status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getMessageList" parameterType="xzz.library.dto.MessageSearchInfoDto" resultMap="BaseResultMap" >
+    select id, user_id, title, content, status
+    from messages
+    <where>
+      <if test="detail!=null and detail !=''">
+        title like concat("%",#{detail},"%")
+        or content like concat("%",#{detail},"%")
+      </if>
+    </where>
+    limit #{page}, #{limit}
+  </select>
+  <select id="countUserBookList" parameterType="xzz.library.dto.MessageSearchInfoDto" resultMap="java.lang.Integer" >
+    select count(0)
+    from messages
+    <where>
+      <if test="detail!=null and detail !=''">
+        title like concat("%",#{detail},"%")
+        or content like concat("%",#{detail},"%")
+      </if>
+    </where>
+  </select>
+
 </mapper>

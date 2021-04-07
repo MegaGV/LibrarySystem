@@ -67,4 +67,16 @@ public interface AdminService {
 
     String updateUserBookList(UserBookList userBookList);
 
+    //========================================================================================
+    // Messages
+    //========================================================================================
+    MessageListDto getMessageList(MessageSearchInfoDto messageSearchInfoDto);
+
+    Message getMessage(String messageId);
+
+    String addMessage(Message message);
+
+    String deleteMessage(String[] ids);
+
+    String updateMessage(Message message);
 }

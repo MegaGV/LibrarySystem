@@ -25,6 +25,8 @@ public class AdminServiceImpl implements AdminService {
     private FineRecordMapper fineRecordMapper;
     @Autowired
     private UserBookListMapper userBookListMapper;
+    @Autowired
+    private MessageMapper messageMapper;
 
     //========================================================================================
     // Users
@@ -303,12 +305,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    // Records
+    // UerBookLists
     //========================================================================================
     @Override
     public UserBookListsDto getUserBookLists(UserBookListSearchInfoDto userBookListSearchInfoDto) {
         userBookListSearchInfoDto.initial();
-        return new UserBookListsDto(userBookListMapper.getUserBookList(userBookListSearchInfoDto),
+        return new UserBookListsDto(userBookListMapper.getUserBookLists(userBookListSearchInfoDto),
                 userBookListMapper.countUserBookList(userBookListSearchInfoDto));
     }
 
@@ -365,6 +367,72 @@ public class AdminServiceImpl implements AdminService {
         }catch (Exception e){
             e.printStackTrace();
             return "修改书单失败";
+        }
+    }
+
+    //========================================================================================
+    // Messages
+    //========================================================================================
+    @Override
+    public MessageListDto getMessageList(MessageSearchInfoDto messageSearchInfoDto) {
+        messageSearchInfoDto.initial();
+        return new MessageListDto(messageMapper.getMessageList(messageSearchInfoDto),
+                messageMapper.countMessage(messageSearchInfoDto));
+    }
+
+    @Override
+    public Message getMessage(String messageId) {
+        return messageMapper.selectByPrimaryKey(messageId);
+    }
+
+    @Override
+    @Transactional
+    public String addMessage(Message message) {
+        if (message == null)
+            return "通知错误";
+        message.initial();
+        while (messageMapper.selectByPrimaryKey(message.getId()) != null)
+            message.setId(UUID.randomUUID().toString());
+
+        try {
+            messageMapper.insert(message);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "通知添加失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteMessage(String[] ids) {
+        if (ids == null)
+            return "通知错误";
+        if (ids.length == 0)
+            return "无选中通知";
+
+        try {
+            for (String id : ids)
+                messageMapper.deleteByPrimaryKey(id);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "删除通知失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateMessage(Message message) {
+        if(message == null)
+            return "通知错误";
+
+        try{
+            messageMapper.updateByPrimaryKey(message);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "修改通知失败";
         }
     }
 }
