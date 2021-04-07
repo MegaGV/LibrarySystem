@@ -6,7 +6,7 @@ import xzz.library.pojo.UserBookList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserBookListDto {
+public class UserBookListInfoDto {
     //========================================================================================
     // Description: 后端返回到前端的书单信息类
     //========================================================================================
@@ -20,7 +20,7 @@ public class UserBookListDto {
 
     private List<Book> bookList;
 
-    public UserBookListDto(UserBookList userBookList){
+    public UserBookListInfoDto(UserBookList userBookList){
         this.id = userBookList.getId();
         this.userId = userBookList.getUserId();
         this.listName = userBookList.getListName();

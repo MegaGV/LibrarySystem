@@ -308,9 +308,9 @@ public class AdminServiceImpl implements AdminService {
     // UerBookLists
     //========================================================================================
     @Override
-    public UserBookListsDto getUserBookLists(UserBookListSearchInfoDto userBookListSearchInfoDto) {
+    public UserBookListListDto getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto) {
         userBookListSearchInfoDto.initial();
-        return new UserBookListsDto(userBookListMapper.getUserBookLists(userBookListSearchInfoDto),
+        return new UserBookListListDto(userBookListMapper.getUserBookListList(userBookListSearchInfoDto),
                 userBookListMapper.countUserBookList(userBookListSearchInfoDto));
     }
 

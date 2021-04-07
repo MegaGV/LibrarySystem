@@ -150,10 +150,10 @@ public class AdminController {
     // UserBookList
     // Operations: 获取书单列表、获取书单信息、添加书单、删除书单、更新书单
     //========================================================================================
-    @PostMapping("/getUserBookLists")
+    @PostMapping("/getUserBookListList")
     @ResponseBody
-    public UserBookListsDto getUserBookLists(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
-        return adminService.getUserBookLists(userBookListSearchInfoDto);
+    public UserBookListListDto getUserBookListList(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
+        return adminService.getUserBookListList(userBookListSearchInfoDto);
     }
 
     @GetMapping("/getUserBookList")

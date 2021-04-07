@@ -57,7 +57,7 @@ public interface AdminService {
     //========================================================================================
     // UserBookLists
     //========================================================================================
-    UserBookListsDto getUserBookLists(UserBookListSearchInfoDto userBookListSearchInfoDto);
+    UserBookListListDto getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto);
 
     UserBookList getUserBookList(String userBookListId);
 
