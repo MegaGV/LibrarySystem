@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-03-31 17:49:25
+Date: 2021-04-06 18:57:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -206,6 +206,39 @@ INSERT INTO `fine_records` VALUES ('0acfe137-17d4-4f01-81c2-5e12d398bc90', '92ce
 INSERT INTO `fine_records` VALUES ('9e8b2aff-829d-4ad9-a7f7-09dbc8ffa8c9', '92ce0faa-3bde-4df1-82aa-69991773dbab', '8ca67071-ba53-4c58-b8df-2c4273a297c5', '1098915e-1f21-4438-972b-be917c6b529c', '30', '8.40');
 
 -- ----------------------------
+-- Table structure for messages
+-- ----------------------------
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of messages
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for message_status
+-- ----------------------------
+DROP TABLE IF EXISTS `message_status`;
+CREATE TABLE `message_status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of message_status
+-- ----------------------------
+INSERT INTO `message_status` VALUES ('0', '未读');
+INSERT INTO `message_status` VALUES ('1', '已读');
+
+-- ----------------------------
 -- Table structure for return_records
 -- ----------------------------
 DROP TABLE IF EXISTS `return_records`;
@@ -311,7 +344,7 @@ CREATE TABLE `user_booklist` (
 -- ----------------------------
 INSERT INTO `user_booklist` VALUES ('1462813a-b9d7-46b1-aecf-47ba91db5fd9', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '我的书单', '我的第一个书单', '028cef-82e5-44c8-b69b-222df8043d12,0157096e-b13f-4860-911e-20efbcd5f5df');
 INSERT INTO `user_booklist` VALUES ('1462813a-b9d7-46b1-aecf-47ca13db5fd9', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '空书单', '', '');
-INSERT INTO `user_booklist` VALUES ('9a89a47b-c7e3-4551-a8e9-0828758a1e9c', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'LongList', '', '0157096e-b13f-4860-911e-20efbcd5f5df,02810cef-82e5-44c8-b69b-222df8043d12,02b68328-2337-41ca-969d-ba19326faecc,03fb7786-6f82-496c-b157-adb8e904fbbf,045740ce-efb9-4a51-8e77-6970f47e8748,05cf259f-62e5-4512-9e72-44973090e4af,0ba06ded-0612-419a-8b4e-ae0bdfc61729,0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d,14315e47-c398-47d1-b297-2ac8401dc14e,2257cbed-e9f3-4207-a409-54879296169b');
+INSERT INTO `user_booklist` VALUES ('9a89a47b-c7e3-4551-a8e9-0828758a1e9c', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '满书单', '', '0157096e-b13f-4860-911e-20efbcd5f5df,02810cef-82e5-44c8-b69b-222df8043d12,02b68328-2337-41ca-969d-ba19326faecc,03fb7786-6f82-496c-b157-adb8e904fbbf,045740ce-efb9-4a51-8e77-6970f47e8748,05cf259f-62e5-4512-9e72-44973090e4af,0ba06ded-0612-419a-8b4e-ae0bdfc61729,0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d,14315e47-c398-47d1-b297-2ac8401dc14e,2257cbed-e9f3-4207-a409-54879296169b');
 INSERT INTO `user_booklist` VALUES ('cd1a6031-1676-496f-bfb0-80e40c022e13', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'MyBookList', 'MyBookList is here', '0157096e-b13f-4860-911e-20efbcd5f5df');
 
 -- ----------------------------

@@ -23,7 +23,7 @@ public class UserBookListServiceImpl implements UserBookListService {
     private UserBookListMapper userBookListMapper;
 
     @Override
-    public UserBookListListDto getUserBookLists(String userId) {
+    public UserBookListListDto getUserBookListList(String userId) {
         return new UserBookListListDto(userBookListMapper.getBookListsByUserid(userId));
     }
 

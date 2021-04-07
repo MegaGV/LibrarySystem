@@ -5,7 +5,7 @@ import xzz.library.dto.UserBookListListDto;
 import xzz.library.pojo.UserBookList;
 
 public interface UserBookListService {
-    UserBookListListDto getUserBookLists(String userId);
+    UserBookListListDto getUserBookListList(String userId);
 
     UserBookListInfoDto getUserBookList(String bookListId);
 

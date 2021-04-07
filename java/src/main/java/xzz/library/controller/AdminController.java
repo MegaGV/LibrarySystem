@@ -150,10 +150,10 @@ public class AdminController {
     // UserBookList
     // Operations: 获取书单列表、获取书单信息、添加书单、删除书单、更新书单
     //========================================================================================
-    @PostMapping("/getUserBookLists")
+    @PostMapping("/getUserBookListList")
     @ResponseBody
-    public UserBookListListDto getUserBookLists(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
-        return adminService.getUserBookLists(userBookListSearchInfoDto);
+    public UserBookListListDto getUserBookListList(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
+        return adminService.getUserBookListList(userBookListSearchInfoDto);
     }
 
     @GetMapping("/getUserBookList")
@@ -178,5 +178,39 @@ public class AdminController {
     @ResponseBody
     public String updateUserBookList(@RequestBody UserBookList userBookList){
         return adminService.updateUserBookList(userBookList);
+    }
+
+    //========================================================================================
+    // Messages
+    // Operations: 获取通知列表、获取通知信息、添加通知、删除通知、更新通知
+    //========================================================================================
+    @PostMapping("/getMessageList")
+    @ResponseBody
+    public MessageListDto getMessageList(@RequestBody MessageSearchInfoDto messageSearchInfoDto){
+        return adminService.getMessageList(messageSearchInfoDto);
+    }
+
+    @GetMapping("/getMessage")
+    @ResponseBody
+    public Message getMessage(String messageId){
+        return adminService.getMessage(messageId);
+    }
+
+    @PostMapping("/addMessage")
+    @ResponseBody
+    public String addMessage(@RequestBody Message message){
+        return adminService.addMessage(message);
+    }
+
+    @PostMapping("/deleteMessage")
+    @ResponseBody
+    public String deleteMessage(@RequestBody String[] ids){
+        return adminService.deleteMessage(ids);
+    }
+
+    @PostMapping("/updateMessage")
+    @ResponseBody
+    public String updateMessage(@RequestBody Message message){
+        return adminService.updateMessage(message);
     }
 }

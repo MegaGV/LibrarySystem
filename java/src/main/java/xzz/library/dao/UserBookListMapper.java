@@ -21,7 +21,7 @@ public interface UserBookListMapper {
 
     void updateBooksByPrimaryKey(@Param("id") String id, @Param("books")  String books);
 
-    List<UserBookList> getUserBookList(UserBookListSearchInfoDto userBookListSearchInfoDto);
+    List<UserBookList> getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto);
 
     int countUserBookList(UserBookListSearchInfoDto userBookListSearchInfoDto);
 }

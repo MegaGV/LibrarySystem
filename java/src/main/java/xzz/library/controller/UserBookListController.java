@@ -19,10 +19,10 @@ public class UserBookListController {
     @Autowired
     private UserBookListService userBookListService;
 
-    @GetMapping("/getUserBookLists")
+    @GetMapping("/getUserBookListList")
     @ResponseBody
-    public UserBookListListDto getUserBookLists(String userId){
-        return userBookListService.getUserBookLists(userId);
+    public UserBookListListDto getUserBookListList(String userId){
+        return userBookListService.getUserBookListList(userId);
     }
 
     @GetMapping("/getUserBookList")
