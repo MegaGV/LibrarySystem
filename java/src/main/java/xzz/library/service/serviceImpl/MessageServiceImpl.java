@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.MessageMapper;
-import xzz.library.dto.MessageInfoDto;
-import xzz.library.dto.MessageListDto;
+import xzz.library.dto.info.MessageInfoDto;
+import xzz.library.dto.list.MessageListDto;
 import xzz.library.pojo.Message;
 import xzz.library.service.MessageService;
 
@@ -15,7 +15,7 @@ public class MessageServiceImpl implements MessageService {
     private MessageMapper messageMapper;
 
     @Override
-    public MessageListDto getMessageList(String userId) {
+    public MessageListDto getMessages(String userId) {
         return new MessageListDto(messageMapper.getMessageListByUserid(userId));
     }
 

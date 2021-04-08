@@ -1,4 +1,4 @@
-package xzz.library.dto;
+package xzz.library.dto.list;
 
 import xzz.library.pojo.UserBookList;
 

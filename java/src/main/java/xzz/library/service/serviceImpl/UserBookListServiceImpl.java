@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.BookMapper;
 import xzz.library.dao.UserBookListMapper;
-import xzz.library.dto.*;
+import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.UserBookListListDto;
 import xzz.library.pojo.Book;
 import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserBookListService;
 import xzz.library.util.StringListUtils;
 
 import java.util.UUID;
-
 
 @Service
 public class UserBookListServiceImpl implements UserBookListService {
@@ -23,7 +23,7 @@ public class UserBookListServiceImpl implements UserBookListService {
     private UserBookListMapper userBookListMapper;
 
     @Override
-    public UserBookListListDto getUserBookListList(String userId) {
+    public UserBookListListDto getUserBookLists(String userId) {
         return new UserBookListListDto(userBookListMapper.getBookListsByUserid(userId));
     }
 

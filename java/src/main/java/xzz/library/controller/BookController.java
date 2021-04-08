@@ -3,9 +3,9 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.BookTypeListDto;
-import xzz.library.dto.BooksListDto;
-import xzz.library.dto.BooksSearchInfoDto;
+import xzz.library.dto.list.BookTypeListDto;
+import xzz.library.dto.list.BookListDto;
+import xzz.library.dto.search.BookSearchDto;
 import xzz.library.pojo.Book;
 import xzz.library.service.BookService;
 
@@ -19,10 +19,10 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/getBookList")
+    @PostMapping("/getBooks")
     @ResponseBody
-    public BooksListDto getBookList(@RequestBody BooksSearchInfoDto booksSearchInfoDto){
-        return bookService.getBookList(booksSearchInfoDto);
+    public BookListDto getBooks(@RequestBody BookSearchDto bookSearchDto){
+        return bookService.getBooks(bookSearchDto);
     }
 
     @GetMapping("/getBookDetail")

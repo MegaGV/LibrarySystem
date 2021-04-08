@@ -1,25 +1,23 @@
-package xzz.library.dto;
-
-import xzz.library.pojo.Message;
+package xzz.library.dto.list;
 
 import java.util.List;
 
-public class MessageListDto {
+public class RecordListDto {
     //========================================================================================
-    // Description: 后端返回到前端的通知列表类
+    // Description: 后端返回到前端的记录列表类
     //========================================================================================
     private Integer total;
 
-    private List<Message> data;
+    private List data;
 
-    public MessageListDto(List<Message> messages, int total){
-        this.data = messages;
+    public RecordListDto(List data, int total){
+        this.data = data;
         this.total = total;
     }
 
-    public MessageListDto(List<Message> messages){
-        this.data = messages;
-        this.total = messages.size();
+    public RecordListDto(List data){
+        this.data = data;
+        this.total = data.size();
     }
 
     public Integer getTotal() {
@@ -30,11 +28,11 @@ public class MessageListDto {
         this.total = total;
     }
 
-    public List<Message> getData() {
+    public List getData() {
         return data;
     }
 
-    public void setData(List<Message> data) {
+    public void setData(List data) {
         this.data = data;
     }
 }

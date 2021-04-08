@@ -12,12 +12,12 @@
     delete from messages
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="xzz.library.pojo.Messages" >
+  <insert id="insert" parameterType="xzz.library.pojo.Message" >
     insert into messages (id, user_id, title, content, status)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
       #{content,jdbcType=LONGVARCHAR}, #{status,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Messages" >
+  <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Message" >
     update messages
     set user_id = #{userId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
@@ -49,7 +49,7 @@
     set status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="getMessageList" parameterType="xzz.library.dto.MessageSearchInfoDto" resultMap="BaseResultMap" >
+  <select id="getMessages" parameterType="xzz.library.dto.search.MessageSearchDto" resultMap="BaseResultMap" >
     select id, user_id, title, content, status
     from messages
     <where>
@@ -57,16 +57,22 @@
         title like concat("%",#{detail},"%")
         or content like concat("%",#{detail},"%")
       </if>
+      <if test="userId!=null and userId!=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
     </where>
     limit #{page}, #{limit}
   </select>
-  <select id="countUserBookList" parameterType="xzz.library.dto.MessageSearchInfoDto" resultMap="java.lang.Integer" >
+  <select id="countUserBookList" parameterType="xzz.library.dto.search.MessageSearchDto" resultMap="java.lang.Integer" >
     select count(0)
     from messages
     <where>
       <if test="detail!=null and detail !=''">
         title like concat("%",#{detail},"%")
         or content like concat("%",#{detail},"%")
+      </if>
+      <if test="userId!=null and userId!=''">
+        and user_id like concat("%",#{userId},"%")
       </if>
     </where>
   </select>

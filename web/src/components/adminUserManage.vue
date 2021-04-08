@@ -127,6 +127,10 @@ export default {
             addFormVisible: false,
             total:0,
             searchForm:{
+                userName:"",
+                nickName:"",
+                roleStr:"",
+                statusStr:"",
                 limit:5,
                 page:1
             },
@@ -204,7 +208,8 @@ export default {
             this.getUsers();
         },
         getUsers(){
-            this.$axios.get('api/library/admin/getUsers?limit=' + this.searchForm.limit + "&page=" + this.searchForm.page)
+            this.$axios
+            .post('api/library/admin/getUsers', this.searchForm)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取用户列表失败");

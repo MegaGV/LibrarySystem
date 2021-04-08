@@ -1,6 +1,7 @@
 package xzz.library.service;
 
-import xzz.library.dto.*;
+import xzz.library.dto.list.*;
+import xzz.library.dto.search.*;
 import xzz.library.pojo.*;
 
 public interface AdminService {
@@ -8,7 +9,7 @@ public interface AdminService {
     //========================================================================================
     // Users
     //========================================================================================
-    UsersListDto getUsers(Integer limit, Integer page);
+    UserListDto getUsers(UserSearchDto userSearchDto);
 
     User getUser(String userId);
 
@@ -21,7 +22,7 @@ public interface AdminService {
     //========================================================================================
     // Books
     //========================================================================================
-    BooksListDto getBooks(BooksSearchInfoDto booksSearchInfoDto);
+    BookListDto getBooks(BookSearchDto bookSearchDto);
 
     Book getBook(String bookId);
 
@@ -34,7 +35,7 @@ public interface AdminService {
     //========================================================================================
     // Records
     //========================================================================================
-    RecordsListDto getRecords(Integer limit, Integer page, String recordType);
+    RecordListDto getRecords(RecordSearchDto recordSearchDto);
 
     BorrowRecord getBR(String borrowId);
 
@@ -57,7 +58,7 @@ public interface AdminService {
     //========================================================================================
     // UserBookLists
     //========================================================================================
-    UserBookListListDto getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto);
+    UserBookListListDto getUserBookLists(UserBookListSearchDto userBookListSearchDto);
 
     UserBookList getUserBookList(String userBookListId);
 
@@ -70,7 +71,7 @@ public interface AdminService {
     //========================================================================================
     // Messages
     //========================================================================================
-    MessageListDto getMessageList(MessageSearchInfoDto messageSearchInfoDto);
+    MessageListDto getMessages(MessageSearchDto messageSearchDto);
 
     Message getMessage(String messageId);
 

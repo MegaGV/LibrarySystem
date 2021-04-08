@@ -1,11 +1,11 @@
 package xzz.library.service;
 
-import xzz.library.dto.UserBookListInfoDto;
-import xzz.library.dto.UserBookListListDto;
+import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.UserBookListListDto;
 import xzz.library.pojo.UserBookList;
 
 public interface UserBookListService {
-    UserBookListListDto getUserBookListList(String userId);
+    UserBookListListDto getUserBookLists(String userId);
 
     UserBookListInfoDto getUserBookList(String bookListId);
 

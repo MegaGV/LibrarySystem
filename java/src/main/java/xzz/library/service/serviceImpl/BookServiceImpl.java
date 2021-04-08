@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.*;
-import xzz.library.dto.BookTypeListDto;
-import xzz.library.pojo.BookType;
-import xzz.library.dto.BooksListDto;
-import xzz.library.dto.BooksSearchInfoDto;
+import xzz.library.dto.list.BookTypeListDto;
+import xzz.library.dto.list.BookListDto;
+import xzz.library.dto.search.BookSearchDto;
 import xzz.library.pojo.*;
 import xzz.library.service.BookService;
 
@@ -31,9 +30,9 @@ public class BookServiceImpl implements BookService {
     private ClassificationMapper classificationMapper;
 
     @Override
-    public BooksListDto getBookList(BooksSearchInfoDto booksSearchInfoDto) {
-        booksSearchInfoDto.initial();
-        return new BooksListDto(bookMapper.getBookList(booksSearchInfoDto),bookMapper.countBook(booksSearchInfoDto));
+    public BookListDto getBooks(BookSearchDto bookSearchDto) {
+        bookSearchDto.initial();
+        return new BookListDto(bookMapper.getBooks(bookSearchDto),bookMapper.countBook(bookSearchDto));
     }
 
     @Override

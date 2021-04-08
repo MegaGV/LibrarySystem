@@ -3,7 +3,8 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.*;
+import xzz.library.dto.list.*;
+import xzz.library.dto.search.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 
@@ -18,10 +19,10 @@ public class AdminController {
     // Users
     // Operations: 获取用户列表、获取用户信息、添加用户、删除用户、更新用户
     //========================================================================================
-    @GetMapping("/getUsers")
+    @PostMapping("/getUsers")
     @ResponseBody
-    public UsersListDto getUsers(Integer limit, Integer page){
-        return adminService.getUsers(limit, page);
+    public UserListDto getUsers(@RequestBody UserSearchDto userSearchDto){
+        return adminService.getUsers(userSearchDto);
     }
 
     @GetMapping("/getUser")
@@ -54,8 +55,8 @@ public class AdminController {
     //========================================================================================
     @PostMapping("/getBooks")
     @ResponseBody
-    public BooksListDto getBooks(@RequestBody BooksSearchInfoDto booksSearchInfoDto){
-        return adminService.getBooks(booksSearchInfoDto);
+    public BookListDto getBooks(@RequestBody BookSearchDto bookSearchDto){
+        return adminService.getBooks(bookSearchDto);
     }
 
     @GetMapping("/getBook")
@@ -86,10 +87,10 @@ public class AdminController {
     // Records
     // Operations: 获取记录列表、获取记录、删除记录、更新记录(除列表外均按种类单独一个函数)
     //========================================================================================
-    @GetMapping("/getRecords")
+    @PostMapping("/getRecords")
     @ResponseBody
-    public RecordsListDto getRecords(Integer limit, Integer page, String recordType){
-        return adminService.getRecords(limit, page, recordType);
+    public RecordListDto getRecords(@RequestBody RecordSearchDto recordSearchDto){
+        return adminService.getRecords(recordSearchDto);
     }
 
     @GetMapping("/getBR")
@@ -150,10 +151,10 @@ public class AdminController {
     // UserBookList
     // Operations: 获取书单列表、获取书单信息、添加书单、删除书单、更新书单
     //========================================================================================
-    @PostMapping("/getUserBookListList")
+    @PostMapping("/getUserBookLists")
     @ResponseBody
-    public UserBookListListDto getUserBookListList(@RequestBody UserBookListSearchInfoDto userBookListSearchInfoDto){
-        return adminService.getUserBookListList(userBookListSearchInfoDto);
+    public UserBookListListDto getUserBookLists(@RequestBody UserBookListSearchDto userBookListSearchDto){
+        return adminService.getUserBookLists(userBookListSearchDto);
     }
 
     @GetMapping("/getUserBookList")
@@ -184,10 +185,10 @@ public class AdminController {
     // Messages
     // Operations: 获取通知列表、获取通知信息、添加通知、删除通知、更新通知
     //========================================================================================
-    @PostMapping("/getMessageList")
+    @PostMapping("/getMessages")
     @ResponseBody
-    public MessageListDto getMessageList(@RequestBody MessageSearchInfoDto messageSearchInfoDto){
-        return adminService.getMessageList(messageSearchInfoDto);
+    public MessageListDto getMessages(@RequestBody MessageSearchDto messageSearchDto){
+        return adminService.getMessages(messageSearchDto);
     }
 
     @GetMapping("/getMessage")

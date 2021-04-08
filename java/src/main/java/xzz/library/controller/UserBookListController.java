@@ -3,8 +3,8 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.UserBookListInfoDto;
-import xzz.library.dto.UserBookListListDto;
+import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.UserBookListListDto;
 import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserBookListService;
 
@@ -19,10 +19,10 @@ public class UserBookListController {
     @Autowired
     private UserBookListService userBookListService;
 
-    @GetMapping("/getUserBookListList")
+    @GetMapping("/getUserBookLists")
     @ResponseBody
-    public UserBookListListDto getUserBookListList(String userId){
-        return userBookListService.getUserBookListList(userId);
+    public UserBookListListDto getUserBookLists(String userId){
+        return userBookListService.getUserBookLists(userId);
     }
 
     @GetMapping("/getUserBookList")

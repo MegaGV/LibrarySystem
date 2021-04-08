@@ -1,10 +1,10 @@
-package xzz.library.dto;
+package xzz.library.dto.search;
 
-public class UserBookListSearchInfoDto {
+public class MessageSearchDto {
     //========================================================================================
-    // Description: 前端发送到后端形成的书单检索类
+    // Description: 前端发送到后端形成的通知检索类
     //========================================================================================
-    private String listName;
+    private String detail;
 
     private String userId;
 
@@ -22,12 +22,12 @@ public class UserBookListSearchInfoDto {
             this.page = (this.page - 1) * this.limit;
     }
 
-    public String getListName() {
-        return listName;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setListName(String listName) {
-        this.listName = listName;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public String getUserId() {

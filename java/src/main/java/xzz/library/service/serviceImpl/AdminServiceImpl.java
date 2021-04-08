@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.*;
-import xzz.library.dto.*;
+import xzz.library.dto.list.*;
+import xzz.library.dto.search.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 import xzz.library.util.MD5Utils;
@@ -32,12 +33,13 @@ public class AdminServiceImpl implements AdminService {
     // Users
     //========================================================================================
     @Override
-    public UsersListDto getUsers(Integer limit, Integer page) {
-        if (limit == null)
-            limit = 5;
-        int start = page == null ? 0 : (page - 1) * limit;
-
-        return new UsersListDto(userMapper.getUsers(limit, start), userMapper.countUsers());
+    public UserListDto getUsers(UserSearchDto userSearchDto) {
+        userSearchDto.initial();
+        if (userSearchDto.getRoleStr() != null && !userSearchDto.getRoleStr().isEmpty())
+            userSearchDto.setRole(userMapper.getRoleId(userSearchDto.getRoleStr()));
+        if (userSearchDto.getStatusStr() != null && !userSearchDto.getStatusStr().isEmpty())
+            userSearchDto.setStatus(userMapper.getStatusId(userSearchDto.getStatusStr()));
+        return new UserListDto(userMapper.getUsers(userSearchDto), userMapper.countUsers(userSearchDto));
     }
 
     @Override
@@ -106,9 +108,9 @@ public class AdminServiceImpl implements AdminService {
     // Books
     //========================================================================================
     @Override
-    public BooksListDto getBooks(BooksSearchInfoDto booksSearchInfoDto) {
-        booksSearchInfoDto.initial();
-        return new BooksListDto(bookMapper.getBookList(booksSearchInfoDto),bookMapper.countBook(booksSearchInfoDto));
+    public BookListDto getBooks(BookSearchDto bookSearchDto) {
+        bookSearchDto.initial();
+        return new BookListDto(bookMapper.getBooks(bookSearchDto),bookMapper.countBook(bookSearchDto));
     }
 
     @Override
@@ -171,20 +173,22 @@ public class AdminServiceImpl implements AdminService {
     // Records
     //========================================================================================
     @Override
-    public RecordsListDto getRecords(Integer limit, Integer page, String recordType){
-        if (limit == null)
-            limit = 5;
-        int start = page == null ? 0 : (page - 1) * limit;
-        switch (recordType){
+    public RecordListDto getRecords(RecordSearchDto recordSearchDto){
+        recordSearchDto.initial();
+        switch (recordSearchDto.getRecordType()){
             case "borrow" :
-                return new RecordsListDto(borrowRecordMapper.getRecords(limit, start),
-                        borrowRecordMapper.countRecords());
+                if (recordSearchDto.getStatusStr() != null && !recordSearchDto.getStatusStr().isEmpty())
+                    recordSearchDto.setStatus(borrowRecordMapper.getStatusId(recordSearchDto.getStatusStr()));
+                return new RecordListDto(borrowRecordMapper.getRecords(recordSearchDto),
+                        borrowRecordMapper.countRecords(recordSearchDto));
             case "return":
-                return new RecordsListDto(returnRecordMapper.getRecords(limit, start),
-                        returnRecordMapper.countRecords());
+                if (recordSearchDto.getStatusStr() != null && !recordSearchDto.getStatusStr().isEmpty())
+                    recordSearchDto.setStatus(returnRecordMapper.getStatusId(recordSearchDto.getStatusStr()));
+                return new RecordListDto(returnRecordMapper.getRecords(recordSearchDto),
+                        returnRecordMapper.countRecords(recordSearchDto));
             case "fine":
-                return new RecordsListDto(fineRecordMapper.getRecords(limit, start),
-                        fineRecordMapper.countRecords());
+                return new RecordListDto(fineRecordMapper.getRecords(recordSearchDto),
+                        fineRecordMapper.countRecords(recordSearchDto));
             default:
         }
         return null;
@@ -308,10 +312,10 @@ public class AdminServiceImpl implements AdminService {
     // UerBookLists
     //========================================================================================
     @Override
-    public UserBookListListDto getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto) {
-        userBookListSearchInfoDto.initial();
-        return new UserBookListListDto(userBookListMapper.getUserBookListList(userBookListSearchInfoDto),
-                userBookListMapper.countUserBookList(userBookListSearchInfoDto));
+    public UserBookListListDto getUserBookLists(UserBookListSearchDto userBookListSearchDto) {
+        userBookListSearchDto.initial();
+        return new UserBookListListDto(userBookListMapper.getUserBookLists(userBookListSearchDto),
+                userBookListMapper.countUserBookList(userBookListSearchDto));
     }
 
     @Override
@@ -374,10 +378,10 @@ public class AdminServiceImpl implements AdminService {
     // Messages
     //========================================================================================
     @Override
-    public MessageListDto getMessageList(MessageSearchInfoDto messageSearchInfoDto) {
-        messageSearchInfoDto.initial();
-        return new MessageListDto(messageMapper.getMessageList(messageSearchInfoDto),
-                messageMapper.countMessage(messageSearchInfoDto));
+    public MessageListDto getMessages(MessageSearchDto messageSearchDto) {
+        messageSearchDto.initial();
+        return new MessageListDto(messageMapper.getMessages(messageSearchDto),
+                messageMapper.countMessage(messageSearchDto));
     }
 
     @Override

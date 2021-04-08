@@ -2,13 +2,10 @@ package xzz.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import xzz.library.dto.BorrowRecordListDto;
-import xzz.library.dto.RecordsListDto;
-import xzz.library.dto.ReturnRecordListDto;
+import org.springframework.web.bind.annotation.*;
+import xzz.library.dto.list.BorrowRecordListDto;
+import xzz.library.dto.list.RecordListDto;
+import xzz.library.dto.list.ReturnRecordListDto;
 import xzz.library.pojo.FineRecord;
 import xzz.library.service.RecordService;
 
@@ -24,7 +21,7 @@ public class RecordController {
 
     @GetMapping("/getRecords")
     @ResponseBody
-    public RecordsListDto getRecords(String userId, String recordType){
+    public RecordListDto getRecords(String userId, String recordType){
         return recordService.getRecords(userId, recordType);
     }
 

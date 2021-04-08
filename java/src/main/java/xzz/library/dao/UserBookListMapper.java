@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import org.apache.ibatis.annotations.Param;
-import xzz.library.dto.UserBookListSearchInfoDto;
+import xzz.library.dto.search.UserBookListSearchDto;
 import xzz.library.pojo.UserBookList;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public interface UserBookListMapper {
 
     void updateBooksByPrimaryKey(@Param("id") String id, @Param("books")  String books);
 
-    List<UserBookList> getUserBookListList(UserBookListSearchInfoDto userBookListSearchInfoDto);
+    List<UserBookList> getUserBookLists(UserBookListSearchDto userBookListSearchDto);
 
-    int countUserBookList(UserBookListSearchInfoDto userBookListSearchInfoDto);
+    int countUserBookList(UserBookListSearchDto userBookListSearchDto);
 }

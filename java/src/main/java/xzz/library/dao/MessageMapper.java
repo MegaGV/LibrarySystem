@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import org.apache.ibatis.annotations.Param;
-import xzz.library.dto.MessageSearchInfoDto;
+import xzz.library.dto.search.MessageSearchDto;
 import xzz.library.pojo.Message;
 
 import java.util.List;
@@ -23,8 +23,8 @@ public interface MessageMapper {
 
     void updateStatus(@Param("id") String id, @Param("status") Integer status);
 
-    List<Message> getMessageList(MessageSearchInfoDto messageSearchInfoDto);
+    List<Message> getMessages(MessageSearchDto messageSearchDto);
 
-    int countMessage(MessageSearchInfoDto messageSearchInfoDto);
+    int countMessage(MessageSearchDto messageSearchDto);
 
 }

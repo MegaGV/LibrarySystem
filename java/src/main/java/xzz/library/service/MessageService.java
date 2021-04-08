@@ -1,10 +1,10 @@
 package xzz.library.service;
 
-import xzz.library.dto.MessageInfoDto;
-import xzz.library.dto.MessageListDto;
+import xzz.library.dto.info.MessageInfoDto;
+import xzz.library.dto.list.MessageListDto;
 
 public interface MessageService {
-    MessageListDto getMessageList(String userId);
+    MessageListDto getMessages(String userId);
 
     MessageInfoDto getMessage(String userId, String messageId);
 

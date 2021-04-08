@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import xzz.library.dto.search.RecordSearchDto;
 import xzz.library.pojo.ReturnRecord;
 
 public interface ReturnRecordMapper {
@@ -19,7 +19,9 @@ public interface ReturnRecordMapper {
 
     String getReturnRecordStatus(Integer statusId);
 
-    List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
+    List<ReturnRecord> getRecords(RecordSearchDto recordSearchDto);
 
-    int countRecords();
+    int countRecords(RecordSearchDto recordSearchDto);
+
+    Integer getStatusId(String statusStr);
 }

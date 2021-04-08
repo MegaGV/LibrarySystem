@@ -87,6 +87,9 @@ export default {
             FormVisible: false,
             total:0,
             searchForm:{
+                recordType:"borrow",
+                userId:"",
+                statusStr:"",
                 limit:5,
                 page:1,
             },
@@ -116,20 +119,21 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
-        this.getRecords('borrow');
+        this.getRecords();
     },
     methods:{
         handleSizeChange(val) {
             this.searchForm.limit = val;
             this.searchForm.page=1;
-            this.getRecords('borrow');
+            this.getRecords();
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
-            this.getRecords('borrow');
+            this.getRecords();
         },
-        getRecords(recordType){
-            this.$axios.get('api/library/admin/getRecords?limit=' + this.searchForm.limit + "&page=" + this.searchForm.page +  "&recordType=" + recordType)
+        getRecords(){
+            this.$axios
+            .post('api/library/admin/getRecords', this.searchForm)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取借阅记录列表失败");
@@ -176,7 +180,7 @@ export default {
                          message: '归还成功',
                          type: 'success'
                     });
-                    this.getRecords('borrow');
+                    this.getRecords();
                 }
                 else{
                     this.$message.error(res.data);

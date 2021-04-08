@@ -1,23 +1,25 @@
-package xzz.library.dto;
+package xzz.library.dto.list;
+
+import xzz.library.pojo.Book;
 
 import java.util.List;
 
-public class RecordsListDto {
+public class BookListDto {
     //========================================================================================
-    // Description: 后端返回到前端的记录列表类
+    // Description: 后端返回到前端的图书列表类
     //========================================================================================
     private Integer total;
 
-    private List data;
+    private List<Book> data;
 
-    public RecordsListDto(List data, int total){
-        this.data = data;
+    public BookListDto(List<Book> books, int total){
+        this.data = books;
         this.total = total;
     }
 
-    public RecordsListDto(List data){
-        this.data = data;
-        this.total = data.size();
+    public BookListDto(List<Book> books){
+        this.data = books;
+        this.total = books.size();
     }
 
     public Integer getTotal() {
@@ -28,11 +30,11 @@ public class RecordsListDto {
         this.total = total;
     }
 
-    public List getData() {
+    public List<Book> getData() {
         return data;
     }
 
-    public void setData(List data) {
+    public void setData(List<Book> data) {
         this.data = data;
     }
 }

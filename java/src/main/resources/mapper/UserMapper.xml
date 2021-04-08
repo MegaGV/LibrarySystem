@@ -58,18 +58,56 @@
     from `role`
     where id=#{roleId}
   </select>
+  <select id="getStatusId" resultType="java.lang.Integer" >
+    select id
+    from user_status
+    where status=#{statusStr}
+  </select>
+  <select id="getRoleId" resultType="java.lang.Integer" >
+    select id
+    from `role`
+    where `role`=#{roleStr}
+  </select>
   <update id="updatePassword">
     update users
     set password = #{newPassword}
     where id=#{id}
   </update>
-  <select id="getUsers" resultMap="BaseResultMap" >
+  <select id="getUsers" resultMap="BaseResultMap" parameterType="xzz.library.dto.search.UserSearchDto" >
     select id, username, password, nickname, `role`, borrowed, status, balance
     from users
-    limit #{start}, #{limit}
+    <where>
+      <if test="userName!=null and userName !=''">
+        username like concat("%",#{userName},"%")
+      </if>
+      <if test="nickName!=null and nickName !=''">
+        and nickname like concat("%",#{nickName},"%")
+      </if>
+      <if test="status!=null">
+        and status = #{status}
+      </if>
+      <if test="role!=null">
+        and `role` = #{role}
+      </if>
+    </where>
+    limit #{page}, #{limit}
   </select>
   <select id="countUsers" resultType="java.lang.Integer">
     select count(0)
     from users
+    <where>
+      <if test="userName!=null and userName !=''">
+        username like concat("%",#{userName},"%")
+      </if>
+      <if test="nickName!=null and nickName !=''">
+        and nickname like concat("%",#{nickName},"%")
+      </if>
+      <if test="status!=null">
+        and status = #{status}
+      </if>
+      <if test="role!=null">
+        and `role` = #{role}
+      </if>
+    </where>
   </select>
 </mapper>

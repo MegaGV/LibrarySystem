@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import xzz.library.dto.search.RecordSearchDto;
 import xzz.library.pojo.BorrowRecord;
 
 public interface BorrowRecordMapper {
@@ -19,7 +19,9 @@ public interface BorrowRecordMapper {
 
     String getBorrowRecordStatus(Integer statusId);
 
-    List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
+    List<BorrowRecord> getRecords(RecordSearchDto recordSearchDto);
 
-    int countRecords();
+    int countRecords(RecordSearchDto recordSearchDto);
+
+    Integer getStatusId(String statusStr);
 }

@@ -2,6 +2,7 @@ package xzz.library.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import xzz.library.dto.search.UserSearchDto;
 import xzz.library.pojo.User;
 
 public interface UserMapper {
@@ -23,7 +24,11 @@ public interface UserMapper {
 
     void updatePassword(@Param("id") String id, @Param("newPassword") String newPassword);
 
-    List<User> getUsers(@Param("limit") Integer limit, @Param("start") Integer start);
+    List<User> getUsers(UserSearchDto userSearchDto);
 
-    int countUsers();
+    int countUsers(UserSearchDto userSearchDto);
+
+    Integer getRoleId(String roleStr);
+
+    Integer getStatusId(String statusStr);
 }

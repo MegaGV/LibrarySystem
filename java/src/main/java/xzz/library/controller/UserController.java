@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xzz.library.dto.CreditInfoDto;
-import xzz.library.dto.PasswordResetInfoDto;
-import xzz.library.dto.UserInfoDto;
+import xzz.library.dto.info.CreditInfoDto;
+import xzz.library.dto.info.PasswordResetInfoDto;
+import xzz.library.dto.info.UserInfoDto;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 

@@ -45,7 +45,7 @@
     select id, book_name, book_type, author, publisher, price, stock, total
     from books
   </select>
-  <select id="getBookList" parameterType="xzz.library.dto.BooksSearchInfoDto" resultMap="BaseResultMap" >
+  <select id="getBooks" parameterType="xzz.library.dto.search.BookSearchDto" resultMap="BaseResultMap" >
     select id, book_name, book_type, author, publisher, price, stock, total, detail
     from books
     <where>
@@ -70,7 +70,7 @@
     </where>
     limit #{page}, #{limit}
   </select>
-  <select id="countBook" parameterType="xzz.library.dto.BooksSearchInfoDto" resultType="java.lang.Integer" >
+  <select id="countBook" parameterType="xzz.library.dto.search.BookSearchDto" resultType="java.lang.Integer" >
     select count(0)
     from books
     <where>

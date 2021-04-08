@@ -1,4 +1,4 @@
-package xzz.library.dto;
+package xzz.library.dto.list;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;

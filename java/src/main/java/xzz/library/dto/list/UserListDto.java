@@ -1,10 +1,10 @@
-package xzz.library.dto;
+package xzz.library.dto.list;
 
 import xzz.library.pojo.User;
 
 import java.util.List;
 
-public class UsersListDto {
+public class UserListDto {
     //========================================================================================
     // Description: 后端返回到前端的用户列表类
     //========================================================================================
@@ -12,12 +12,12 @@ public class UsersListDto {
     
     private List<User> data;
 
-    public UsersListDto(List<User> users, int total){
+    public UserListDto(List<User> users, int total){
         this.data = users;
         this.total = total;
     }
 
-    public UsersListDto(List<User> users){
+    public UserListDto(List<User> users){
         this.data = users;
         this.total = users.size();
     }

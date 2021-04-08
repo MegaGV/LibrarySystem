@@ -82,6 +82,8 @@ export default {
             FormVisible: false,
             total:0,
             searchForm:{
+                recordType:"fine",
+                userId:"",
                 limit:5,
                 page:1,
             },
@@ -111,20 +113,21 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
-        this.getRecords('fine');
+        this.getRecords();
     },
     methods:{
         handleSizeChange(val) {
             this.searchForm.limit = val;
             this.searchForm.page=1;
-            this.getRecords('fine');
+            this.getRecords();
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
-            this.getRecords('fine');
+            this.getRecords();
         },
-        getRecords(recordType){
-            this.$axios.get('api/library/admin/getRecords?limit=' + this.searchForm.limit + "&page=" + this.searchForm.page +  "&recordType=" + recordType)
+        getRecords(){
+            this.$axios
+            .post('api/library/admin/getRecords', this.searchForm)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取罚款记录列表失败");

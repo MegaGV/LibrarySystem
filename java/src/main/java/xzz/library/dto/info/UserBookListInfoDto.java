@@ -1,4 +1,4 @@
-package xzz.library.dto;
+package xzz.library.dto.info;
 
 import xzz.library.pojo.Book;
 import xzz.library.pojo.UserBookList;
@@ -64,7 +64,7 @@ public class UserBookListInfoDto {
         this.description = description;
     }
 
-    public List<Book> getBookList() {
+    public List<Book> getBooks() {
         return bookList;
     }
 

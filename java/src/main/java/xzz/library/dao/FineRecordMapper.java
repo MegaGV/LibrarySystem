@@ -1,7 +1,7 @@
 package xzz.library.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import xzz.library.dto.search.RecordSearchDto;
 import xzz.library.pojo.FineRecord;
 
 public interface FineRecordMapper {
@@ -17,7 +17,7 @@ public interface FineRecordMapper {
 
     List<FineRecord> getRecordsByUserid(String userId);
 
-    List getRecords(@Param("limit") Integer limit, @Param("start") Integer start);
+    List<FineRecord> getRecords(RecordSearchDto recordSearchDto);
 
-    int countRecords();
+    int countRecords(RecordSearchDto recordSearchDto);
 }

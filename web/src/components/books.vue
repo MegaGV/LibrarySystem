@@ -197,7 +197,7 @@ export default {
             })
         },
         getBookList(){
-            this.$axios.post('api/library/book/getBookList', this.searchForm)
+            this.$axios.post('api/library/book/getBooks', this.searchForm)
             .then(res => {
                 if (res.data == ""){
                     this.$message.error("获取记录失败");

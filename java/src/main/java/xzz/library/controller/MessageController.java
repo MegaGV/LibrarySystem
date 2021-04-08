@@ -3,8 +3,8 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.MessageInfoDto;
-import xzz.library.dto.MessageListDto;
+import xzz.library.dto.info.MessageInfoDto;
+import xzz.library.dto.list.MessageListDto;
 import xzz.library.service.MessageService;
 
 @Controller
@@ -14,10 +14,10 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping("/getMessageList")
+    @GetMapping("/getMessages")
     @ResponseBody
-    public MessageListDto getMessageList(String userId){
-        return messageService.getMessageList(userId);
+    public MessageListDto getMessages(String userId){
+        return messageService.getMessages(userId);
     }
 
     @GetMapping("/getMessage")

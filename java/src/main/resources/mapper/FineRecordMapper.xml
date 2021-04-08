@@ -42,13 +42,23 @@
     from fine_records
     where user_id=#{userId}
   </select>
-  <select id="getRecords" resultMap="BaseResultMap" >
+  <select id="getRecords" resultMap="BaseResultMap" parameterType="xzz.library.dto.search.RecordSearchDto" >
     select id, user_id, borrow_id, return_id, days, fine
     from fine_records
-    limit #{start}, #{limit}
+    <where>
+      <if test="userId and userId !=''">
+        user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
+    limit #{page}, #{limit}
   </select>
-  <select id="countRecords" resultType="java.lang.Integer">
+  <select id="countRecords" resultType="java.lang.Integer" parameterType="xzz.library.dto.search.RecordSearchDto" >
     select count(0)
+    <where>
+      <if test="userId and userId !=''">
+        user_id like concat("%",#{userId},"%")
+      </if>
+    </where>
     from fine_records
   </select>
 </mapper>

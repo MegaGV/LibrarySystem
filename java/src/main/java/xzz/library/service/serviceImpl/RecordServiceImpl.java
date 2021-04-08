@@ -6,9 +6,9 @@ import xzz.library.dao.BookMapper;
 import xzz.library.dao.BorrowRecordMapper;
 import xzz.library.dao.FineRecordMapper;
 import xzz.library.dao.ReturnRecordMapper;
-import xzz.library.dto.BorrowRecordListDto;
-import xzz.library.dto.RecordsListDto;
-import xzz.library.dto.ReturnRecordListDto;
+import xzz.library.dto.list.BorrowRecordListDto;
+import xzz.library.dto.list.RecordListDto;
+import xzz.library.dto.list.ReturnRecordListDto;
 import xzz.library.pojo.BorrowRecord;
 import xzz.library.pojo.FineRecord;
 import xzz.library.pojo.ReturnRecord;
@@ -29,7 +29,7 @@ public class RecordServiceImpl implements RecordService {
     private FineRecordMapper fineRecordMapper;
 
     @Override
-    public RecordsListDto getRecords(String userId, String recordType) {
+    public RecordListDto getRecords(String userId, String recordType) {
         List records = new ArrayList();
         switch (recordType){
             case "borrow" :
@@ -58,7 +58,7 @@ public class RecordServiceImpl implements RecordService {
                 break;
             default:
         }
-        return new RecordsListDto(records);
+        return new RecordListDto(records);
     }
 
     @Override
