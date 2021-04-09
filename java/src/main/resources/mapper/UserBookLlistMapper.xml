@@ -57,7 +57,7 @@
     </where>
     limit #{page}, #{limit}
   </select>
-  <select id="countUserBookList" parameterType="xzz.library.dto.search.UserBookListSearchDto" resultMap="java.lang.Integer" >
+  <select id="countUserBookList" parameterType="xzz.library.dto.search.UserBookListSearchDto" resultType="java.lang.Integer" >
     select count(0)
     from user_booklist
     <where>

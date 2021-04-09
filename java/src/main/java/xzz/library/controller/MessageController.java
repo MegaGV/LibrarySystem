@@ -11,6 +11,10 @@ import xzz.library.service.MessageService;
 @RequestMapping("/message")
 @CrossOrigin(allowCredentials = "true")
 public class MessageController {
+    //========================================================================================
+    // Message
+    // Operations: 获取通知列表、获取通知、设置状态、删除通知
+    //========================================================================================
     @Autowired
     private MessageService messageService;
 

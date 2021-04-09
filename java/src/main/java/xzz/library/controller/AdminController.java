@@ -16,7 +16,7 @@ public class AdminController {
     private AdminService adminService;
 
     //========================================================================================
-    // Users
+    // User
     // Operations: 获取用户列表、获取用户信息、添加用户、删除用户、更新用户
     //========================================================================================
     @PostMapping("/getUsers")
@@ -50,7 +50,7 @@ public class AdminController {
     }
 
     //========================================================================================
-    // Books
+    // Book
     // Operations: 获取图书列表、获取图书信息、添加图书、删除图书、更新图书
     //========================================================================================
     @PostMapping("/getBooks")
@@ -84,7 +84,7 @@ public class AdminController {
     }
 
     //========================================================================================
-    // Records
+    // Record
     // Operations: 获取记录列表、获取记录、删除记录、更新记录(除列表外均按种类单独一个函数)
     //========================================================================================
     @PostMapping("/getRecords")
@@ -182,7 +182,7 @@ public class AdminController {
     }
 
     //========================================================================================
-    // Messages
+    // Message
     // Operations: 获取通知列表、获取通知信息、添加通知、删除通知、更新通知
     //========================================================================================
     @PostMapping("/getMessages")
@@ -213,5 +213,39 @@ public class AdminController {
     @ResponseBody
     public String updateMessage(@RequestBody Message message){
         return adminService.updateMessage(message);
+    }
+
+    //========================================================================================
+    // BookReview
+    // Operations: 获取书单列表、获取书单信息、添加书单、删除书单、更新书单
+    //========================================================================================
+    @PostMapping("/getBookReviews")
+    @ResponseBody
+    public BookReviewListDto getBookReviews(@RequestBody BookReviewSearchDto bookReviewSearchDto){
+        return adminService.getBookReviews(bookReviewSearchDto);
+    }
+
+    @GetMapping("/getBookReview")
+    @ResponseBody
+    public BookReview getBookReview(String bookReviewId){
+        return adminService.getBookReview(bookReviewId);
+    }
+
+    @PostMapping("/addBookReview")
+    @ResponseBody
+    public String addBookReview(@RequestBody BookReview bookReview){
+        return adminService.addBookReview(bookReview);
+    }
+
+    @PostMapping("/deleteBookReview")
+    @ResponseBody
+    public String deleteBookReview(@RequestBody String[] ids){
+        return adminService.deleteBookReview(ids);
+    }
+
+    @PostMapping("/updateBookReview")
+    @ResponseBody
+    public String updateBookReview(@RequestBody BookReview bookReview){
+        return adminService.updateBookReview(bookReview);
     }
 }

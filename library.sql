@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-04-06 18:57:35
+Date: 2021-04-09 18:04:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,6 +74,24 @@ INSERT INTO `books` VALUES ('dceb7857-c2e0-4757-9497-a35300fcff8d', '特工风�
 INSERT INTO `books` VALUES ('e99072f3-cd5a-4563-8c7d-30340368b4b7', '科学史', 'N0', '(英) W. C. 丹皮尔', '中国人民大学出版社', '49.80', '1', '1', '《科学史》主要讲述了科学、哲学和宗教在人类历史长河中各自的发生、发展历程，以及它们在各个历史时期所发生的相互纠葛。作者以科学技术的发展为主干，以哲学和宗教为枝叶，勾勒了一幅人类科学技术与人文景观齐头并进的美妙画卷。');
 INSERT INTO `books` VALUES ('f2e718b4-bb3d-4924-a1cf-a0826ed6c11d', '圣女的救济', 'I0', '(日) 东野圭吾', '当代世界出版社', '25.00', '2', '2', '丈夫在家里遭毒杀，身为嫌疑犯的妻子却有着铜墙铁壁般的不在场证明。究竟是如何下毒的？被称之为神探伽利略的汤川教授再度挑战高难度的不可能犯罪，去证明在那惟有女性特有的不合逻辑思考下设定的骇人诡计，而答案竟是“虚数解”—— 从理论上而言可行，但从现实上而言却是决不可能的。贤惠温柔的妻子，为了挽回丈夫的爱，做出了“完全不可能”的事情……<br />《圣女的救济》是继《嫌疑犯X的献身》后伽利略系列长篇的第二部。');
 INSERT INTO `books` VALUES ('f44b15b4-8b25-406e-b72d-06319c46911c', '邓小平智慧', 'A8', '萧诗美', '人民出版社', '56.00', '3', '3', '邓小平是中国改革开放的总设计师。他的各种政治设计、经济设计、文化设计、社会设计等，无不充满着智慧，其大智大勇令人叹为观止。举重若轻，绵里藏针，能屈能伸，原则的坚定性和策略的灵活性高度统一，等等，既是邓小平智慧的精华所在，也是新时期治国理政和为官做人的重要精神资源。本书主要从谋划和策略的角度对邓小平智慧进行了系统解读，并以深入浅出的语言对其博大精深和运用之妙进行了传神的刻画，包括：治乱智慧、改革智慧、经济智慧、政治智慧、军事智慧、统战智慧、外交智慧。全书史论结合，夹叙夹议，雅俗共赏，很好地做到了让伟人的思想和智慧以贴近现代生活的方式走进现代人的生活世界！');
+
+-- ----------------------------
+-- Table structure for book_reviews
+-- ----------------------------
+DROP TABLE IF EXISTS `book_reviews`;
+CREATE TABLE `book_reviews` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `book_id` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of book_reviews
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for borrow_records
@@ -282,6 +300,23 @@ CREATE TABLE `return_status` (
 -- ----------------------------
 INSERT INTO `return_status` VALUES ('0', '按时归还');
 INSERT INTO `return_status` VALUES ('1', '超时归还');
+
+-- ----------------------------
+-- Table structure for review_status
+-- ----------------------------
+DROP TABLE IF EXISTS `review_status`;
+CREATE TABLE `review_status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of review_status
+-- ----------------------------
+INSERT INTO `review_status` VALUES ('0', '待审核');
+INSERT INTO `review_status` VALUES ('1', '已过审');
+INSERT INTO `review_status` VALUES ('2', '未过审');
 
 -- ----------------------------
 -- Table structure for role

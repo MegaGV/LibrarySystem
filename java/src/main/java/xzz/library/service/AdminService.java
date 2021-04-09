@@ -7,7 +7,7 @@ import xzz.library.pojo.*;
 public interface AdminService {
 
     //========================================================================================
-    // Users
+    // User
     //========================================================================================
     UserListDto getUsers(UserSearchDto userSearchDto);
 
@@ -20,7 +20,7 @@ public interface AdminService {
     String updateUser(User user);
 
     //========================================================================================
-    // Books
+    // Book
     //========================================================================================
     BookListDto getBooks(BookSearchDto bookSearchDto);
 
@@ -33,7 +33,7 @@ public interface AdminService {
     String updateBook(Book book);
 
     //========================================================================================
-    // Records
+    // Record
     //========================================================================================
     RecordListDto getRecords(RecordSearchDto recordSearchDto);
 
@@ -56,7 +56,7 @@ public interface AdminService {
     String updateFR(FineRecord fineRecord);
 
     //========================================================================================
-    // UserBookLists
+    // UserBookList
     //========================================================================================
     UserBookListListDto getUserBookLists(UserBookListSearchDto userBookListSearchDto);
 
@@ -69,7 +69,7 @@ public interface AdminService {
     String updateUserBookList(UserBookList userBookList);
 
     //========================================================================================
-    // Messages
+    // Message
     //========================================================================================
     MessageListDto getMessages(MessageSearchDto messageSearchDto);
 
@@ -80,4 +80,17 @@ public interface AdminService {
     String deleteMessage(String[] ids);
 
     String updateMessage(Message message);
+
+    //========================================================================================
+    // BookReview
+    //========================================================================================
+    BookReviewListDto getBookReviews(BookReviewSearchDto bookReviewSearchDto);
+
+    BookReview getBookReview(String bookReviewId);
+
+    String addBookReview(BookReview bookReview);
+
+    String deleteBookReview(String[] ids);
+
+    String updateBookReview(BookReview bookReview);
 }
