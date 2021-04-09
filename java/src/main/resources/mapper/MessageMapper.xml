@@ -63,7 +63,7 @@
     </where>
     limit #{page}, #{limit}
   </select>
-  <select id="countUserBookList" parameterType="xzz.library.dto.search.MessageSearchDto" resultMap="java.lang.Integer" >
+  <select id="countUserBookList" parameterType="xzz.library.dto.search.MessageSearchDto" resultType="java.lang.Integer" >
     select count(0)
     from messages
     <where>

@@ -14,6 +14,7 @@ import xzz.library.service.BookService;
 @CrossOrigin(allowCredentials = "true")
 public class BookController {
     //========================================================================================
+    // Book
     // Operations: 获取图书列表、获取图书信息、借书、还书、获取图书种类
     //========================================================================================
     @Autowired

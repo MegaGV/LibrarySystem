@@ -6,9 +6,9 @@ import xzz.library.dao.BookMapper;
 import xzz.library.dao.BorrowRecordMapper;
 import xzz.library.dao.FineRecordMapper;
 import xzz.library.dao.ReturnRecordMapper;
-import xzz.library.dto.list.BorrowRecordListDto;
+import xzz.library.dto.info.BorrowRecordInfoDto;
 import xzz.library.dto.list.RecordListDto;
-import xzz.library.dto.list.ReturnRecordListDto;
+import xzz.library.dto.info.ReturnRecordInfoDto;
 import xzz.library.pojo.BorrowRecord;
 import xzz.library.pojo.FineRecord;
 import xzz.library.pojo.ReturnRecord;
@@ -36,10 +36,10 @@ public class RecordServiceImpl implements RecordService {
                 {
                     List<BorrowRecord> originRecords = borrowRecordMapper.getRecordsByUserid(userId);
                     for (BorrowRecord borrowRecord : originRecords) {
-                        BorrowRecordListDto borrowRecordListDto = new BorrowRecordListDto(borrowRecord);
-                        borrowRecordListDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
-                        borrowRecordListDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
-                        records.add(borrowRecordListDto);
+                        BorrowRecordInfoDto borrowRecordInfoDto = new BorrowRecordInfoDto(borrowRecord);
+                        borrowRecordInfoDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
+                        borrowRecordInfoDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
+                        records.add(borrowRecordInfoDto);
                     }
                 }
                 break;
@@ -47,9 +47,9 @@ public class RecordServiceImpl implements RecordService {
                 {
                     List<ReturnRecord> originRecords = returnRecordMapper.getRecordsByUserid(userId);
                     for (ReturnRecord returnRecord : originRecords){
-                        ReturnRecordListDto returnRecordListDto = new ReturnRecordListDto(returnRecord);
-                        returnRecordListDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
-                        records.add(returnRecordListDto);
+                        ReturnRecordInfoDto returnRecordInfoDto = new ReturnRecordInfoDto(returnRecord);
+                        returnRecordInfoDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
+                        records.add(returnRecordInfoDto);
                     }
                 }
                 break;
@@ -62,24 +62,24 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public BorrowRecordListDto getBR(String userId, String recordId) {
+    public BorrowRecordInfoDto getBR(String userId, String recordId) {
         BorrowRecord borrowRecord = borrowRecordMapper.selectByPrimaryKey(recordId);
         if (borrowRecord == null || !borrowRecord.getUserId().equals(userId))
             return null;
-        BorrowRecordListDto borrowRecordListDto = new BorrowRecordListDto(borrowRecord);
-        borrowRecordListDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
-        borrowRecordListDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
-        return borrowRecordListDto;
+        BorrowRecordInfoDto borrowRecordInfoDto = new BorrowRecordInfoDto(borrowRecord);
+        borrowRecordInfoDto.setBook(bookMapper.selectByPrimaryKey(borrowRecord.getBookId()));
+        borrowRecordInfoDto.setStatus(borrowRecordMapper.getBorrowRecordStatus(borrowRecord.getStatus()));
+        return borrowRecordInfoDto;
     }
 
     @Override
-    public ReturnRecordListDto getRR(String userId, String recordId) {
+    public ReturnRecordInfoDto getRR(String userId, String recordId) {
         ReturnRecord returnRecord = returnRecordMapper.selectByPrimaryKey(recordId);
         if (returnRecord == null || !returnRecord.getUserId().equals(userId))
             return null;
-        ReturnRecordListDto returnRecordListDto = new ReturnRecordListDto(returnRecord);
-        returnRecordListDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
-        return returnRecordListDto;
+        ReturnRecordInfoDto returnRecordInfoDto = new ReturnRecordInfoDto(returnRecord);
+        returnRecordInfoDto.setStatus(returnRecordMapper.getReturnRecordStatus(returnRecord.getStatus()));
+        return returnRecordInfoDto;
     }
 
     @Override

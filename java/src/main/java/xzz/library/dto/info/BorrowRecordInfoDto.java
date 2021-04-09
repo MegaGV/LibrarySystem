@@ -1,4 +1,4 @@
-package xzz.library.dto.list;
+package xzz.library.dto.info;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -7,9 +7,9 @@ import xzz.library.pojo.BorrowRecord;
 
 import java.util.Date;
 
-public class BorrowRecordListDto {
+public class BorrowRecordInfoDto {
     //========================================================================================
-    // Description: 后端返回到前端的借阅记录列表类
+    // Description: 后端返回到前端的借阅记录信息类
     //========================================================================================
     private String id;
 
@@ -27,7 +27,7 @@ public class BorrowRecordListDto {
 
     private String status;
 
-    public BorrowRecordListDto(BorrowRecord borrowRecord){
+    public BorrowRecordInfoDto(BorrowRecord borrowRecord){
         this.id = borrowRecord.getId();
         this.userId = borrowRecord.getUserId();
         this.borrowDate = borrowRecord.getBorrowDate();

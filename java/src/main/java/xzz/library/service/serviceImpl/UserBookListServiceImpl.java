@@ -68,7 +68,7 @@ public class UserBookListServiceImpl implements UserBookListService {
             return "信息有误";
         UserBookList userBookList = userBookListMapper.selectByPrimaryKey(userBookListId);
         if (!userId.equals(userBookList.getUserId()))
-            return "无法删除他人书单";
+            return "权限不足";
 
         try{
             userBookListMapper.deleteByPrimaryKey(userBookListId);
@@ -101,7 +101,7 @@ public class UserBookListServiceImpl implements UserBookListService {
             return "信息有误";
         UserBookList dbList = userBookListMapper.selectByPrimaryKey(userBookListId);
         if (!dbList.getUserId().equals(userId))
-            return "无法编辑他人书单";
+            return "权限不足";
         String books = dbList.getBooks();
         if (isAdd) {
             if (StringListUtils.count(books) >= 9) // 暂时限制书单长度为10

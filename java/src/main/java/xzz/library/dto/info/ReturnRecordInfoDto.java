@@ -1,4 +1,4 @@
-package xzz.library.dto.list;
+package xzz.library.dto.info;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -6,9 +6,9 @@ import xzz.library.pojo.ReturnRecord;
 
 import java.util.Date;
 
-public class ReturnRecordListDto {
+public class ReturnRecordInfoDto {
     //========================================================================================
-    // Description: 后端返回到前端的归还记录列表类
+    // Description: 后端返回到前端的归还记录信息类
     //========================================================================================
     private String id;
 
@@ -20,7 +20,7 @@ public class ReturnRecordListDto {
 
     private String status;
 
-    public ReturnRecordListDto(ReturnRecord returnRecord){
+    public ReturnRecordInfoDto(ReturnRecord returnRecord){
         this.id = returnRecord.getId();
         this.borrowId = returnRecord.getBorrowId();
         this.returnDate = returnRecord.getReturnDate();

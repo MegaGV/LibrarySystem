@@ -3,9 +3,9 @@ package xzz.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xzz.library.dto.list.BorrowRecordListDto;
+import xzz.library.dto.info.BorrowRecordInfoDto;
 import xzz.library.dto.list.RecordListDto;
-import xzz.library.dto.list.ReturnRecordListDto;
+import xzz.library.dto.info.ReturnRecordInfoDto;
 import xzz.library.pojo.FineRecord;
 import xzz.library.service.RecordService;
 
@@ -14,6 +14,7 @@ import xzz.library.service.RecordService;
 @CrossOrigin(allowCredentials = "true")
 public class RecordController {
     //========================================================================================
+    // Record
     // Operations: 获取记录列表、获取单个记录(按种类单独一个函数)
     //========================================================================================
     @Autowired
@@ -27,13 +28,13 @@ public class RecordController {
 
     @GetMapping("/getBR")
     @ResponseBody
-    public BorrowRecordListDto getBR(String userId, String recordId){
+    public BorrowRecordInfoDto getBR(String userId, String recordId){
         return recordService.getBR(userId, recordId);
     }
 
     @GetMapping("/getRR")
     @ResponseBody
-    public ReturnRecordListDto getRR(String userId, String recordId){
+    public ReturnRecordInfoDto getRR(String userId, String recordId){
         return recordService.getRR(userId, recordId);
     }
 

@@ -28,9 +28,11 @@ public class AdminServiceImpl implements AdminService {
     private UserBookListMapper userBookListMapper;
     @Autowired
     private MessageMapper messageMapper;
+    @Autowired
+    private BookReviewMapper bookReviewMapper;
 
     //========================================================================================
-    // Users
+    // User
     //========================================================================================
     @Override
     public UserListDto getUsers(UserSearchDto userSearchDto) {
@@ -105,7 +107,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    // Books
+    // Book
     //========================================================================================
     @Override
     public BookListDto getBooks(BookSearchDto bookSearchDto) {
@@ -170,7 +172,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    // Records
+    // Record
     //========================================================================================
     @Override
     public RecordListDto getRecords(RecordSearchDto recordSearchDto){
@@ -309,7 +311,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    // UerBookLists
+    // UerBookList
     //========================================================================================
     @Override
     public UserBookListListDto getUserBookLists(UserBookListSearchDto userBookListSearchDto) {
@@ -375,7 +377,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //========================================================================================
-    // Messages
+    // Message
     //========================================================================================
     @Override
     public MessageListDto getMessages(MessageSearchDto messageSearchDto) {
@@ -437,6 +439,74 @@ public class AdminServiceImpl implements AdminService {
         }catch (Exception e){
             e.printStackTrace();
             return "修改通知失败";
+        }
+    }
+
+    //========================================================================================
+    // BookReview
+    //========================================================================================
+    @Override
+    public BookReviewListDto getBookReviews(BookReviewSearchDto bookReviewSearchDto) {
+        bookReviewSearchDto.initial();
+        if (bookReviewSearchDto.getStatusStr() != null && !bookReviewSearchDto.getStatusStr().isEmpty())
+            bookReviewSearchDto.setStatus(borrowRecordMapper.getStatusId(bookReviewSearchDto.getStatusStr()));
+        return new BookReviewListDto(bookReviewMapper.getBookReviews(bookReviewSearchDto),
+                bookReviewMapper.countBookReview(bookReviewSearchDto));
+    }
+
+    @Override
+    public BookReview getBookReview(String bookReviewId) {
+        return bookReviewMapper.selectByPrimaryKey(bookReviewId);
+    }
+
+    @Override
+    @Transactional
+    public String addBookReview(BookReview bookReview) {
+        if (bookReview == null)
+            return "书评错误";
+        bookReview.initial();
+        while (messageMapper.selectByPrimaryKey(bookReview.getId()) != null)
+            bookReview.setId(UUID.randomUUID().toString());
+
+        try {
+            bookReviewMapper.insert(bookReview);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "书评添加失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteBookReview(String[] ids) {
+        if (ids == null)
+            return "书评错误";
+        if (ids.length == 0)
+            return "无选中书评";
+
+        try {
+            for (String id : ids)
+                bookReviewMapper.deleteByPrimaryKey(id);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "删除书评失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateBookReview(BookReview bookReview) {
+        if(bookReview == null)
+            return "书评错误";
+
+        try{
+            bookReviewMapper.updateByPrimaryKey(bookReview);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "修改书评失败";
         }
     }
 }
