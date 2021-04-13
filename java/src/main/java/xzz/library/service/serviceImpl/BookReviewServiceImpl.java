@@ -93,7 +93,7 @@ public class BookReviewServiceImpl implements BookReviewService {
     public String updateBookReview(BookReview bookReview) {
         if (bookReview == null)
             return "信息有误";
-        if (!bookReview.getUserId().equals(bookReviewMapper.selectByPrimaryKey(bookReview.getUserId())))
+        if (!bookReviewMapper.selectByPrimaryKey(bookReview.getId()).getUserId().equals(bookReview.getUserId()))
             return "权限不足";
         bookReview.setStatus(0); // 编辑后需重新审核
 

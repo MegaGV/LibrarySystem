@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-04-09 18:04:52
+Date: 2021-04-13 17:25:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -202,6 +202,40 @@ INSERT INTO `classifications` VALUES ('35', 'C', '9', '社会学');
 INSERT INTO `classifications` VALUES ('36', 'D', '6', '中国政治');
 INSERT INTO `classifications` VALUES ('37', 'D', '9', '法律');
 INSERT INTO `classifications` VALUES ('38', 'E', '1', '世界军事');
+
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `discuss_id` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
+  `publish_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comments
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for discusses
+-- ----------------------------
+DROP TABLE IF EXISTS `discusses`;
+CREATE TABLE `discusses` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
+  `publish_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of discusses
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for fine_records
