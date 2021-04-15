@@ -34,4 +34,9 @@
     select id, user_id, discuss_id, content, publish_date
     from comments
   </select>
+  <select id="getCommentsByDiscussId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, user_id, discuss_id, content, publish_date
+    from comments
+    where discuss_id = #{discussId,jdbcType=VARCHAR}
+  </select>
 </mapper>

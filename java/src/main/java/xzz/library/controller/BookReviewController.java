@@ -43,7 +43,7 @@ public class BookReviewController {
         return bookReviewService.publishBookReview(bookReview);
     }
 
-    @PostMapping("deleteBookReview")
+    @PostMapping("/deleteBookReview")
     @ResponseBody
     public String deleteBookReview(String userId, String bookReviewId){
         return bookReviewService.deleteBookReview(userId, bookReviewId);
