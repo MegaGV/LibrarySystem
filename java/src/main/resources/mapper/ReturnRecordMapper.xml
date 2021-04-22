@@ -54,7 +54,7 @@
     select id, user_id, borrow_id, return_date, status
     from return_records
     <where>
-      <if test="userId and userId !=''">
+      <if test="userId!=null and userId !=''">
         user_id like concat("%",#{userId},"%")
       </if>
       <if test="status!=null">
@@ -66,7 +66,7 @@
   <select id="countRecords" resultType="java.lang.Integer" parameterType="xzz.library.dto.search.RecordSearchDto" >
     select count(0)
     <where>
-      <if test="userId and userId !=''">
+      <if test="userId!=null and userId !=''">
         user_id like concat("%",#{userId},"%")
       </if>
       <if test="status!=null">
