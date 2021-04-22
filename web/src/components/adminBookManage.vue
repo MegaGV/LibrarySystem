@@ -223,7 +223,7 @@ export default {
                     this.$router.push('/');
                 }
                 else{
-                    if (res.data.role != '管理员'){
+                    if (res.data != '管理员'){
                         alert("用户权限不足，即将回到登录界面");
                         this.$router.push('/');
                     }
