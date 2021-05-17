@@ -6,7 +6,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="book_id" property="bookId" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="content" property="detail" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
+    <result column="content" property="content" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
@@ -48,7 +48,7 @@
     from book_reviews
     where user_id = #{userId} and status = 1
   </select>
-  <select id="getUserStatus" resultType="java.lang.String" >
+  <select id="getReviewStatus" resultType="java.lang.String" >
     select status
     from book_reviews
     where id=#{statusId}
@@ -71,9 +71,9 @@
       <if test="bookId!=null and bookId !=''">
         book_id like concat("%",#{bookId},"%")
       </if>
-      <if test="detail!=null and detail !=''">
-        and title like concat("%",#{detail},"%")
-        or content like concat("%",#{detail},"%")
+      <if test="content!=null and content !=''">
+        and title like concat("%",#{content},"%")
+        or content like concat("%",#{content},"%")
       </if>
       <if test="status!=null">
         and status = #{status}
@@ -94,9 +94,9 @@
       <if test="bookId!=null and bookId !=''">
         book_id like concat("%",#{bookId},"%")
       </if>
-      <if test="detail!=null and detail !=''">
-        and title like concat("%",#{detail},"%")
-        or content like concat("%",#{detail},"%")
+      <if test="content!=null and content !=''">
+        and title like concat("%",#{content},"%")
+        or content like concat("%",#{content},"%")
       </if>
       <if test="status!=null">
         and status = #{status}

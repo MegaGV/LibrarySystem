@@ -51,11 +51,6 @@ export default new Router({
       component: () => import("../components/userMessage.vue")
     },
     {
-      path: '/userBookList',
-      name: 'userBookList',
-      component: () => import("../components/userBookList.vue")
-    },
-    {
       path: '/discussHome',
       name: 'discussHome',
       component: () => import("../components/discussHome.vue")

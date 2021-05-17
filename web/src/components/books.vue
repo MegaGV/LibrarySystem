@@ -67,7 +67,11 @@
                     <el-table-column prop="total" label="库存" :show-overflow-tooltip="true" align="center" />
                     <el-table-column label="操作" width="250" align="center">
                         <template slot-scope="scope">
-                            <el-button @click="viewBook(scope.row)">查看详情</el-button>
+                            <el-button>
+                                <router-link style="text-decoration: none;color:black" :to="{ path: '/bookDetail/' + scope.row.id}" >
+                                查看详情
+                                </router-link>
+                            </el-button>
                             <el-button type="primary" @click="borrowBook(scope.row)" :disabled="scope.row.stock=='0'">借阅</el-button>
                         </template>
                     </el-table-column>
@@ -87,37 +91,7 @@
                 </el-pagination>
             </div>
 
-            <!-- bookDetail -->
-            <div>
-                <el-dialog title="书籍信息" :visible.sync="bookVisible"  width="40%">
-                    <el-form :model="bookForm" label-width="100px">
-                        <el-form-item   label="书名：" style="width: 90%" >
-                            <span>{{bookForm.bookName}}</span>
-                        </el-form-item>
-                        <el-form-item label="图书类型：" style="width: 90%" >
-                            <span>{{bookForm.bookType}}</span>
-                        </el-form-item>
-                        <el-form-item label="作者：" style="width: 90%" >
-                            <span>{{bookForm.author}}</span>
-                        </el-form-item>
-                        <el-form-item label="出版社：" style="width: 90%" >
-                            <span>{{bookForm.publisher}}</span>
-                        </el-form-item>
-                        <el-form-item label="定价：" style="width: 90%" >
-                            <span>{{bookForm.price}}</span>
-                        </el-form-item>
-                        <el-form-item label="在库数：" style="width: 90%" >
-                            <span>{{bookForm.stock}}</span>
-                        </el-form-item>
-                        <el-form-item label="库存：" style="width: 90%" >
-                            <span>{{bookForm.total}}</span>
-                        </el-form-item>
-                        <el-form-item label="简介：" style="width: 90%" >
-                            <span v-html="bookForm.detail" />
-                        </el-form-item>
-                    </el-form>
-                </el-dialog>
-            </div>
+
 
         </div>
 

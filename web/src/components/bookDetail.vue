@@ -21,7 +21,37 @@
         </ul>
     </div>
     <div class="contents">
-        
+        <!-- bookDetail -->
+        <div>
+            <div style="float:left;width:30%;">
+                <el-card style="margin:0 auto;text-align:left">
+                    <div slot="header">
+                        <el-button type="primary" @click="borrowBook()" style="float:right">借阅</el-button>
+                        <h1>图书详情</h1>
+                    </div>
+                    <p>书名：{{bookForm.bookName }}</p>
+                    <p>图书类型：{{bookForm.bookType}}</p>
+                    <p>作者：{{bookForm.author}}</p>
+                    <p>出版社：{{bookForm.publisher}}</p>
+                    <p>定价：{{bookForm.price}}</p>
+                    <p>在库数：{{bookForm.stock}}</p>
+                    <p>库存：{{bookForm.total}}</p>
+                    <p>简介</p>
+                    <p><span v-html="bookForm.detail" /></p>
+                </el-card>
+            </div>
+            <div style="float:left;width:50%;margin-left:300px">
+                <h1 style="text-align:left">相关书评</h1>
+                <div v-if="bookReviews.length == 0">暂无相关书评</div>
+                <div v-else>
+                    <el-card v-for="bookReview in bookReviews" v-bind:key="bookReview.id" style="margin-top:10px" :body-style="{ padding: '10px' }">
+                        <h2>{{bookReview.title}}</h2>
+                        <p style="text-align:center">{{bookReview.user.nickname}}</p>
+                        <p><span v-html="bookReview.content" /></p>
+                    </el-card>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -31,6 +61,13 @@ export default {
     data(){
         return{
             logo:require("../assets/libLog.jpg"),
+            bookForm: "",
+            bookReviews: [],
+        }
+    },
+    computed: {
+        id () {
+            return this.$route.params.id
         }
     },
     mounted(){
@@ -50,6 +87,8 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        this.getBookDetail();
+        this.getBookReviews();
     },
     methods:{
         logout() {
@@ -71,6 +110,36 @@ export default {
         toUserHome(){
             this.$router.push('/userHome');
         },
+        getBookDetail(){
+            this.$axios.get('api/library/book/getBookDetail?bookId='+this.id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取图书失败");
+                }
+                else {
+                    this.bookForm = res.data;
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        getBookReviews(){
+            this.$axios.get('api/library/bookReview/getBookReviewsByBook?bookId='+this.id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取书评失败");
+                }
+                else if (res.data.total != 0){
+                    this.bookReviews = res.data.data;
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        }
     }
 }
 </script>
