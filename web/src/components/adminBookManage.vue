@@ -5,8 +5,8 @@
 
         <!-- search -->
         <el-collapse>
-            <el-collapse-item title="搜索框">
-                <el-form :model="searchForm" ref="searchForm" style="width: 20%">
+            <el-collapse-item title="图书查询">
+                <el-form :inline="true" :model="searchForm" ref="searchForm" style="width: 100%">
                     <el-form-item label="书籍名称">
                         <el-input v-model="searchForm.bookName" placeholder="请输入内容" />
                     </el-form-item>

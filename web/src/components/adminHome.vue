@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header style="background: #99a9bf;">
-            <h1>图书馆后台管理系统</h1>
+            <h1>重理工中山图书馆社区后台管理系统</h1>
         </el-header>
         <el-container>
             <el-aside width="200px" class="nav-left">
@@ -42,8 +42,24 @@ import adminBookManage from '@/components/adminBookManage'
 import adminBRManage from '@/components/adminBRManage'
 import adminRRManage from '@/components/adminRRManage'
 import adminFRManage from '@/components/adminFRManage'
+
+import adminBookListManage from '@/components/adminBookListManage'
+import adminBookReviewManage from '@/components/adminBookReviewManage'
+import adminCommentManage from '@/components/adminCommentManage'
+import adminDiscussManage from '@/components/adminDiscussManage'
+import adminMessageManage from '@/components/adminMessageManage'
+
 export default {
-    components:{adminUserManage, adminBookManage, adminBRManage, adminRRManage, adminFRManage},
+    components:{adminUserManage, 
+                adminBookManage, 
+                adminBRManage, 
+                adminRRManage, 
+                adminFRManage,
+                adminBookListManage,
+                adminBookReviewManage,
+                adminCommentManage,
+                adminDiscussManage,
+                adminMessageManage},
     data(){
         return {
             selectIndex:"",

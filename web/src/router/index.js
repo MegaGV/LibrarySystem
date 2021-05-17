@@ -44,5 +44,41 @@ export default new Router({
       name: 'records',
       component: () => import("../components/records.vue")
     },
+    //========================================================
+    {
+      path: '/userMessage',
+      name: 'userMessage',
+      component: () => import("../components/userMessage.vue")
+    },
+    {
+      path: '/userBookList',
+      name: 'userBookList',
+      component: () => import("../components/userBookList.vue")
+    },
+    {
+      path: '/discussHome',
+      name: 'discussHome',
+      component: () => import("../components/discussHome.vue")
+    },
+    {
+      path: '/discussHome/discussDetail/:id',
+      name:'discussDetail',
+      component: () => import("../components/discussDetail.vue")
+    },
+    {
+      path: '/booklistHome',
+      name: 'booklistHome',
+      component: () => import("../components/booklistHome.vue")
+    },
+    {
+      path: '/booklistHome/booklistDetail/:id',
+      name:'booklistDetail',
+      component: () => import("../components/booklistDetail.vue")
+    },
+    {
+      path: '/bookDetail/:id',
+      name:'bookDetail',
+      component: () => import("../components/bookDetail.vue")
+    },
   ]
 })

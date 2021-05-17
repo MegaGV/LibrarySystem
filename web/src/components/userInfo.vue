@@ -12,6 +12,7 @@
                         <el-avatar icon="el-icon-user-solid"></el-avatar>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item icon="el-icon-setting" @click.native="toUserInfo">个人设置</el-dropdown-item>
+                            <el-dropdown-item icon="el-icon-bell" @click.native="toUserMessage">消息通知</el-dropdown-item>
                             <el-dropdown-item icon="el-icon-switch-button" @click.native="logout">退出账户</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -221,6 +222,12 @@ export default {
                 window.sessionStorage.removeItem("user");
                 this.$router.push('/login')
             });
+        },
+        toUserInfo(){
+            this.$router.push('/userInfo')
+        },
+        toUserMessage(){
+            this.$router.push('/userMessage')
         },
         toUserHome(){
             this.$router.push('/userHome');

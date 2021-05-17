@@ -8,7 +8,7 @@ public interface MessageService {
 
     MessageInfoDto getMessage(String userId, String messageId);
 
-    String setStatus(String userId, String messageId, Integer status);
+    String setStatus(String[] ids, Integer status);
 
-    String deleteMessage(String userId, String messageId);
+    String deleteMessage(String[] ids);
 }

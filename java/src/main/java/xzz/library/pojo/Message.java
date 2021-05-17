@@ -1,6 +1,10 @@
 package xzz.library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 public class Message implements Serializable {
@@ -12,6 +16,10 @@ public class Message implements Serializable {
     private String title;
 
     private String content;
+
+    @DateTimeFormat(pattern = "yyy-MM-dd hh:mm:sss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:sss")
+    private Date receiveDate;
 
     private Integer status;
 
@@ -51,6 +59,18 @@ public class Message implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getReceiveDate() {
+        return receiveDate;
+    }
+
+    public void setReceiveDate(Date receiveDate) {
+        this.receiveDate = receiveDate;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getStatus() {

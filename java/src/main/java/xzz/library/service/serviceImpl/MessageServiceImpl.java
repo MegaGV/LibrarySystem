@@ -29,14 +29,15 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional
-    public String setStatus(String userId, String messageId, Integer status) {
-        if (userId == null || messageId == null || status == null)
-            return "信息有误";
-        if (!messageMapper.selectByPrimaryKey(messageId).getUserId().equals(userId))
-            return "权限不足";
+    public String setStatus(String[] ids, Integer status) {
+        if (ids == null)
+            return "消息错误";
+        if (ids.length == 0)
+            return "无选中消息记录";
 
         try {
-            messageMapper.updateStatus(messageId, status);
+            for (String id : ids)
+                messageMapper.updateStatus(id, status);
             return null;
         } catch (Exception e){
             e.printStackTrace();
@@ -46,14 +47,15 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional
-    public String deleteMessage(String userId, String messageId) {
-        if (userId == null || messageId == null)
-            return "信息有误";
-        if (!messageMapper.selectByPrimaryKey(messageId).getUserId().equals(userId))
-            return "权限不足";
+    public String deleteMessage(String[] ids) {
+        if (ids == null)
+            return "消息错误";
+        if (ids.length == 0)
+            return "无选中消息记录";
 
         try {
-            messageMapper.deleteByPrimaryKey(messageId);
+            for (String id : ids)
+                messageMapper.deleteByPrimaryKey(id);
             return null;
         } catch (Exception e){
             e.printStackTrace();

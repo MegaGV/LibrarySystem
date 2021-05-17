@@ -21,31 +21,7 @@
         </ul>
     </div>
     <div class="contents">
-        <el-image :src="top"></el-image>
-        <el-card class="content-card" style="margin-left:300px">
-            <img :src="pic1" class="image">
-            <router-link style="text-decoration: none;color:black" :to="{ path: '/books'}">
-                <h3>查阅馆藏</h3>
-            </router-link>
-        </el-card>
-        <el-card class="content-card">
-            <img :src="pic2" class="image">
-            <router-link style="text-decoration: none;color:black" :to="{ path: '/records'}">
-                <h3>查询个人记录</h3>
-            </router-link>
-        </el-card>
-        <el-card class="content-card" style="margin-left:300px">
-            <img :src="pic3" class="image">
-            <router-link style="text-decoration: none;color:black" :to="{ path: '/discussHome'}">
-                <h3>讨论区</h3>
-            </router-link>
-        </el-card>
-        <el-card class="content-card">
-            <img :src="pic4" class="image">
-            <router-link style="text-decoration: none;color:black" :to="{ path: '/booklistHome'}">
-                <h3>书单区</h3>
-            </router-link>
-        </el-card>
+        
     </div>
 </div>
 
@@ -55,11 +31,6 @@ export default {
     data(){
         return{
             logo:require("../assets/libLog.jpg"),
-            pic1:require("../assets/1.jpg"),
-            pic2:require("../assets/2.jpg"),
-            pic3:require("../assets/3.jpg"),
-            pic4:require("../assets/4.jpg"),
-            top:require("../assets/topTop.jpg")
         }
     },
     mounted(){
@@ -159,15 +130,5 @@ li {
     height: 100%;
     overflow: hidden;
     padding: 85px 4% 100px;
-}
-.content-card{
-    width : 500px;
-    height: 300px;
-    float: left;
-    margin:50px;
-}
-.image{
-    width: 100%;
-    display: block;
 }
 </style>

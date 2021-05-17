@@ -6,6 +6,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="detail" property="detail" jdbcType="LONGVARCHAR" /> <!-- mybatis' LONGVARCHAR >> mysql's LONGTEXT -->
+    <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
@@ -13,29 +14,30 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.Message" >
-    insert into messages (id, user_id, title, content, status)
+    insert into messages (id, user_id, title, content, receive_date, status)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
-      #{content,jdbcType=LONGVARCHAR}, #{status,jdbcType=INTEGER})
+      #{content,jdbcType=LONGVARCHAR}, #{receiveDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Message" >
     update messages
     set user_id = #{userId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
+      receive_date = #{receiveDate,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, user_id, title, content, status
+    select id, user_id, title, content, receive_date, status
     from messages
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, user_id, title, content, status
+    select id, user_id, title, content, receive_date, status
     from messages
   </select>
   <select id="getMessageListByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, user_id, title, content, status
+    select id, user_id, title, content, receive_date, status
     from messages
     where user_id = #{userId}
   </select>
@@ -50,7 +52,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="getMessages" parameterType="xzz.library.dto.search.MessageSearchDto" resultMap="BaseResultMap" >
-    select id, user_id, title, content, status
+    select id, user_id, title, content, receive_date, status
     from messages
     <where>
       <if test="detail!=null and detail !=''">
