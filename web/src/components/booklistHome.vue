@@ -4,7 +4,7 @@
     <div class="nav">
         <ul class="nav-left">
             <li class="nav-left-item">
-                <el-image class="logo" :src="logo" style="width: 200px; height: 50px"></el-image>
+                <el-image class="logo" :src="logo" style="width: 200px; height: 50px" @click="toUserHome"></el-image>
             </li>
         </ul>
         <ul class="nav-right">
@@ -21,6 +21,60 @@
         </ul>
     </div>
     <div class="contents">
+        <!-- nav -->
+        <div>
+            <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1">我的书单</el-menu-item>
+                <el-menu-item index="2">书单广场</el-menu-item>    
+            </el-menu>
+            <div class="line"></div>
+        </div>
+
+        <!-- lists -->
+        <div v-if="activeIndex == 1">
+            <div slot="header" class="clearfix" style="padding-bottom:40px;margin-top:20px">
+            </div>
+
+            <el-card v-for="booklist in booklists" v-bind:key="booklist.id" class="booklist_card" :body-style="{ padding: '0px' }">
+                <div>
+                    <strong >
+                        <router-link style="text-decoration: none;color:black" :to="{ path: '/booklistHome/booklistDetail/' + booklist.id}">
+                        <h2 style="text-align:center">{{booklist.listName}}</h2>
+                        </router-link>
+                    </strong>
+                </div>
+                <p class="booklist_description">
+                    {{booklist.description}}
+                </p>
+                <div class="booklist_card_foot">
+                    <el-button type="primary">编辑书单</el-button>
+                    <el-button type="danger">删除书单</el-button>
+                </div>
+            </el-card>
+            <el-card class="booklist_card" :body-style="{ padding: '0px' }">
+                <div>
+                    <div style="text-align:center;margin:100px;cursor:pointer" >
+                        <h2>+<br>新增书单</h2>
+                    </div>
+                </div>
+            </el-card>
+        </div>
+
+        <div v-if="activeIndex == 2">
+
+            <!-- page -->
+            <div class="page-part">
+                <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page.sync="searchForm.page"
+                    :page-sizes="[5,10,15,20]"
+                    :page-size="searchForm.limit"
+                    layout="total, sizes,prev, pager, next,jumper"
+                    :total="total">
+                </el-pagination>
+            </div>
+        </div>
         
     </div>
 </div>
@@ -31,6 +85,13 @@ export default {
     data(){
         return{
             logo:require("../assets/libLog.jpg"),
+            booklists:[],
+            activeIndex:'1',
+            total:0,
+            searchForm:{
+                limit:5,
+                page:1
+            },
         }
     },
     mounted(){
@@ -50,6 +111,7 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        this.getUserBookLists();
     },
     methods:{
         logout() {
@@ -70,6 +132,48 @@ export default {
         },
         toUserHome(){
             this.$router.push('/userHome');
+        },
+        getUserBookLists(){
+            var userid = sessionStorage.getItem("user");
+            this.$axios.get('api/library/userBookList/getUserBookLists?userId=' + userid)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取记录失败");
+                }
+                else if (res.data.total != 0){
+                    this.booklists = res.data.data;
+                    this.total = res.data.total;
+                }
+                else{
+                    this.booklists = [];
+                    this.total = 0;
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        handleSizeChange(val) {
+            this.searchForm.limit = val;
+            this.searchForm.page=1;
+            this.getDiscusses();
+        },
+        handleCurrentChange(val) {
+            this.searchForm.page = val;
+            this.getDiscusses();
+        },
+        handleSelect(key, keyPath) {
+            this.activeIndex = key;
+            this.currentPage = 1;
+            this.records = [];
+            switch(key){
+                case '1': this.getUserBookLists();break;
+                case '2': break;
+                default: console.log("wrong record type");
+            }
+            console.log(this.records);
+            //console.log(key, keyPath);
         },
     }
 }
@@ -131,4 +235,28 @@ li {
     overflow: hidden;
     padding: 85px 4% 100px;
 }
+.booklist_card{
+    width: 300px;
+    height: 250px;
+    background: rgb(243, 241, 241);
+    position: relative;
+    border: 1px solid #E2E6ED;
+    border-radius: 8px;
+    float:left;
+    margin:15px;
+}
+.booklist_description{
+    margin-top: 15px;
+    padding: 14px;
+    height: 105px;
+    border-bottom: 1px solid rgba(226,230,237,1);
+}
+.booklist_card_foot{
+    width: 80%;
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    right: 16px;
+}
+
 </style>

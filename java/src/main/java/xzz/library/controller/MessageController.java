@@ -32,19 +32,19 @@ public class MessageController {
 
     @PostMapping("/setRead")
     @ResponseBody
-    public String setRead(String[] ids){
+    public String setRead(@RequestBody String[] ids){
         return messageService.setStatus(ids, 1);
     }
 
     @PostMapping("/setUnRead")
     @ResponseBody
-    public String setUnRead(String[] ids){
+    public String setUnRead(@RequestBody String[] ids){
         return messageService.setStatus(ids, 0);
     }
 
     @PostMapping("/deleteMessage")
     @ResponseBody
-    public String deleteMessage(String[] ids){
+    public String deleteMessage(@RequestBody String[] ids){
         return messageService.deleteMessage(ids);
     }
 }

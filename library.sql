@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-05-17 19:37:22
+Date: 2021-05-18 17:27:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -253,6 +253,11 @@ CREATE TABLE `discusses` (
 -- Records of discusses
 -- ----------------------------
 INSERT INTO `discusses` VALUES ('1098915e-1f21-4438-972b-be917c6b529c', 'ba05892f-4403-48f2-9c36-1de685d5f3fc', '欢迎来到讨论区', '欢迎来到讨论区，请合规发言，遵守相关法律法规秩序', '2021-05-10 19:35:54');
+INSERT INTO `discusses` VALUES ('1098916e-1f21-4438-972b-be917c6b529c', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '新人建议', '欢迎各位来到讨论区，下列为一些新人需要注意的点和建议', '2021-05-11 15:51:12');
+INSERT INTO `discusses` VALUES ('1098917e-1f21-4438-972b-be917c6b529c', '2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', '求书籍推荐', '对计算机基础有一定的兴趣，想求各位推荐一些图书供学习', '2021-05-12 16:00:56');
+INSERT INTO `discusses` VALUES ('1098918e-1f21-4438-972b-be917c6b529c', '7572249b-386a-4ef6-82bb-7cb9f2e06986', '图书推荐《看不见的森林 : 林中自然笔记》', '近几天读了这本书，觉得很不错，特地推荐给大家', '2021-05-13 16:03:30');
+INSERT INTO `discusses` VALUES ('1098919e-1f21-4438-972b-be917c6b529c', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '【推荐阅读】好书推荐', '大家可以在这里回复自己推荐的图书给其他人', '2021-05-14 16:16:04');
+INSERT INTO `discusses` VALUES ('1098920e-1f21-4438-972b-be917c6b529c', '92ce0faa-3bde-4df1-82aa-69991773dbab', '关于借阅的一点疑问', '不小心把借来的书弄丢了，请问该怎么办', '2021-05-11 16:31:53');
 
 -- ----------------------------
 -- Table structure for fine_records

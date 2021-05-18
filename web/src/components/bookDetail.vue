@@ -4,7 +4,7 @@
     <div class="nav">
         <ul class="nav-left">
             <li class="nav-left-item">
-                <el-image class="logo" :src="logo" style="width: 200px; height: 50px"></el-image>
+                <el-image class="logo" :src="logo" style="width: 200px; height: 50px" @click="toUserHome"></el-image>
             </li>
         </ul>
         <ul class="nav-right">
@@ -26,6 +26,7 @@
             <div style="float:left;width:30%;">
                 <el-card style="margin:0 auto;text-align:left">
                     <div slot="header">
+                        <el-button type="info"  style="float:right;margin-left:10px;">加到书单</el-button>
                         <el-button type="primary" @click="borrowBook()" style="float:right">借阅</el-button>
                         <h1>图书详情</h1>
                     </div>

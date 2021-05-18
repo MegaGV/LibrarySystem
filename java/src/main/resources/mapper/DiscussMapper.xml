@@ -14,7 +14,7 @@
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.Discuss" >
     insert into discusses (id, user_id, title, content, publish_date)
-    values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
       #{content,jdbcType=LONGVARCHAR}, #{publishDate,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Discuss" >
@@ -46,6 +46,7 @@
         or content like concat("%",#{detail},"%")
       </if>
     </where>
+    order by publish_date desc
     limit #{page}, #{limit}
   </select>
   <select id="countDiscusses" parameterType="xzz.library.dto.search.DiscussSearchDto" resultType="java.lang.Integer" >

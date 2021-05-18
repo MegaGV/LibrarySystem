@@ -26,9 +26,9 @@
                     <el-menu-item index="1">系统消息</el-menu-item>
                 </el-menu>
                 <el-row style="float:left;margin-top:20px">
-                    <el-button>删除</el-button>
-                    <el-button type="primary">设为已读</el-button>
-                    <el-button type="danger">设为未读</el-button>
+                    <el-button @click="DelMessage">删除</el-button>
+                    <el-button type="primary" @click="SetRead">设为已读</el-button>
+                    <el-button type="danger" @click="SetUnread">设为未读</el-button>
                 </el-row>
             </div>
             <!-- table -->
@@ -173,6 +173,98 @@ export default {
             this.multipleSelection = [];
             for (var i = 0; i < val.length; i++){
                 this.multipleSelection[i] = val[i].id;
+            }
+        },
+        SetUnread(){
+            if (this.multipleSelection.length == 0)
+                this.$message("未选中任何数据");
+            else{
+                this.$axios.post('api/library/message/setUnRead', this.multipleSelection)
+                .then(res => {
+                    if (res.data == ""){
+                        this.$message({
+                                type: 'success',
+                                message: '设置成功!'
+                        });
+                        this.getMessages();
+                    }
+                    else{
+                        this.$message.error(res.data);
+                    } 
+                })
+                .catch(err => {
+                    this.$message.error("系统繁忙，请稍后再试");
+                    console.log(err);
+                })
+                .catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消设置'
+                    });          
+                });
+            }
+        },
+        SetRead(){
+            if (this.multipleSelection.length == 0)
+                this.$message("未选中任何数据");
+            else{
+                this.$axios.post('api/library/message/setRead', this.multipleSelection)
+                .then(res => {
+                    if (res.data == ""){
+                        this.$message({
+                                type: 'success',
+                                message: '设置成功!'
+                        });
+                        this.getMessages();
+                    }
+                    else{
+                        this.$message.error(res.data);
+                    } 
+                })
+                .catch(err => {
+                    this.$message.error("系统繁忙，请稍后再试");
+                    console.log(err);
+                })
+                .catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消设置'
+                    });          
+                });
+            }
+        },
+        DelMessage(){
+            if (this.multipleSelection.length == 0)
+            this.$message("未选中任何数据");
+            else{
+                this.$confirm('此操作将永久删除选中数据, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$axios.post('api/library/message/deleteMessage', this.multipleSelection)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            this.getMessages();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        } 
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+                });
             }
         },
 

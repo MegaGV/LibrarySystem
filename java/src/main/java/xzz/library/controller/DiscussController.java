@@ -21,7 +21,7 @@ public class DiscussController {
     @Autowired
     private DiscussService discussService;
 
-    @GetMapping("/getDiscusses")
+    @PostMapping("/getDiscusses")
     @ResponseBody
     public DiscussListDto getDiscusses(@RequestBody DiscussSearchDto discussSearchDto){
         return discussService.getDiscusses(discussSearchDto);

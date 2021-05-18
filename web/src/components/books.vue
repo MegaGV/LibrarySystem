@@ -65,7 +65,7 @@
                     <el-table-column prop="price" label="定价" :show-overflow-tooltip="true" align="center" />
                     <el-table-column prop="stock" label="在库数" :show-overflow-tooltip="true" align="center" />
                     <el-table-column prop="total" label="库存" :show-overflow-tooltip="true" align="center" />
-                    <el-table-column label="操作" width="250" align="center">
+                    <el-table-column label="操作" width="350" align="center">
                         <template slot-scope="scope">
                             <el-button>
                                 <router-link style="text-decoration: none;color:black" :to="{ path: '/bookDetail/' + scope.row.id}" >
@@ -73,6 +73,7 @@
                                 </router-link>
                             </el-button>
                             <el-button type="primary" @click="borrowBook(scope.row)" :disabled="scope.row.stock=='0'">借阅</el-button>
+                            <el-button type="info">加到书单</el-button>
                         </template>
                     </el-table-column>
                 </el-table>

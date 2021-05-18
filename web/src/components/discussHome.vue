@@ -4,7 +4,7 @@
     <div class="nav">
         <ul class="nav-left">
             <li class="nav-left-item">
-                <el-image class="logo" :src="logo" style="width: 200px; height: 50px"></el-image>
+                <el-image class="logo" :src="logo" style="width: 200px; height: 50px" @click="toUserHome"></el-image>
             </li>
         </ul>
         <ul class="nav-right">
@@ -21,7 +21,52 @@
         </ul>
     </div>
     <div class="contents">
-        
+        <!-- table -->
+        <div>
+            <div slot="header" class="clearfix" style="padding-bottom:30px">
+                <h1>讨论区</h1>
+                <el-button type="primary" style="float:left;margin-bottom:10px" @click="openAddForm">发布新讨论</el-button>
+            </div>
+            <el-card v-for="discuss in discusses" v-bind:key="discuss.id" shadow="hover" style="margin-top:20px"  :body-style="{ padding: '10px' }">
+                <router-link style="text-decoration: none;color:black;text-align:left" :to="{ path: '/discussHome/discussDetail/' + discuss.id}">
+                    <h3>
+                        {{discuss.title}}
+                    </h3>
+                </router-link>
+                <span style="float:right">最新回复：{{discuss.publishDate}}</span>
+            </el-card>
+        </div>
+
+        <!-- page -->
+        <div class="page-part">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="searchForm.page"
+                :page-sizes="[5,10,15,20]"
+                :page-size="searchForm.limit"
+                layout="total, sizes,prev, pager, next,jumper"
+                :total="total">
+            </el-pagination>
+        </div>
+
+        <!-- UpdateForm -->
+        <div>
+            <el-dialog title="新讨论" :visible.sync="discussFormVisible"  width="40%">
+                <el-form ref="discussForm" :model="discussForm" :rules="addRules" label-width="100px">
+                    <el-form-item prop="title" label="标题" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.title" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="content" label="内容" style="width: 90%" >
+                        <el-input type="textarea" v-model="discussForm.content" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item style="width: 90%" >
+                        <el-button type="primary" @click="publishDiscuss('discussForm')">提交</el-button>
+                        <el-button type="" @click="closeAddForm">取消</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+        </div>
     </div>
 </div>
 
@@ -31,6 +76,26 @@ export default {
     data(){
         return{
             logo:require("../assets/libLog.jpg"),
+            discusses:[],
+            discussForm: {
+                userId:"",
+                title:"",
+                content:"",
+            },
+            discussFormVisible: false,
+            total:0,
+            searchForm:{
+                limit:5,
+                page:1
+            },
+            addRules: {
+                title: [
+                    { required: true, message: '请输入标题', trigger: 'blur' }
+                ],
+                content: [
+                    { required: true, message: '请输入内容', trigger: 'blur' }
+                ],
+            },
         }
     },
     mounted(){
@@ -50,6 +115,7 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        this.getDiscusses();
     },
     methods:{
         logout() {
@@ -70,6 +136,76 @@ export default {
         },
         toUserHome(){
             this.$router.push('/userHome');
+        },
+        getDiscusses(){
+            this.$axios.post('api/library/discuss/getDiscusses', this.searchForm)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取记录失败");
+                }
+                else if (res.data.total != 0){
+                    this.discusses = res.data.data;
+                    this.total = res.data.total;
+                }
+                else{
+                    this.discusses = [];
+                    this.total = 0;
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        handleSizeChange(val) {
+            this.searchForm.limit = val;
+            this.searchForm.page=1;
+            this.getDiscusses();
+        },
+        handleCurrentChange(val) {
+            this.searchForm.page = val;
+            this.getDiscusses();
+        },
+        publishDiscuss(formName){
+            this.discussForm.userId = sessionStorage.getItem("user");
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios.post("api/library/discuss/publishDiscuss", this.discussForm)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                message: '添加成功',
+                                type: 'success'
+                            });
+                            this.getDiscusses();
+                            this.closeAddForm();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    });
+                } 
+              else {
+                  return false;
+                }
+            });
+        },
+        resetForm(){
+            this.discussForm = {
+                title: "",
+                content: ""
+            }
+        },
+        openAddForm(){
+            this.resetForm();
+            this.discussFormVisible = true;
+        },
+        closeAddForm(){
+            this.discussFormVisible = false;
         },
     }
 }

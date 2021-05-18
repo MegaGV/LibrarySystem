@@ -24,6 +24,7 @@ public class DiscussServiceImpl implements DiscussService {
 
     @Override
     public DiscussListDto getDiscusses(DiscussSearchDto discussSearchDto) {
+        discussSearchDto.initial();
         return new DiscussListDto(discussMapper.getDiscusses(discussSearchDto), discussMapper.countDiscusses(discussSearchDto));
     }
 

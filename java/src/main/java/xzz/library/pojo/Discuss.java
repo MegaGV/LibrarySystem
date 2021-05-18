@@ -25,6 +25,7 @@ public class Discuss implements Serializable {
 
     public void initial(){
         this.id = UUID.randomUUID().toString();
+        this.publishDate = new Date();
     }
 
     public String getId() {
