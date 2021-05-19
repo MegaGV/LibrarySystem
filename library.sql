@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-05-19 14:17:40
+Date: 2021-05-19 17:54:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -450,8 +450,11 @@ CREATE TABLE `user_booklist` (
 -- ----------------------------
 -- Records of user_booklist
 -- ----------------------------
+INSERT INTO `user_booklist` VALUES ('1462583a-b9d7-46b1-aecf-47ba91db5fd9', '2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', '计算机入门', '推荐了部分计算机入门需要看的书籍', '0157096e-b13f-4860-911e-20efbcd5f5df,02810cef-82e5-44c8-b69b-222df8043d12,02b68328-2337-41ca-969d-ba19326faecc,03fb7786-6f82-496c-b157-adb8e904fbbf,045740ce-efb9-4a51-8e77-6970f47e8748,');
 INSERT INTO `user_booklist` VALUES ('1462813a-b9d7-46b1-aecf-47ba91db5fd9', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '我的书单', '我的第一个书单', '028cef-82e5-44c8-b69b-222df8043d12,0157096e-b13f-4860-911e-20efbcd5f5df');
 INSERT INTO `user_booklist` VALUES ('1462813a-b9d7-46b1-aecf-47ca13db5fd9', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '空书单', '', '');
+INSERT INTO `user_booklist` VALUES ('1489253a-b9d7-46b1-aecf-47ba91db5fd9', '2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', 'C++入门', 'C++入门所需要学习的内容', '05cf259f-62e5-4512-9e72-44973090e4af,0ba06ded-0612-419a-8b4e-ae0bdfc61729,0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d,14315e47-c398-47d1-b297-2ac8401dc14e,2257cbed-e9f3-4207-a409-54879296169b');
+INSERT INTO `user_booklist` VALUES ('9a89a47b-c7e3-4551-a8e9-0828568a1e9c', '7572249b-386a-4ef6-82bb-7cb9f2e06986', '经典书目合集', '收录个人比较喜欢的经典图书，欢迎访问', '8faec636-9699-4ade-bb94-f6393c8109be,3f0314cf-10e9-468c-a32c-09010535e127.386ea8ff-94f5-4557-adf6-b711035aaf57');
 INSERT INTO `user_booklist` VALUES ('9a89a47b-c7e3-4551-a8e9-0828758a1e9c', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '满书单', '', '0157096e-b13f-4860-911e-20efbcd5f5df,02810cef-82e5-44c8-b69b-222df8043d12,02b68328-2337-41ca-969d-ba19326faecc,03fb7786-6f82-496c-b157-adb8e904fbbf,045740ce-efb9-4a51-8e77-6970f47e8748,05cf259f-62e5-4512-9e72-44973090e4af,0ba06ded-0612-419a-8b4e-ae0bdfc61729,0ecdf9b2-2549-4fe3-9a08-8ae9ff1b936d,14315e47-c398-47d1-b297-2ac8401dc14e,2257cbed-e9f3-4207-a409-54879296169b');
 INSERT INTO `user_booklist` VALUES ('cd1a6031-1676-496f-bfb0-80e40c022e13', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'MyBookList', 'MyBookList is here', '0157096e-b13f-4860-911e-20efbcd5f5df');
 

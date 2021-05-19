@@ -73,7 +73,7 @@
                                 </router-link>
                             </el-button>
                             <el-button type="primary" @click="borrowBook(scope.row)" :disabled="scope.row.stock=='0'">借阅</el-button>
-                            <el-button type="info">加到书单</el-button>
+                            <el-button type="info" @click="viewBookList(scope.row.id)" >加到书单</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -92,6 +92,25 @@
                 </el-pagination>
             </div>
 
+            <!-- booklist -->
+            <div>
+                <el-dialog title="书单一览" :visible.sync="booklistVisible"  width="60%">
+                    <el-table  :data="booklists" stripe key='1'>
+                        <el-table-column label="序号" align="center" width="50">
+                            <template slot-scope="scope">
+                                <p>{{scope.$index + 1 }}</p>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="listName" label="书单名" :show-overflow-tooltip="true" align="center" />
+                        <el-table-column prop="description" label="书单描述" :show-overflow-tooltip="true" align="center" />
+                        <el-table-column label="操作" width="360" align="center">
+                            <template slot-scope="scope">
+                                <el-button type="primary" @click="addBook(scope.row.id)">加到书单</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-dialog>
+            </div>
 
 
         </div>
@@ -118,6 +137,10 @@ export default {
             total:0,
             bookVisible: false,
             bookForm:"",
+            booklists: [],
+            booklistsize: 0,
+            booklistVisible: false,
+            currentBook: "",
         }
     },
     mounted(){
@@ -247,7 +270,52 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
-        }
+        },
+        getUserBookLists(){
+            var userId = sessionStorage.getItem("user");
+            this.$axios.get('api/library/userBookList/getUserBookLists?userId=' + userId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取记录失败");
+                }
+                else if (res.data.total != 0){
+                    this.booklists = res.data.data;
+                    this.booklistsize = res.data.total;
+                }
+                else{
+                    this.booklists = [];
+                    this.booklistsize = 0;
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        viewBookList(bookId){
+            this.getUserBookLists();
+            this.booklistVisible = true;
+            this.currentBook = bookId;
+        },
+        addBook(listId){
+            this.$axios.post('api/library/userBookList/addBook?bookId=' + this.currentBook + "&userBookListId=" + listId)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message({
+                        type: 'success',
+                        message: '添加成功!'
+                    });
+                    this.getUserBookLists();
+                }
+                else{
+                    this.$message.error(res.data);
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
     }
 }
 </script>
