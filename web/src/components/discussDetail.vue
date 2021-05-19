@@ -21,7 +21,72 @@
         </ul>
     </div>
     <div class="contents">
-        
+        <div>
+            <!-- title -->
+            <div style="text-align:left;">
+                <h1>
+                    <el-avatar icon="el-icon-back" @click.native="toDiscussHome" />
+                    {{discussForm.title}}
+                    </h1>
+                <el-button type="primary" @click="openCommentForm">评论</el-button>
+                <el-button type="danger" v-if="isDiscussOwner" @click="DelDiscuss">删除帖子</el-button>
+            </div>
+
+            <!-- comments -->
+            <div>
+                <el-card shadow="hover" style="margin-top:20px"  :body-style="{ padding: '10px' }">
+                    <div>
+                        <p style="text-align:left">
+                            {{discussForm.content}}
+                            <br/>
+                            <span style="float:right"> 
+                                {{discussForm.publishDate}}
+                            </span>
+                        </p>
+                    </div>
+                </el-card>
+                <el-card v-for="comment in comments" v-bind:key="comment.id" shadow="hover" style="margin-top:20px"  :body-style="{ padding: '10px' }">
+                    <div>
+                        <p style="text-align:left">
+                            {{comment.content}}
+                            <br/>
+                            <span style="float:right">
+                                <el-button type="text" v-if="isDiscussOwner" style="margin-right:10px" @click="DelComment(comment.id)">删除回复</el-button>
+                                {{comment.publishDate}}
+                            </span>
+                        </p>
+                    </div>
+                </el-card>
+            </div>
+
+            <!-- page -->
+            <div class="page-part">
+                <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page.sync="searchForm.page"
+                    :page-sizes="[5,10,15,20]"
+                    :page-size="searchForm.limit"
+                    layout="total, sizes,prev, pager, next,jumper"
+                    :total="total">
+                </el-pagination>
+            </div>
+
+            <!-- UpdateForm -->
+            <div>
+                <el-dialog title="评论内容" :visible.sync="commentFormVisible"  width="40%">
+                    <el-form ref="commentForm" :model="commentForm" :rules="addRules" label-width="100px">
+                        <el-form-item prop="content" label="内容" style="width: 90%" >
+                            <el-input type="textarea" v-model="commentForm.content" placeholder="请输入内容"></el-input>
+                        </el-form-item>
+                        <el-form-item style="width: 90%" >
+                            <el-button type="primary" @click="publishComment('commentForm')">提交</el-button>
+                            <el-button type="" @click="closeCommentForm">取消</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -31,7 +96,35 @@ export default {
     data(){
         return{
             logo:require("../assets/libLog.jpg"),
+            discussForm:"",
+            comments: [],
+            total: 0,
+            commentForm:{
+                userId:"",
+                discussId:"",
+                content:"",
+            },
+            commentFormVisible:false,
+            searchForm:{
+                discussId:"",
+                limit:5,
+                page:1
+            },
+            addRules: {
+                content: [
+                    { required: true, message: '请输入内容', trigger: 'blur' }
+                ],
+            },
         }
+    },
+    computed: {
+        id () {
+            return this.$route.params.id
+        },
+        isDiscussOwner () {
+            return this.discussForm.userId == sessionStorage.getItem("user");
+        },
+        
     },
     mounted(){
         var userId = sessionStorage.getItem("user");
@@ -50,6 +143,8 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        this.getDiscuss();
+        this.getComments();
     },
     methods:{
         logout() {
@@ -70,6 +165,155 @@ export default {
         },
         toUserHome(){
             this.$router.push('/userHome');
+        },
+        toDiscussHome(){
+            this.$router.push('/discussHome');
+        },
+        handleSizeChange(val) {
+            this.searchForm.limit = val;
+            this.searchForm.page=1;
+            this.getComments();
+        },
+        handleCurrentChange(val) {
+            this.searchForm.page = val;
+            this.getComments();
+        },
+        getDiscuss(){
+            this.$axios.get('api/library/discuss/getDiscuss?discussId='+this.id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取讨论失败");
+                }
+                else {
+                    this.discussForm = res.data;
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        getComments(){
+            this.searchForm.discussId = this.id;
+            this.$axios.post('api/library/discuss/getComments', this.searchForm)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取评论失败");
+                }
+                else if (res.data.total != 0){
+                    this.comments = res.data.data;
+                    this.total = res.data.total;
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        DelDiscuss(){
+            var userId = sessionStorage.getItem("user");
+            this.$confirm('此操作将永久删除选中数据, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.$axios.post('api/library/discuss/deleteDiscuss?userId=' + userId + "&discussId=" + this.id)
+                .then(res => {
+                    if (res.data == ""){
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        this.toDiscussHome();
+                    }
+                    else{
+                        this.$message.error(res.data);
+                    } 
+                })
+                .catch(err => {
+                    this.$message.error("系统繁忙，请稍后再试");
+                    console.log(err);
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
+        DelComment(cid){
+            var userId = sessionStorage.getItem("user");
+            this.$confirm('此操作将永久删除选中数据, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.$axios.post('api/library/discuss/deleteComment?userId=' + userId + "&commentId=" + cid)
+                .then(res => {
+                    if (res.data == ""){
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        this.getComments();
+                    }
+                    else{
+                        this.$message.error(res.data);
+                    } 
+                })
+                .catch(err => {
+                    this.$message.error("系统繁忙，请稍后再试");
+                    console.log(err);
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
+        publishComment(formName){
+            this.commentForm.userId = sessionStorage.getItem("user");
+            this.commentForm.discussId = this.id;
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios.post("api/library/discuss/publishComment", this.commentForm)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                message: '添加成功',
+                                type: 'success'
+                            });
+                            this.getComments();
+                            this.closeCommentForm();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    });
+                } 
+              else {
+                  return false;
+                }
+            });
+        },
+        resetForm(){
+            this.commentForm = {
+                userId:"",
+                discussId:"",
+                content:"",
+            }
+        },
+        openCommentForm(){
+            this.resetForm();
+            this.commentFormVisible = true;
+        },
+        closeCommentForm(){
+            this.commentFormVisible = false;
         },
     }
 }

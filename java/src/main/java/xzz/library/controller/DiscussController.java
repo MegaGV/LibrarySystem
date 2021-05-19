@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.list.CommentListDto;
 import xzz.library.dto.list.DiscussListDto;
+import xzz.library.dto.search.CommentSearchDto;
 import xzz.library.dto.search.DiscussSearchDto;
 import xzz.library.pojo.Comment;
 import xzz.library.pojo.Discuss;
@@ -45,10 +46,10 @@ public class DiscussController {
         return discussService.deleteDiscuss(userId, discussId);
     }
 
-    @GetMapping("/getComments")
+    @PostMapping("/getComments")
     @ResponseBody
-    public CommentListDto getComments(String discussId){
-        return discussService.getComments(discussId);
+    public CommentListDto getComments(@RequestBody CommentSearchDto commentSearchDto){
+        return discussService.getComments(commentSearchDto);
     }
 
     @PostMapping("/publishComment")

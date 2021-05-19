@@ -2,6 +2,7 @@ package xzz.library.service;
 
 import xzz.library.dto.list.CommentListDto;
 import xzz.library.dto.list.DiscussListDto;
+import xzz.library.dto.search.CommentSearchDto;
 import xzz.library.dto.search.DiscussSearchDto;
 import xzz.library.pojo.Comment;
 import xzz.library.pojo.Discuss;
@@ -15,7 +16,7 @@ public interface DiscussService {
 
     String deleteDiscuss(String userId, String discussId);
 
-    CommentListDto getComments(String discussId);
+    CommentListDto getComments(CommentSearchDto commentSearchDto);
 
     String publishComment(Comment comment);
 

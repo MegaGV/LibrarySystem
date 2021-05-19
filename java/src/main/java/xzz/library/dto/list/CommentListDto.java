@@ -1,6 +1,6 @@
 package xzz.library.dto.list;
 
-import xzz.library.pojo.Discuss;
+import xzz.library.pojo.Comment;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ public class CommentListDto {
     //========================================================================================
     private Integer total;
 
-    private List<Discuss> data;
+    private List<Comment> data;
 
-    public CommentListDto(List<Discuss> books, int total){
+    public CommentListDto(List<Comment> books, int total){
         this.data = books;
         this.total = total;
     }
 
-    public CommentListDto(List<Discuss> books){
+    public CommentListDto(List<Comment> books){
         this.data = books;
         this.total = books.size();
     }
@@ -30,11 +30,11 @@ public class CommentListDto {
         this.total = total;
     }
 
-    public List<Discuss> getData() {
+    public List<Comment> getData() {
         return data;
     }
 
-    public void setData(List<Discuss> data) {
+    public void setData(List<Comment> data) {
         this.data = data;
     }
 }

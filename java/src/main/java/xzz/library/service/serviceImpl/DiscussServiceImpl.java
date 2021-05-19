@@ -5,13 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.CommentMapper;
 import xzz.library.dao.DiscussMapper;
+import xzz.library.dto.list.BookListDto;
 import xzz.library.dto.list.CommentListDto;
 import xzz.library.dto.list.DiscussListDto;
+import xzz.library.dto.search.CommentSearchDto;
 import xzz.library.dto.search.DiscussSearchDto;
 import xzz.library.pojo.Comment;
 import xzz.library.pojo.Discuss;
 import xzz.library.service.DiscussService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -70,8 +73,9 @@ public class DiscussServiceImpl implements DiscussService {
     }
 
     @Override
-    public CommentListDto getComments(String discussId) {
-        return commentMapper.getCommentsByDiscussId(discussId);
+    public CommentListDto getComments(CommentSearchDto commentSearchDto) {
+        commentSearchDto.initial();
+        return new CommentListDto(commentMapper.getComments(commentSearchDto), commentMapper.countComments(commentSearchDto));
     }
 
     @Override

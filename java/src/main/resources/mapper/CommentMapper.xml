@@ -14,7 +14,7 @@
   </delete>
   <insert id="insert" parameterType="xzz.library.pojo.Comment" >
     insert into comments (id, user_id, discuss_id, content, publish_date)
-    values (#{id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{discussId,jdbcType=VARCHAR},
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{discussId,jdbcType=VARCHAR},
       #{content,jdbcType=LONGVARCHAR}, #{publishDate,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.Comment" >
@@ -36,6 +36,18 @@
   </select>
   <select id="getCommentsByDiscussId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select id, user_id, discuss_id, content, publish_date
+    from comments
+    where discuss_id = #{discussId,jdbcType=VARCHAR}
+  </select>
+  <select id="getComments" resultMap="BaseResultMap" parameterType="xzz.library.dto.search.CommentSearchDto" >
+    select id, user_id, discuss_id, content, publish_date
+    from comments
+    where discuss_id = #{discussId,jdbcType=VARCHAR}
+    order by publish_date
+    limit #{page}, #{limit}
+  </select>
+  <select id="countComments" resultType="java.lang.Integer" parameterType="xzz.library.dto.search.CommentSearchDto" >
+    select count(0)
     from comments
     where discuss_id = #{discussId,jdbcType=VARCHAR}
   </select>

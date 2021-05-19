@@ -1,6 +1,7 @@
 package xzz.library.dao;
 
 import xzz.library.dto.list.CommentListDto;
+import xzz.library.dto.search.CommentSearchDto;
 import xzz.library.pojo.Comment;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface CommentMapper {
 
     CommentListDto getCommentsByDiscussId(String discussId);
 
+    List<Comment> getComments(CommentSearchDto commentSearchDto);
+
+    int countComments(CommentSearchDto commentSearchDto);
 }
