@@ -66,11 +66,6 @@ export default new Router({
       component: () => import("../components/booklistHome.vue")
     },
     {
-      path: '/booklistHome/booklistDetail/:id',
-      name:'booklistDetail',
-      component: () => import("../components/booklistDetail.vue")
-    },
-    {
       path: '/bookDetail/:id',
       name:'bookDetail',
       component: () => import("../components/bookDetail.vue")

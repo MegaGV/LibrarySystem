@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.BookListDto;
 import xzz.library.dto.list.UserBookListListDto;
+import xzz.library.dto.search.UserBookListSearchDto;
 import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserBookListService;
 
@@ -51,13 +53,25 @@ public class UserBookListController {
 
     @PostMapping("/addBook")
     @ResponseBody
-    public String addBook(String userId, String bookId, String userBookListId ){
-        return userBookListService.updateBook(userId, bookId, userBookListId, true);
+    public String addBook(String bookId, String userBookListId ){
+        return userBookListService.updateBook(bookId, userBookListId, true);
     }
 
     @PostMapping("/removeBook")
     @ResponseBody
-    public String removeBook(String userId, String bookId, String userBookListId ){
-        return userBookListService.updateBook(userId, bookId, userBookListId, false);
+    public String removeBook(String bookId, String userBookListId ){
+        return userBookListService.updateBook(bookId, userBookListId, false);
+    }
+
+    @GetMapping("/getListBooks")
+    @ResponseBody
+    public BookListDto getListBooks(String userBookListId){
+        return userBookListService.getListBooks(userBookListId);
+    }
+
+    @PostMapping("/getAllUserBookLists")
+    @ResponseBody
+    public UserBookListListDto getAllUserBookLists(@RequestBody UserBookListSearchDto userBookListSearchDto){
+        return userBookListService.getAllUserBookLists(userBookListSearchDto);
     }
 }

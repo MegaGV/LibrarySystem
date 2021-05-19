@@ -6,12 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 import xzz.library.dao.BookMapper;
 import xzz.library.dao.UserBookListMapper;
 import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.BookListDto;
 import xzz.library.dto.list.UserBookListListDto;
+import xzz.library.dto.search.UserBookListSearchDto;
 import xzz.library.pojo.Book;
 import xzz.library.pojo.UserBookList;
 import xzz.library.service.UserBookListService;
 import xzz.library.util.StringListUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -96,12 +100,10 @@ public class UserBookListServiceImpl implements UserBookListService {
 
     @Override
     @Transactional
-    public String updateBook(String userId, String bookId, String userBookListId, Boolean isAdd) {
-        if (userId == null || bookId == null || userBookListId == null)
+    public String updateBook(String bookId, String userBookListId, Boolean isAdd) {
+        if (bookId == null || userBookListId == null)
             return "信息有误";
         UserBookList dbList = userBookListMapper.selectByPrimaryKey(userBookListId);
-        if (!dbList.getUserId().equals(userId))
-            return "权限不足";
         String books = dbList.getBooks();
         if (isAdd) {
             if (StringListUtils.count(books) >= 9) // 暂时限制书单长度为10
@@ -127,6 +129,34 @@ public class UserBookListServiceImpl implements UserBookListService {
             e.printStackTrace();
             return "书单图书变更失败";
         }
+    }
+
+    @Override
+    public BookListDto getListBooks(String userBookListId) {
+        UserBookList dbList = userBookListMapper.selectByPrimaryKey(userBookListId);
+        if (dbList.getBooks().isEmpty())
+            return new BookListDto(new ArrayList<>(), 0);
+        String[] bookIds = dbList.getBooks().split(",");
+        List<Book> books = new ArrayList<>();
+        for (String bookId : bookIds) {
+            Book book = bookMapper.selectByPrimaryKey(bookId);
+            if (book != null)
+                books.add(book);
+            else // 有找不到的书，添加空对象标记
+            {
+                Book emptyBook = new Book();
+                emptyBook.setId(bookId);
+                books.add(emptyBook);
+            }
+        }
+        return new BookListDto(books);
+    }
+
+    @Override
+    public UserBookListListDto getAllUserBookLists(UserBookListSearchDto userBookListSearchDto) {
+        userBookListSearchDto.initial();
+        return new UserBookListListDto(userBookListMapper.getUserBookLists(userBookListSearchDto),
+                userBookListMapper.countUserBookList(userBookListSearchDto));
     }
 
 }

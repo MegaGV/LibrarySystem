@@ -1,7 +1,9 @@
 package xzz.library.service;
 
 import xzz.library.dto.info.UserBookListInfoDto;
+import xzz.library.dto.list.BookListDto;
 import xzz.library.dto.list.UserBookListListDto;
+import xzz.library.dto.search.UserBookListSearchDto;
 import xzz.library.pojo.UserBookList;
 
 public interface UserBookListService {
@@ -15,6 +17,9 @@ public interface UserBookListService {
 
     String updateUserBookList(UserBookList userBookList);
 
-    String updateBook(String userId, String bookId, String userBookListId, Boolean isAdd);
+    String updateBook(String bookId, String userBookListId, Boolean isAdd);
 
+    BookListDto getListBooks(String userBookListId);
+
+    UserBookListListDto getAllUserBookLists(UserBookListSearchDto userBookListSearchDto);
 }

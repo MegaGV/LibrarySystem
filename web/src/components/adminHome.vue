@@ -17,9 +17,17 @@
                             <el-menu-item index="4-1" @click="indexChangeHandle('4-1')">借阅记录管理</el-menu-item>
                             <el-menu-item index="4-2" @click="indexChangeHandle('4-2')">归还记录管理</el-menu-item>
                             <el-menu-item index="4-3" @click="indexChangeHandle('4-3')">罚款记录管理</el-menu-item>
-                        </el-submenu>     
+                        </el-submenu>
+                        <el-submenu index="5">
+                            <template slot="title">社区管理</template>
+                            <el-menu-item index="5-1" @click="indexChangeHandle('5-1')">讨论管理</el-menu-item>
+                            <el-menu-item index="5-2" @click="indexChangeHandle('5-2')">评论管理</el-menu-item>
+                        </el-submenu>
+                        <el-menu-item index="6" @click="indexChangeHandle('6')">书单管理</el-menu-item>    
+                        <el-menu-item index="7" @click="indexChangeHandle('7')">书评管理</el-menu-item>
+                        <el-menu-item index="8" @click="indexChangeHandle('8')">通知管理</el-menu-item>     
                     </el-submenu>
-                    <el-submenu index="5">
+                    <el-submenu index="8">
                         <template slot="title">
                             <i class="el-icon-setting" />系统管理 
                         </template>
@@ -32,6 +40,11 @@
                 <adminBRManage v-if="selectIndex=='4-1'"></adminBRManage>
                 <adminRRManage v-if="selectIndex=='4-2'"></adminRRManage>
                 <adminFRManage v-if="selectIndex=='4-3'"></adminFRManage>
+                <adminDiscussManage v-if="selectIndex=='5-1'"></adminDiscussManage>
+                <adminCommentManage v-if="selectIndex=='5-2'"></adminCommentManage>
+                <adminBookListManage v-if="selectIndex=='6'"></adminBookListManage>
+                <adminBookReviewManage v-if="selectIndex=='7'"></adminBookReviewManage>
+                <adminMessageManage v-if="selectIndex=='8'"></adminMessageManage>
             </el-main>
         </el-container>
     </el-container>
@@ -62,7 +75,7 @@ export default {
                 adminMessageManage},
     data(){
         return {
-            selectIndex:"",
+            selectIndex: "",
         }
     },
     mounted(){
@@ -101,6 +114,6 @@ export default {
 <style scoped>
 .nav-left{
     background-color: rgb(238, 241, 246);
-    min-height: 700px;
+    min-height: 800px;
 }
 </style>
