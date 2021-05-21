@@ -43,7 +43,10 @@
                 </el-card>
             </div>
             <div style="float:left;width:50%;margin-left:280px">
-                <h1 style="text-align:left">相关书评</h1>
+                <h1 style="text-align:left">
+                    相关书评
+                    <el-button type="primary" @click="openReviewForm()" style="float:right">撰写书评</el-button>
+                </h1>
                 <div v-if="bookReviews.length == 0">暂无相关书评</div>
                 <div v-else>
                     <el-card v-for="bookReview in bookReviews" v-bind:key="bookReview.id" style="margin-top:10px" :body-style="{ padding: '10px' }">
@@ -74,6 +77,24 @@
                 </el-table>
             </el-dialog>
         </div>
+
+        <!-- AddBookReview -->
+        <div>
+            <el-dialog title="撰写书评" :visible.sync="bookRevieFormVisible"  width="40%">
+                <el-form ref="bookReviewForm" :model="bookReviewForm" :rules="addRules" label-width="100px">
+                    <el-form-item prop="title" label="标题" style="width: 90%" >
+                        <el-input type="text" v-model="bookReviewForm.title" placeholder="请输入标题"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="content" label="内容" style="width: 90%" >
+                        <el-input type="textarea" v-model="bookReviewForm.content" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item style="width: 90%" >
+                        <el-button type="primary" @click="publishBookReview('bookReviewForm')">提交</el-button>
+                        <el-button type="" @click="closeBookReviewForm">取消</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+        </div>
     </div>
 </div>
 
@@ -88,6 +109,21 @@ export default {
             booklists: [],
             booklistsize: 0,
             booklistVisible: false,
+            bookRevieFormVisible: false,
+            bookReviewForm:{
+                userId: "",
+                bookId: "",
+                title: "",
+                content: "",
+            },
+            addRules: {
+                title: [
+                    { required: true, message: '请输入标题', trigger: 'blur' }
+                ],
+                content: [
+                    { required: true, message: '请输入内容', trigger: 'blur' }
+                ],
+            },
         }
     },
     computed: {
@@ -211,6 +247,49 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        },
+        publishBookReview(formName){
+            this.bookReviewForm.userId = sessionStorage.getItem("user");
+            this.bookReviewForm.bookId = this.id;
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios.post("api/library/bookReview/publishBookReview", this.bookReviewForm)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                message: '添加成功，请等待通过审核',
+                                type: 'success'
+                            });
+                            this.closeReviewForm();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    });
+                } 
+              else {
+                  return false;
+                }
+            });
+        },
+        resetForm(){
+            this.bookReviewForm = {
+                userId:"",
+                bookId:"",
+                title: "",
+                content:"",
+            }
+        },
+        openReviewForm(){
+            this.resetForm();
+            this.bookRevieFormVisible = true;
+        },
+        closeReviewForm(){
+            this.bookRevieFormVisible = false;
         },
     }
 }
