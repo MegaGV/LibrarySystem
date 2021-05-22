@@ -49,16 +49,35 @@
       <if test="userId!=null and userId !=''">
         user_id like concat("%",#{userId},"%")
       </if>
+      <if test="borrowId!=null and borrowId !=''">
+        and borrow_id like concat("%",#{borrowId},"%")
+      </if>
+      <if test="returnId!=null and returnId !=''">
+        and return_id like concat("%",#{returnId},"%")
+      </if>
+      <if test="status!=null">
+        and status = #{status}
+      </if>
     </where>
+    order by return_id
     limit #{page}, #{limit}
   </select>
   <select id="countRecords" resultType="java.lang.Integer" parameterType="xzz.library.dto.search.RecordSearchDto" >
     select count(0)
+    from fine_records
     <where>
       <if test="userId!=null and userId !=''">
         user_id like concat("%",#{userId},"%")
       </if>
+      <if test="borrowId!=null and borrowId !=''">
+        and borrow_id like concat("%",#{borrowId},"%")
+      </if>
+      <if test="returnId!=null and returnId !=''">
+        and return_id like concat("%",#{returnId},"%")
+      </if>
+      <if test="status!=null">
+        and status = #{status}
+      </if>
     </where>
-    from fine_records
   </select>
 </mapper>

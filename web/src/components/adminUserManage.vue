@@ -3,6 +3,38 @@
         <h1>用户管理</h1>
         <hr />
 
+        <!-- search -->
+        <el-collapse>
+            <el-collapse-item title="用户查询">
+                <el-form :inline="true" :model="searchForm" ref="searchForm" style="width: 100%">
+                    <el-form-item label="用户名">
+                        <el-input v-model="searchForm.userName" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="昵称">
+                        <el-input v-model="searchForm.nickName" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="状态">
+                        <el-select v-model="searchForm.status" clearable placeholder="请选择">
+                            <el-option key="0" label="正常" value="0"></el-option>
+                            <el-option key="1" label="欠费" value="1"></el-option>
+                            <el-option key="2" label="达到上限" value="2"></el-option>
+                            <el-option key="3" label="冻结" value="3"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="角色">
+                        <el-select v-model="searchForm.role" clearable placeholder="请选择">
+                            <el-option key="0" label="普通用户" value="0"></el-option>
+                            <el-option key="1" label="管理员" value="1"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="getUsers()">查询</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-collapse-item>
+        </el-collapse>
+
         <!-- table -->
         <el-button type="primary" @click="openAddForm" class="top-button">新增用户</el-button>
         <el-button type="danger" @click="DelUser" class="top-button">删除用户</el-button>
@@ -59,8 +91,8 @@
                     </el-form-item>
                     <el-form-item prop="role" label="角色" style="width: 90%" >
                         <el-select v-model="userForm.role" clearable placeholder="请选择">
-                            <el-option key="0" label="0" value="0"></el-option>
-                            <el-option key="1" label="1" value="1"></el-option>
+                            <el-option key="0" label="普通用户" value="0"></el-option>
+                            <el-option key="1" label="管理员" value="1"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item prop="borrowed" label="借书数" style="width: 90%" >
@@ -68,10 +100,10 @@
                     </el-form-item>
                     <el-form-item prop="status" label="状态" style="width: 90%" >
                         <el-select v-model="userForm.status" clearable placeholder="请选择">
-                            <el-option key="0" label="0" value="0"></el-option>
-                            <el-option key="1" label="1" value="1"></el-option>
-                            <el-option key="2" label="2" value="2"></el-option>
-                            <el-option key="3" label="3" value="3"></el-option>
+                            <el-option key="0" label="正常" value="0"></el-option>
+                            <el-option key="1" label="欠费" value="1"></el-option>
+                            <el-option key="2" label="达到上限" value="2"></el-option>
+                            <el-option key="3" label="冻结" value="3"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item prop="balance" label="余额" style="width: 90%" >
@@ -129,8 +161,8 @@ export default {
             searchForm:{
                 userName:"",
                 nickName:"",
-                roleStr:"",
-                statusStr:"",
+                role:"",
+                status:"",
                 limit:5,
                 page:1
             },
@@ -227,6 +259,13 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        },
+        clearSearch(){
+            this.searchForm.userName = "";
+            this.searchForm.nickName = "";
+            this.searchForm.role = "";
+            this.searchForm.status = "";
+            this.getUsers();
         },
         handleSelectionChange(val){
             this.multipleSelection = [];

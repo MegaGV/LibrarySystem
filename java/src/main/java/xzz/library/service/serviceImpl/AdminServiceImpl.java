@@ -37,10 +37,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public UserListDto getUsers(UserSearchDto userSearchDto) {
         userSearchDto.initial();
-        if (userSearchDto.getRoleStr() != null && !userSearchDto.getRoleStr().isEmpty())
-            userSearchDto.setRole(userMapper.getRoleId(userSearchDto.getRoleStr()));
-        if (userSearchDto.getStatusStr() != null && !userSearchDto.getStatusStr().isEmpty())
-            userSearchDto.setStatus(userMapper.getStatusId(userSearchDto.getStatusStr()));
         return new UserListDto(userMapper.getUsers(userSearchDto), userMapper.countUsers(userSearchDto));
     }
 
@@ -179,13 +175,9 @@ public class AdminServiceImpl implements AdminService {
         recordSearchDto.initial();
         switch (recordSearchDto.getRecordType()){
             case "borrow" :
-                if (recordSearchDto.getStatusStr() != null && !recordSearchDto.getStatusStr().isEmpty())
-                    recordSearchDto.setStatus(borrowRecordMapper.getStatusId(recordSearchDto.getStatusStr()));
                 return new RecordListDto(borrowRecordMapper.getRecords(recordSearchDto),
                         borrowRecordMapper.countRecords(recordSearchDto));
             case "return":
-                if (recordSearchDto.getStatusStr() != null && !recordSearchDto.getStatusStr().isEmpty())
-                    recordSearchDto.setStatus(returnRecordMapper.getStatusId(recordSearchDto.getStatusStr()));
                 return new RecordListDto(returnRecordMapper.getRecords(recordSearchDto),
                         returnRecordMapper.countRecords(recordSearchDto));
             case "fine":

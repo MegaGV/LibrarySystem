@@ -8,7 +8,11 @@ public class RecordSearchDto {
 
     private String userId;
 
-    private String statusStr;
+    private String bookId;
+
+    private String borrowId;
+
+    private String returnId;
 
     private Integer status;
 
@@ -42,12 +46,28 @@ public class RecordSearchDto {
         this.userId = userId;
     }
 
-    public String getStatusStr() {
-        return statusStr;
+    public String getBookId() {
+        return bookId;
     }
 
-    public void setStatusStr(String statusStr) {
-        this.statusStr = statusStr;
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
+
+    public String getBorrowId() {
+        return borrowId;
+    }
+
+    public void setBorrowId(String borrowId) {
+        this.borrowId = borrowId;
+    }
+
+    public String getReturnId() {
+        return returnId;
+    }
+
+    public void setReturnId(String returnId) {
+        this.returnId = returnId;
     }
 
     public Integer getStatus() {

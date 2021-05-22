@@ -288,6 +288,7 @@ export default {
             this.searchForm.publisher = "";
             this.searchForm.stock = "";
             this.selectTypes = "";
+            this.getBooks();
         },
         handleSelectionChange(val){
             this.multipleSelection = [];

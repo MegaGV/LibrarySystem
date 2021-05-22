@@ -225,6 +225,7 @@ export default {
             this.searchForm.publisher = "";
             this.searchForm.stock = "";
             this.selectTypes = "";
+            this.getBookList();
         },
         handleSizeChange(val) {
             this.searchForm.limit = val;

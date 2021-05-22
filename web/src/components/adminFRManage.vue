@@ -3,6 +3,27 @@
         <h1>罚款记录管理</h1>
         <hr />
 
+        <!-- search -->
+        <el-collapse>
+            <el-collapse-item title=" 罚款记录查询">
+                <el-form :inline="true" :model="searchForm" ref="searchForm" style="width: 100%">
+                    <el-form-item label="用户ID">
+                        <el-input v-model="searchForm.userId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="借阅ID">
+                        <el-input v-model="searchForm.borrowId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="归还ID">
+                        <el-input v-model="searchForm.returnId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="getRecords()">查询</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-collapse-item>
+        </el-collapse>
+
         <!-- table -->
         <el-table @selection-change="handleSelectionChange" :data="records" stripe>
             <el-table-column type="selection" width="50" />
@@ -84,6 +105,8 @@ export default {
             searchForm:{
                 recordType:"fine",
                 userId:"",
+                borrowId: "",
+                returnId: "",
                 limit:5,
                 page:1,
             },
@@ -145,6 +168,12 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        },
+        clearSearch(){
+            this.searchForm.userId = "";
+            this.searchForm.borrowId = "";
+            this.searchForm.returnId = "";
+            this.getRecords();
         },
         handleSelectionChange(val){
             this.multipleSelection = [];

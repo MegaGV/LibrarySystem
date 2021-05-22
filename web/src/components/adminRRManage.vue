@@ -3,6 +3,30 @@
         <h1>归还记录管理</h1>
         <hr />
 
+        <!-- search -->
+        <el-collapse>
+            <el-collapse-item title=" 归还记录查询">
+                <el-form :inline="true" :model="searchForm" ref="searchForm" style="width: 100%">
+                    <el-form-item label="用户ID">
+                        <el-input v-model="searchForm.userId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="借阅ID">
+                        <el-input v-model="searchForm.borrowId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="状态">
+                        <el-select v-model="searchForm.status" clearable placeholder="请选择">
+                            <el-option key="0" label="按时归还" value="0"></el-option>
+                            <el-option key="1" label="超时归还" value="1"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="getRecords()">查询</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-collapse-item>
+        </el-collapse>
+
         <!-- table -->
         <el-table @selection-change="handleSelectionChange" :data="records" stripe>
             <el-table-column type="selection" width="50" />
@@ -54,8 +78,8 @@
                     </el-form-item>
                     <el-form-item prop="status" label="状态" style="width: 90%" >
                         <el-select v-model="recordForm.status" clearable placeholder="请选择">
-                            <el-option key="0" label="0" value="0"></el-option>
-                            <el-option key="1" label="1" value="1"></el-option>
+                            <el-option key="0" label="按时归还" value="0"></el-option>
+                            <el-option key="1" label="超时归还" value="1"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-form>
@@ -82,7 +106,8 @@ export default {
             searchForm:{
                 recordType:"return",
                 userId:"",
-                statusStr:"",
+                borrowId:"",
+                status:"",
                 limit:5,
                 page:1,
             },
@@ -144,6 +169,12 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
+        },
+        clearSearch(){
+            this.searchForm.userId = "";
+            this.searchForm.borrowId = "";
+            this.searchForm.status = "";
+            this.getRecords();
         },
         handleSelectionChange(val){
             this.multipleSelection = [];

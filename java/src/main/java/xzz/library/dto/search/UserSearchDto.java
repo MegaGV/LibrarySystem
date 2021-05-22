@@ -8,10 +8,6 @@ public class UserSearchDto {
 
     private String nickName;
 
-    private String roleStr;
-
-    private String statusStr;
-
     private Integer role;
 
     private Integer status;
@@ -44,22 +40,6 @@ public class UserSearchDto {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getRoleStr() {
-        return roleStr;
-    }
-
-    public void setRoleStr(String roleStr) {
-        this.roleStr = roleStr;
-    }
-
-    public String getStatusStr() {
-        return statusStr;
-    }
-
-    public void setStatusStr(String statusStr) {
-        this.statusStr = statusStr;
     }
 
     public Integer getRole() {
