@@ -30,6 +30,10 @@ public class AdminServiceImpl implements AdminService {
     private MessageMapper messageMapper;
     @Autowired
     private BookReviewMapper bookReviewMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     //========================================================================================
     // User
@@ -501,4 +505,132 @@ public class AdminServiceImpl implements AdminService {
             return "修改书评失败";
         }
     }
+
+    //========================================================================================
+    // Discuss
+    //========================================================================================
+    @Override
+    public DiscussListDto getDiscusses(DiscussSearchDto discussSearchDto) {
+        discussSearchDto.initial();
+        return new DiscussListDto(discussMapper.getDiscusses(discussSearchDto), discussMapper.countDiscusses(discussSearchDto));
+    }
+
+    @Override
+    public Discuss getDiscuss(String discussId) {
+        return discussMapper.selectByPrimaryKey(discussId);
+    }
+
+    @Override
+    @Transactional
+    public String addDiscuss(Discuss discuss) {
+        if (discuss == null)
+            return "讨论错误";
+        discuss.initial();
+        while (discussMapper.selectByPrimaryKey(discuss.getId()) != null)
+            discuss.setId(UUID.randomUUID().toString());
+
+        try{
+            discussMapper.insert(discuss);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "讨论添加失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteDiscuss(String[] ids) {
+        if (ids == null)
+            return "讨论错误";
+        if (ids.length == 0)
+            return "无选中讨论";
+
+        try {
+            for (String id : ids)
+                discussMapper.deleteByPrimaryKey(id);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "删除讨论失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateDiscuss(Discuss discuss) {
+        if(discuss == null)
+            return "讨论错误";
+
+        try{
+            discussMapper.updateByPrimaryKey(discuss);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "修改讨论失败";
+        }
+    }
+
+    @Override
+    public CommentListDto getComments(CommentSearchDto commentSearchDto) {
+        commentSearchDto.initial();
+        return new CommentListDto(commentMapper.getComments(commentSearchDto), commentMapper.countComments(commentSearchDto));
+    }
+
+    @Override
+    public Comment getComment(String commentId) {
+        return commentMapper.selectByPrimaryKey(commentId);
+    }
+
+    @Override
+    @Transactional
+    public String addComment(Comment comment) {
+        if (comment == null)
+            return "信息有误";
+        comment.initial();
+        while (commentMapper.selectByPrimaryKey(comment.getId()) != null)
+            comment.setId(UUID.randomUUID().toString());
+
+        try{
+            commentMapper.insert(comment);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "评论添加失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteComment(String[] ids) {
+        if (ids == null)
+            return "评论错误";
+        if (ids.length == 0)
+            return "无选中评论";
+
+        try {
+            for (String id : ids)
+                commentMapper.deleteByPrimaryKey(id);
+            return null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "删除评论失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String updateComment(Comment comment) {
+        if(comment == null)
+            return "评论错误";
+
+        try{
+            commentMapper.updateByPrimaryKey(comment);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "修改评论失败";
+        }
+    }
+
 }

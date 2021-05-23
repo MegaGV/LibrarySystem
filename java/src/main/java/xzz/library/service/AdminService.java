@@ -93,4 +93,27 @@ public interface AdminService {
     String deleteBookReview(String[] ids);
 
     String updateBookReview(BookReview bookReview);
+
+    //========================================================================================
+    // Discuss
+    //========================================================================================
+    DiscussListDto getDiscusses(DiscussSearchDto discussSearchDto);
+
+    Discuss getDiscuss(String discussId);
+
+    String addDiscuss(Discuss discuss);
+
+    String deleteDiscuss(String[] ids);
+
+    String updateDiscuss(Discuss discuss);
+
+    CommentListDto getComments(CommentSearchDto commentSearchDto);
+
+    Comment getComment(String commentId);
+
+    String addComment(Comment comment);
+
+    String deleteComment(String[] ids);
+
+    String updateComment(Comment comment);
 }

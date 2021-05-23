@@ -14,7 +14,7 @@ public interface DiscussMapper {
 
     List<Discuss> selectAll();
 
-    int updateByPrimaryKey(DiscussMapper record);
+    int updateByPrimaryKey(Discuss record);
 
     List<Discuss> getDiscusses(DiscussSearchDto discussSearchDto);
 

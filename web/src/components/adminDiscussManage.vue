@@ -1,19 +1,108 @@
 <template>
     <div>
-        <h1>管理</h1>
+        <h1>讨论管理</h1>
         <hr />
 
-        <!-- table -->
+        <!-- search -->
+        <el-collapse>
+            <el-collapse-item title="讨论查询">
+                <el-form :inline="true" :model="searchForm" ref="searchForm" style="width: 100%">
+                    <el-form-item label="用户Id">
+                        <el-input v-model="searchForm.userId" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item label="讨论内容">
+                        <el-input v-model="searchForm.detail" placeholder="请输入内容" />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="getDiscusses()">查询</el-button>
+                        <el-button type="" @click="clearSearch()">清空</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-collapse-item>
+        </el-collapse>
 
+        <!-- table -->
+        <el-button type="primary" @click="openAddForm" class="top-button">新增讨论</el-button>
+        <el-button type="danger" @click="DelDiscuss" class="top-button">删除讨论</el-button>
+        <el-table @selection-change="handleSelectionChange" :data="discusses" stripe>
+            <el-table-column type="selection" width="50" />
+            <el-table-column label="序号" width="50" align="center">
+                <template slot-scope="scope">
+                    <p>{{scope.$index + 1 + (searchForm.page - 1)*searchForm.limit}}</p>
+                </template>
+            </el-table-column>
+            <el-table-column prop="id" label="ID" :show-overflow-tooltip="true" align="center" />
+            <el-table-column prop="userId" label="用户ID" :show-overflow-tooltip="true" align="center" />
+            <el-table-column prop="title" label="标题" :show-overflow-tooltip="true" align="center" />
+            <el-table-column prop="content" label="内容" :show-overflow-tooltip="true" align="center" />
+            <el-table-column prop="publishDate" label="最新回复日期" :show-overflow-tooltip="true" align="center" />
+            <el-table-column label="操作" width="250" align="center">
+                <template slot-scope="scope">
+                    <el-button @click="EditDiscuss(scope.row)">编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
 
         <!-- page -->
-        
+        <div class="page-part">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="searchForm.page"
+                :page-sizes="[5,10,15,20]"
+                :page-size="searchForm.limit"
+                layout="total, sizes,prev, pager, next,jumper"
+                :total="total">
+            </el-pagination>
+        </div>
 
         <!-- UpdateForm -->
-        
+        <div>
+            <el-dialog title="讨论详情" :visible.sync="updateFormVisible"  width="40%">
+                <el-form ref="discussForm" :model="discussForm" :rules="updateRules" label-width="110px">
+                    <el-form-item prop="id" label="ID" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.id" placeholder="请输入内容" disabled></el-input>
+                    </el-form-item>
+                    <el-form-item prop="userId" label="用户ID" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.userId" placeholder="请输入内容" disabled></el-input>
+                    </el-form-item>
+                    <el-form-item prop="title" label="标题" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.title" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="content" label="内容" style="width: 90%" >
+                        <el-input type="textarea" v-model="discussForm.content" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="publishDate" label="最新回复日期" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.publishDate" ></el-input>
+                    </el-form-item>
+                    <el-form-item style="width: 90%" >
+                        <el-button type="primary" @click="UpdateDiscuss">提交</el-button>
+                        <el-button type="" @click="closeUpdateForm">取消</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+        </div>
 
         <!-- UpdateForm -->
-        
+        <div>
+            <el-dialog title="新增讨论" :visible.sync="addFormVisible"  width="40%">
+                <el-form ref="discussForm" :model="discussForm" :rules="addRules" label-width="110px">
+                    <el-form-item prop="userId" label="用户ID" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.userId" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="title" label="标题" style="width: 90%" >
+                        <el-input type="text" v-model="discussForm.title" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="content" label="内容" style="width: 90%" >
+                        <el-input type="textarea" v-model="discussForm.content" placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item style="width: 90%" >
+                        <el-button type="primary" @click="AddDiscuss('discussForm')">提交</el-button>
+                        <el-button type="" @click="closeAddForm">取消</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+        </div>
     </div>
 </template>
 
@@ -21,16 +110,45 @@
 export default {
     data(){
         return {
+            discusses:[],
+            discussForm:{
+                id: "",
+                userId: "",
+                title: "",
+                content: "",
+                publishDate: ""
+            },
+            updateFormVisible: false,
+            addFormVisible: false,
             total:0,
             searchForm:{
-                
+                userId:"",
+                detail:"",
+                limit:5,
+                page:1
             },
             multipleSelection: [],
             updateRules: {
-                
+                title: [
+                    { required: true, message: '请输入标题', trigger: 'blur' }
+                ],
+                content: [
+                    { required: true, message: '请输入内容', trigger: 'blur' }
+                ],
+                publishDate: [
+                    { required: true, message: '请输入日期', trigger: 'blur' }
+                ],
             },
             addRules: {
-                
+                userId: [
+                    { required: true, message: '请输入用户ID', trigger: 'blur' }
+                ],
+                title: [
+                    { required: true, message: '请输入标题', trigger: 'blur' }
+                ],
+                content: [
+                    { required: true, message: '请输入内容', trigger: 'blur' }
+                ]
             },
 
         }
@@ -58,23 +176,155 @@ export default {
                 this.$message.error("系统繁忙，请稍后再试");
                 console.log(err);
             })
-        this.getUsers();
+        this.getDiscusses();
     },
     methods:{
         handleSizeChange(val) {
             this.searchForm.limit = val;
             this.searchForm.page=1;
-            this.getUsers();
+            this.getDiscusses();
         },
         handleCurrentChange(val) {
             this.searchForm.page = val;
-            this.getUsers();
+            this.getDiscusses();
+        },
+        getDiscusses(){
+            this.$axios
+            .post('api/library/admin/getDiscusses', this.searchForm)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message.error("获取讨论列表失败");
+                }
+                else if (res.data.total != 0){
+                    this.discusses = res.data.data;
+                    this.total = res.data.total;
+                }
+                else{
+                    this.discusses = [];
+                    this.total = 0;
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        clearSearch(){
+            this.searchForm.userId = "";
+            this.searchForm.title = "";
+            this.searchForm.detail = "";
+            this.getDiscusses();
         },
         handleSelectionChange(val){
             this.multipleSelection = [];
             for (var i = 0; i < val.length; i++){
                 this.multipleSelection[i] = val[i].id;
             }
+        },
+        EditDiscuss(discuss){
+            this.discussForm = discuss;
+            this.updateFormVisible = true;
+        },
+        AddDiscuss(formName){
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  this.$axios
+                    .post("api/library/admin/addDiscuss", this.discussForm)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                message: '添加成功',
+                                type: 'success'
+                            });
+                            this.getDiscusses();
+                            this.closeAddForm();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    });
+                } 
+              else {
+                  return false;
+                }
+            });
+        },
+        DelDiscuss(){
+            if (this.multipleSelection.length == 0)
+            this.$message("未选中任何数据");
+            else{
+                this.$confirm('此操作将永久删除选中数据, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$axios.post('api/library/admin/deleteDiscuss', this.multipleSelection)
+                    .then(res => {
+                        if (res.data == ""){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            this.getDiscusses();
+                        }
+                        else{
+                            this.$message.error(res.data);
+                        } 
+                    })
+                    .catch(err => {
+                        this.$message.error("系统繁忙，请稍后再试");
+                        console.log(err);
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+                });
+            }
+        },
+        UpdateDiscuss(){
+            this.$axios.post('api/library/admin/updateDiscuss', this.discussForm)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message({
+                        message: '更新成功',
+                        type: 'success'
+                    });
+                    this.getDiscusses();
+                    this.closeUpdateForm();
+                }
+                else{
+                   this.$message.error(res.data);
+                } 
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        resetForm(){
+            this.discussForm = {
+                id: "",
+                userId: "",
+                title: "",
+                content: "",
+                publishDate: ""
+            }
+        },
+        closeUpdateForm(){
+            this.updateFormVisible = false;
+        },
+        openAddForm(){
+            this.resetForm();
+            this.addFormVisible = true;
+        },
+        closeAddForm(){
+            this.addFormVisible = false;
         },
     }
 }

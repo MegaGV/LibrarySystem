@@ -248,4 +248,69 @@ public class AdminController {
     public String updateBookReview(@RequestBody BookReview bookReview){
         return adminService.updateBookReview(bookReview);
     }
+
+    //========================================================================================
+    // Discuss
+    // Operations: 获取讨论列表、获取讨论信息、添加讨论、删除讨论、更新讨论
+    //             获取评论列表、获取评论信息、添加评论、删除评论、更新评论
+    //========================================================================================
+    @PostMapping("/getDiscusses")
+    @ResponseBody
+    public DiscussListDto getDiscusses(@RequestBody DiscussSearchDto discussSearchDto){
+        return adminService.getDiscusses(discussSearchDto);
+    }
+
+    @GetMapping("/getDiscuss")
+    @ResponseBody
+    public Discuss getDiscuss(String discussId){
+        return adminService.getDiscuss(discussId);
+    }
+
+    @PostMapping("/addDiscuss")
+    @ResponseBody
+    public String addDiscuss(@RequestBody Discuss discuss){
+        return adminService.addDiscuss(discuss);
+    }
+
+    @PostMapping("/deleteDiscuss")
+    @ResponseBody
+    public String deleteDiscuss(@RequestBody String[] ids){
+        return adminService.deleteDiscuss(ids);
+    }
+
+    @PostMapping("/updateDiscuss")
+    @ResponseBody
+    public String updateDiscuss(@RequestBody Discuss discuss){
+        return adminService.updateDiscuss(discuss);
+    }
+
+    @PostMapping("/getComments")
+    @ResponseBody
+    public CommentListDto getComments(@RequestBody CommentSearchDto commentSearchDto){
+        return adminService.getComments(commentSearchDto);
+    }
+
+    @GetMapping("/getComment")
+    @ResponseBody
+    public Comment getComment(String commentId){
+        return adminService.getComment(commentId);
+    }
+
+    @PostMapping("/addComment")
+    @ResponseBody
+    public String addComment(@RequestBody Comment comment){
+        return adminService.addComment(comment);
+    }
+
+    @PostMapping("/deleteComment")
+    @ResponseBody
+    public String deleteComment(@RequestBody String[] ids){
+        return adminService.deleteComment(ids);
+    }
+
+    @PostMapping("/updateComment")
+    @ResponseBody
+    public String updateComment(@RequestBody Comment comment){
+        return adminService.updateComment(comment);
+    }
 }

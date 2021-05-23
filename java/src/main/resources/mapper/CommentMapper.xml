@@ -42,13 +42,27 @@
   <select id="getComments" resultMap="BaseResultMap" parameterType="xzz.library.dto.search.CommentSearchDto" >
     select id, user_id, discuss_id, content, publish_date
     from comments
-    where discuss_id = #{discussId,jdbcType=VARCHAR}
+    <where>
+      <if test="userId!=null and userId !=''">
+        user_id like concat("%",#{userId},"%")
+      </if>
+      <if test="discussId!=null and discussId !=''">
+        and discuss_id like concat("%",#{discussId},"%")
+      </if>
+    </where>
     order by publish_date
     limit #{page}, #{limit}
   </select>
   <select id="countComments" resultType="java.lang.Integer" parameterType="xzz.library.dto.search.CommentSearchDto" >
     select count(0)
     from comments
-    where discuss_id = #{discussId,jdbcType=VARCHAR}
+    <where>
+      <if test="userId!=null and userId !=''">
+        user_id like concat("%",#{userId},"%")
+      </if>
+      <if test="discussId!=null and discussId !=''">
+        and discuss_id like concat("%",#{discussId},"%")
+      </if>
+    </where>
   </select>
 </mapper>

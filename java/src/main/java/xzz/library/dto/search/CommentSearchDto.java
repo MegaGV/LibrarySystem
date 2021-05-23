@@ -5,6 +5,8 @@ public class CommentSearchDto {
     // Description: 前端发送到后端形成的评论检索类
     //========================================================================================
 
+    private String userId;
+
     private String discussId;
 
     private Integer limit;
@@ -19,6 +21,14 @@ public class CommentSearchDto {
             this.page = 0;
         else
             this.page = (this.page - 1) * this.limit;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getDiscussId() {
