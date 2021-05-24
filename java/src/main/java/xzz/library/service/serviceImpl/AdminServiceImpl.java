@@ -9,6 +9,7 @@ import xzz.library.dto.search.*;
 import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 import xzz.library.util.MD5Utils;
+import xzz.library.util.MessageUtils;
 
 import java.util.Date;
 import java.util.UUID;
@@ -60,9 +61,12 @@ public class AdminServiceImpl implements AdminService {
         user.initial();
         while (userMapper.selectByPrimaryKey(user.getId()) != null)
             user.setId(UUID.randomUUID().toString());
-        
+
+        Message firstMessage = MessageUtils.firstMessage(user.getId());
+
         try {
             userMapper.insert(user);
+            messageMapper.insert(firstMessage);
             return null;
         } catch (Exception e){
             e.printStackTrace();
@@ -516,8 +520,24 @@ public class AdminServiceImpl implements AdminService {
             return "书评不存在";
 
         dbReview.setStatus(status);
+        Message message;
+        String bookName = bookMapper.selectByPrimaryKey(dbReview.getBookId()).getBookName();
+        switch (status){
+            case 0:
+                message = MessageUtils.ReviewReProcess(dbReview.getUserId(),bookName, dbReview.getTitle());
+                break;
+            case 1:
+                message = MessageUtils.ReviewProcess(dbReview.getUserId(),bookName, dbReview.getTitle());
+                break;
+            case 2:
+                message = MessageUtils.ReviewNotProcess(dbReview.getUserId(),bookName, dbReview.getTitle());
+                break;
+            default:return "状态错误";
+        }
+
         try{
             bookReviewMapper.updateByPrimaryKey(dbReview);
+            messageMapper.insert(message);
             return null;
         }catch (Exception e){
             e.printStackTrace();
@@ -609,9 +629,12 @@ public class AdminServiceImpl implements AdminService {
         comment.initial();
         while (commentMapper.selectByPrimaryKey(comment.getId()) != null)
             comment.setId(UUID.randomUUID().toString());
+        Discuss discuss = discussMapper.selectByPrimaryKey(comment.getDiscussId());
+        Message message = MessageUtils.NewComment(discuss.getUserId(), discuss.getTitle());
 
         try{
             commentMapper.insert(comment);
+            messageMapper.insert(message);
             return null;
         } catch (Exception e){
             e.printStackTrace();

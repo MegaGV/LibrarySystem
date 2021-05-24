@@ -3,13 +3,16 @@ package xzz.library.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xzz.library.dao.MessageMapper;
 import xzz.library.dao.UserMapper;
 import xzz.library.dto.info.CreditInfoDto;
 import xzz.library.dto.info.PasswordResetInfoDto;
 import xzz.library.dto.info.UserInfoDto;
+import xzz.library.pojo.Message;
 import xzz.library.pojo.User;
 import xzz.library.service.UserService;
 import xzz.library.util.MD5Utils;
+import xzz.library.util.MessageUtils;
 
 import java.util.UUID;
 
@@ -18,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Override
     @Transactional
@@ -28,8 +33,11 @@ public class UserServiceImpl implements UserService {
         while (userMapper.selectByPrimaryKey(user.getId()) != null)
             user.setId(UUID.randomUUID().toString());
 
+        Message firstMessage = MessageUtils.firstMessage(user.getId());
+
         try{
             userMapper.insert(user);
+            messageMapper.insert(firstMessage);
             return null;
         } catch (Exception e){
             e.printStackTrace();
