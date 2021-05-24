@@ -22,10 +22,10 @@
   <update id="updateByPrimaryKey" parameterType="xzz.library.pojo.BookReview" >
     update book_reviews
     set user_id = #{userId,jdbcType=VARCHAR},
-      book_id = #{bookType,jdbcType=VARCHAR},
+      book_id = #{bookId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
-      content = #{publisher,jdbcType=LONGVARCHAR},
-      status = #{total,jdbcType=INTEGER}
+      content = #{content,jdbcType=LONGVARCHAR},
+      status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -71,9 +71,9 @@
       <if test="bookId!=null and bookId !=''">
         book_id like concat("%",#{bookId},"%")
       </if>
-      <if test="content!=null and content !=''">
-        and title like concat("%",#{content},"%")
-        or content like concat("%",#{content},"%")
+      <if test="detail!=null and detail !=''">
+        and title like concat("%",#{detail},"%")
+        or content like concat("%",#{detail},"%")
       </if>
       <if test="status!=null">
         and status = #{status}
@@ -94,9 +94,9 @@
       <if test="bookId!=null and bookId !=''">
         book_id like concat("%",#{bookId},"%")
       </if>
-      <if test="content!=null and content !=''">
-        and title like concat("%",#{content},"%")
-        or content like concat("%",#{content},"%")
+      <if test="detail!=null and detail !=''">
+        and title like concat("%",#{detail},"%")
+        or content like concat("%",#{detail},"%")
       </if>
       <if test="status!=null">
         and status = #{status}

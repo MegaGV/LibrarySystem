@@ -94,6 +94,8 @@ public interface AdminService {
 
     String updateBookReview(BookReview bookReview);
 
+    String Examine(String reviewId, int status);
+
     //========================================================================================
     // Discuss
     //========================================================================================

@@ -12,8 +12,6 @@ public class BookReviewSearchDto {
 
     private String detail;
 
-    private String statusStr;
-
     private Integer status;
 
     private Integer limit;
@@ -60,14 +58,6 @@ public class BookReviewSearchDto {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public String getStatusStr() {
-        return statusStr;
-    }
-
-    public void setStatusStr(String statusStr) {
-        this.statusStr = statusStr;
     }
 
     public Integer getStatus() {

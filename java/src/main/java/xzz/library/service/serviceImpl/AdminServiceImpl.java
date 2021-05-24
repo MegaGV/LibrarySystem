@@ -10,6 +10,7 @@ import xzz.library.pojo.*;
 import xzz.library.service.AdminService;
 import xzz.library.util.MD5Utils;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -428,6 +429,7 @@ public class AdminServiceImpl implements AdminService {
     public String updateMessage(Message message) {
         if(message == null)
             return "通知错误";
+        message.setReceiveDate(new Date());
 
         try{
             messageMapper.updateByPrimaryKey(message);
@@ -444,8 +446,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BookReviewListDto getBookReviews(BookReviewSearchDto bookReviewSearchDto) {
         bookReviewSearchDto.initial();
-        if (bookReviewSearchDto.getStatusStr() != null && !bookReviewSearchDto.getStatusStr().isEmpty())
-            bookReviewSearchDto.setStatus(borrowRecordMapper.getStatusId(bookReviewSearchDto.getStatusStr()));
         return new BookReviewListDto(bookReviewMapper.getBookReviews(bookReviewSearchDto),
                 bookReviewMapper.countBookReview(bookReviewSearchDto));
     }
@@ -503,6 +503,25 @@ public class AdminServiceImpl implements AdminService {
         }catch (Exception e){
             e.printStackTrace();
             return "修改书评失败";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String Examine(String reviewId, int status) {
+        if(reviewId == null)
+            return "书评错误";
+        BookReview dbReview = bookReviewMapper.selectByPrimaryKey(reviewId);
+        if (dbReview == null)
+            return "书评不存在";
+
+        dbReview.setStatus(status);
+        try{
+            bookReviewMapper.updateByPrimaryKey(dbReview);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "审核失败";
         }
     }
 

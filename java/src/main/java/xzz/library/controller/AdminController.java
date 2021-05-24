@@ -249,6 +249,24 @@ public class AdminController {
         return adminService.updateBookReview(bookReview);
     }
 
+    @PostMapping("/processExamine")
+    @ResponseBody
+    public String processExamine(String reviewId){
+        return adminService.Examine(reviewId, 1);
+    }
+
+    @PostMapping("/notExamine")
+    @ResponseBody
+    public String notExamine(String reviewId){
+        return adminService.Examine(reviewId, 2);
+    }
+
+    @PostMapping("/reExamine")
+    @ResponseBody
+    public String reExamine(String reviewId){
+        return adminService.Examine(reviewId, 0);
+    }
+
     //========================================================================================
     // Discuss
     // Operations: 获取讨论列表、获取讨论信息、添加讨论、删除讨论、更新讨论

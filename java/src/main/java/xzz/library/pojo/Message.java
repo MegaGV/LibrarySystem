@@ -27,6 +27,8 @@ public class Message implements Serializable {
 
     public void initial(){
         this.id = UUID.randomUUID().toString();
+        this.status = 0;
+        this.receiveDate = new Date();
     }
 
     public String getId() {
