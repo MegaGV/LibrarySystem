@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2021-05-23 10:51:49
+Date: 2021-05-24 11:20:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -243,6 +243,7 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` VALUES ('1098918e-1f21-4438-972b-be917c6g529c', '2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', '1098918e-1f21-4438-972b-be917c6b529c', '一切物体，包括动物身体在内，体积的增量是长度增量的立方倍；而一只动物全身所能生成的热量，与其身体大小是成正比的；因此，体热的增长量，也是身体长度增量的立方倍。而在热量流失时，表面积的增量只是长度增量的平方倍。小动物的体温下降速度之所以更快，是因为按照比例来说，它们的体表面积远远大于身体体积。', '2021-05-14 11:02:39');
 INSERT INTO `comments` VALUES ('2ff03fbc-c4e4-4c9c-9c92-841d78e6f3a3', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '1098919e-1f21-4438-972b-be917c6b529c', '我这里先推荐一本《数字电子技术 : 第四版》', '2021-05-14 09:59:23');
 INSERT INTO `comments` VALUES ('2ff03fqs-c4e4-4c9c-9c92-841d78e6f3a3', '2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', '1098919e-1f21-4438-972b-be917c6b529c', '《C++程序设计语言（第1—3部分）（原书第4版）》这本书对于入门是个不错的选择', '2021-05-14 10:04:51');
+INSERT INTO `comments` VALUES ('c2852b0a-a7fc-48a9-a99d-1cfb0131bdaf', '92ce0faa-3bde-4df1-82aa-69991773dbab', '1098920e-1f21-4438-972b-be917c6b529c', '先去前台说明一下吧', '2021-05-24 11:15:18');
 
 -- ----------------------------
 -- Table structure for discusses
@@ -304,12 +305,18 @@ CREATE TABLE `messages` (
 -- ----------------------------
 -- Records of messages
 -- ----------------------------
-INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbad5f5df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '欢迎使用本系统', '欢迎使用本系统', '2021-05-01 10:32:56', '1');
-INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbed6f7df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍已超过归还日期，请及时归还', '2021-05-01 10:56:33', '0');
-INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbff6f7df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍已超过归还日期，请及时归还', '2021-05-02 10:56:33', '0');
-INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍已超过归还日期，请及时归还', '2021-05-03 10:56:33', '0');
-INSERT INTO `messages` VALUES ('0168155e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍已超过归还日期，请及时归还', '2021-05-04 10:56:33', '0');
-INSERT INTO `messages` VALUES ('0169195e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍已超过归还日期，请及时归还', '2021-05-05 10:56:33', '0');
+INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbad5f5df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '欢迎使用本系统', '欢迎使用本中山图书馆社区系统，有任何问题与建议可以在讨论区中提出', '2021-05-01 10:32:56', '1');
+INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbed6f7df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍《数字电子技术 : 第四版》已超过归还日期，请及时归还', '2021-05-01 10:56:33', '0');
+INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbff6f7df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍《雅思王阅读真题语料库》已超过归还日期，请及时归还', '2021-05-02 10:56:33', '0');
+INSERT INTO `messages` VALUES ('0157096e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍《看不见的森林 : 林中自然笔记》已超过归还日期，请及时归还', '2021-05-03 10:56:33', '0');
+INSERT INTO `messages` VALUES ('0168155e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍《Excel VBA程序开发自学宝典》已超过归还日期，请及时归还', '2021-05-04 10:56:33', '0');
+INSERT INTO `messages` VALUES ('0169195e-b13f-4860-911e-20efbff6f8df', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '借阅到期提醒', '您借阅的书籍《C程序设计语言 第2版·新版》已超过归还日期，请及时归还', '2021-05-05 10:56:33', '0');
+INSERT INTO `messages` VALUES ('32100fb2-401d-4ce3-a2a7-3d8b45f8a448', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '书评审核提醒', '您为书籍《世界桥梁趣谈》撰写的书评《桥》已发起重审，请耐心等待', '2021-05-24 11:14:05', '0');
+INSERT INTO `messages` VALUES ('84420851-a3b4-4f74-8068-6b1f95f51b1c', '33989c2c-3e6b-432e-93b9-ce411b15576a', '欢迎使用本系统', '欢迎使用本中山图书馆社区系统，有任何问题与建议可以在讨论区中提出', '2021-05-24 11:13:06', '1');
+INSERT INTO `messages` VALUES ('8b63d06f-082d-4403-96dd-b12a174786c6', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '书评审核提醒', '您为书籍《世界桥梁趣谈》撰写的书评《桥》已通过审核', '2021-05-24 11:14:04', '0');
+INSERT INTO `messages` VALUES ('942d7157-0363-4705-a166-650491562ab0', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '书评审核提醒', '您为书籍《世界桥梁趣谈》撰写的书评《桥》已发起重审，请耐心等待', '2021-05-24 11:14:03', '0');
+INSERT INTO `messages` VALUES ('b5409d8a-6a60-4174-ba02-c90d1e8edbd3', '92ce0faa-3bde-4df1-82aa-69991773dbab', '新回复提醒', '您的帖子《关于借阅的一点疑问》有新的回复了，请前往查看', '2021-05-24 11:15:18', '0');
+INSERT INTO `messages` VALUES ('ef79d04e-3614-42f8-b95a-ec31afa835c0', '1e70b144-614a-4a5d-badb-9bbdc4e3c180', '书评审核提醒', '您为书籍《世界桥梁趣谈》撰写的书评《桥》未能通过审核', '2021-05-24 11:14:05', '0');
 
 -- ----------------------------
 -- Table structure for message_status
@@ -433,6 +440,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 INSERT INTO `users` VALUES ('1e70b144-614a-4a5d-badb-9bbdc4e3c180', 'aaa123', '5b4f52d6aa7de0a10a9cecb91ef51454', '李四', '0', '3', '0', '3.20');
 INSERT INTO `users` VALUES ('2ff03fbc-c4e4-4c9c-9c92-841d78e6f2b3', 'abc', '1632cab5305ea5363422b3afb8089f43', '123456', '0', '5', '2', '0.00');
+INSERT INTO `users` VALUES ('33989c2c-3e6b-432e-93b9-ce411b15576a', 'test2', '77fd9405c0f0e2e49349bc43f93bd2b7', 'ttttt', '0', '0', '0', '0.00');
 INSERT INTO `users` VALUES ('7572249b-386a-4ef6-82bb-7cb9f2e06986', 'bbb', 'e1ec7d80057ed6a94908f5625dc991a9', '王五', '0', '0', '0', '25.20');
 INSERT INTO `users` VALUES ('92ce0faa-3bde-4df1-82aa-69991773dbab', 'aaa', 'afecb53f1f5315531ba8661a93d7c400', '张三', '0', '3', '0', '31.81');
 INSERT INTO `users` VALUES ('9f6ea0ec-984a-4887-bbf5-36ac8bac7154', 'test', '2f2e16e81bd2939cb46166c30ade1038', 'test1', '0', '0', '0', '0.00');
