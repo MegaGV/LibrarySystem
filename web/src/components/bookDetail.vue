@@ -28,7 +28,7 @@
                 <el-card style="margin:0 auto;text-align:left">
                     <div slot="header">
                         <el-button type="info" @click="viewBookList" style="float:right;margin-left:10px;">加到书单</el-button>
-                        <el-button type="primary" @click="borrowBook()" style="float:right">借阅</el-button>
+                        <el-button type="primary" @click="borrowBook()" style="float:right" :disabled="bookForm.stock=='0'">借阅</el-button>
                         <h1>图书详情</h1>
                     </div>
                     <p>书名：{{bookForm.bookName }}</p>
@@ -90,7 +90,7 @@
                     </el-form-item>
                     <el-form-item style="width: 90%" >
                         <el-button type="primary" @click="publishBookReview('bookReviewForm')">提交</el-button>
-                        <el-button type="" @click="closeBookReviewForm">取消</el-button>
+                        <el-button type="" @click="closeReviewForm">取消</el-button>
                     </el-form-item>
                 </el-form>
             </el-dialog>
@@ -197,6 +197,28 @@ export default {
                 }
                 else if (res.data.total != 0){
                     this.bookReviews = res.data.data;
+                }
+            })
+            .catch(err => {
+                this.$message.error("系统繁忙，请稍后再试");
+                console.log(err);
+            })
+        },
+        borrowBook(){
+            if (this.bookForm.stock == '0')
+                this.$message('该书库存不足，无法借阅');
+            var userId = sessionStorage.getItem("user");
+            this.$axios.post('api/library/book/borrowBook?userId=' + userId +"&bookId=" + this.bookForm.id)
+            .then(res => {
+                if (res.data == ""){
+                    this.$message({
+                        message: '借阅成功',
+                        type: 'success'
+                    });
+                    this.getBookList();
+                }
+                else {
+                    this.$message.error(res.data);
                 }
             })
             .catch(err => {

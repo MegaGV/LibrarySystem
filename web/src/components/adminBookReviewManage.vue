@@ -45,6 +45,7 @@
             <el-table-column prop="userId" label="用户ID" :show-overflow-tooltip="true" align="center" />
             <el-table-column prop="bookId" label="图书ID" :show-overflow-tooltip="true" align="center" />
             <el-table-column prop="title" label="标题" :show-overflow-tooltip="true" align="center" />
+            <el-table-column prop="content" label="内容" :show-overflow-tooltip="true" align="center" />
             <el-table-column prop="status" label="状态" :show-overflow-tooltip="true" align="center" />
             <el-table-column label="操作" width="300" align="center">
                 <template slot-scope="scope">
